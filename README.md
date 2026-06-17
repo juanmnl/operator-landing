@@ -1,6 +1,6 @@
 # Operator — landing
 
-Marketing site for **Operator**, a macOS desktop app (Tauri 2) that observes and orchestrates
+Marketing site for **Operator**, a macOS desktop app that observes and orchestrates
 [Claude Code](https://www.anthropic.com/claude-code): a live orchestration timeline, isolated
 git worktrees, in-app diff review, and usage/cost — all from one mission-control window.
 

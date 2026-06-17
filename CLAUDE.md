@@ -1,6 +1,6 @@
 # Operator — landing page
 
-Marketing site for **Operator**, a macOS desktop app (Tauri 2) that observes and orchestrates
+Marketing site for **Operator**, a macOS desktop app that observes and orchestrates
 Claude Code: a live orchestration timeline, isolated git worktrees, in-app diff review, usage/cost.
 Stack: Vite + React + Tailwind v4. The app itself lives at `../operator`.
 

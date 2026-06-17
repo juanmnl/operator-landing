@@ -101,7 +101,7 @@ export default function ThemedHero({ t, onCommand }) {
                   View on GitHub
                 </a>
                 <span className="text-[10.5px] uppercase tracking-[0.14em]" style={{ color: t.muted }}>
-                  Tauri 2 · ~10 MB
+                  Free · ~10 MB
                 </span>
               </div>
             </div>
