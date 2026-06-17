@@ -5,6 +5,8 @@ a live orchestration timeline, isolated git worktrees, in-app diff review, usage
 **Plain HTML/CSS/JS — no framework, no build step, no dependencies.** The app itself lives at
 `../operator`.
 
+**Scope:** a single hero + footer only — no marketing sections (problem / features / etc.).
+
 ## Files
 - `index.html` — markup (hero, footer, ⌘K palette)
 - `styles.css` — themes as `data-theme` custom-property blocks + layout
