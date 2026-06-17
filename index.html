@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ece1c9" />
+    <!-- Paint the aged-paper background immediately, before app CSS/JS arrive.
+         A small dot-matrix "O" pulses in the center as the boot mark. -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #ece1c9;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #ece1c9;
+      }
+      #boot svg {
+        width: 44px;
+        height: 44px;
+        animation: bootpulse 1.5s ease-in-out infinite;
+      }
+      @keyframes bootpulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot svg {
+          animation: none;
+        }
+      }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-source.png" />
+    <title>Operator · Mission control for working agents</title>
+    <meta
+      name="description"
+      content="Operator is a macOS desktop app for orchestrating Claude Code. Define agents and per-task models, watch a live orchestration timeline of every tool call and subagent, run agents in isolated git worktrees, review diffs in-app, and track usage and cost — all from one mission-control window."
+    />
+    <meta name="author" content="juanmnl" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="Claude Code, agent orchestration, macOS app, Tauri, AI agents, git worktrees, orchestration timeline, token cost dashboard, developer tools, subagents"
+    />
+    <link rel="canonical" href="https://juanmnl.com/operator-app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Operator" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://juanmnl.com/operator-app/" />
+    <meta property="og:title" content="Operator · Mission control for working agents" />
+    <meta
+      property="og:description"
+      content="A macOS desktop app for orchestrating Claude Code. You run the agents — Operator makes the work visible and steerable."
+    />
+    <meta property="og:image" content="https://juanmnl.com/operator-app/og.svg" />
+    <meta property="og:image:alt" content="Operator — mission control for working agents" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Operator · Mission control for working agents" />
+    <meta
+      name="twitter:description"
+      content="A macOS desktop app for orchestrating Claude Code. You run the agents — Operator makes the work visible and steerable."
+    />
+    <meta name="twitter:image" content="https://juanmnl.com/operator-app/og.svg" />
+
+    <!-- hero photograph is the LCP element — preload the right size eagerly -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero.jpg"
+      imagesrcset="/hero-sm.jpg 1100w, /hero.jpg 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Display = Sora (geometric technical grotesk) + body = Inter + data = JetBrains Mono.
+         Non-render-blocking so text paints immediately. -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Sora:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Sora:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      />
+    </noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Operator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "macOS",
+        "inLanguage": "en",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "A macOS desktop app for orchestrating Claude Code: an agent library with per-task models, a live orchestration timeline, isolated git worktrees with fan-out, in-app diff review, and a usage & cost dashboard.",
+        "author": { "@type": "Person", "name": "juanmnl" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <div id="boot" aria-hidden="true">
+        <!-- boot mark: the StatusWave dot-circle (same geometry as the brand logo) -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#3a2c1a">
+            <circle cx="22.86" cy="4.57" r="3.57" />
+            <circle cx="32.00" cy="4.57" r="3.57" />
+            <circle cx="41.14" cy="4.57" r="3.57" />
+            <circle cx="13.71" cy="13.71" r="3.57" />
+            <circle cx="22.86" cy="13.71" r="3.57" />
+            <circle cx="32.00" cy="13.71" r="3.57" />
+            <circle cx="41.14" cy="13.71" r="3.57" />
+            <circle cx="50.29" cy="13.71" r="3.57" />
+            <circle cx="4.57" cy="22.86" r="3.57" />
+            <circle cx="13.71" cy="22.86" r="3.57" />
+            <circle cx="22.86" cy="22.86" r="3.57" />
+            <circle cx="32.00" cy="22.86" r="3.57" />
+            <circle cx="41.14" cy="22.86" r="3.57" />
+            <circle cx="50.29" cy="22.86" r="3.57" />
+            <circle cx="59.43" cy="22.86" r="3.57" />
+            <circle cx="4.57" cy="32.00" r="3.57" />
+            <circle cx="13.71" cy="32.00" r="3.57" />
+            <circle cx="22.86" cy="32.00" r="3.57" />
+            <circle cx="32.00" cy="32.00" r="3.57" />
+            <circle cx="41.14" cy="32.00" r="3.57" />
+            <circle cx="50.29" cy="32.00" r="3.57" />
+            <circle cx="59.43" cy="32.00" r="3.57" />
+            <circle cx="4.57" cy="41.14" r="3.57" />
+            <circle cx="13.71" cy="41.14" r="3.57" />
+            <circle cx="22.86" cy="41.14" r="3.57" />
+            <circle cx="32.00" cy="41.14" r="3.57" />
+            <circle cx="41.14" cy="41.14" r="3.57" />
+            <circle cx="50.29" cy="41.14" r="3.57" />
+            <circle cx="59.43" cy="41.14" r="3.57" />
+            <circle cx="13.71" cy="50.29" r="3.57" />
+            <circle cx="22.86" cy="50.29" r="3.57" />
+            <circle cx="32.00" cy="50.29" r="3.57" />
+            <circle cx="41.14" cy="50.29" r="3.57" />
+            <circle cx="50.29" cy="50.29" r="3.57" />
+            <circle cx="22.86" cy="59.43" r="3.57" />
+            <circle cx="32.00" cy="59.43" r="3.57" />
+            <circle cx="41.14" cy="59.43" r="3.57" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

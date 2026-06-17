@@ -1,0 +1,449 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Aged-paper base — a 1950s telephone-company manual reprinted: warm cream stock,
+     sepia ink, hairline rules. Everything else tints off these. */
+  --color-bg: #ece1c9; /* page stock */
+  --color-bg-deep: #e2d4b6; /* deeper paper / inset */
+  --color-surface: #f3ecd9; /* a lighter card / form panel */
+  --color-surface-2: #e7dabf;
+  --color-line: #c3ad84; /* sepia rule */
+  --color-line-soft: #d3c19c; /* faint rule */
+
+  /* Oxblood ink — the single accent, like a second printing plate (the red ink in an
+     old Bell System manual). Scope --color-accent onto any container to re-tint a subtree. */
+  --color-accent: #9a3324;
+  --color-accent-dim: #76271b;
+
+  /* Secondary inks for model badges + status — chosen to read on cream, never as a theme. */
+  --color-haiku: #2b6178; /* cheap / fast — ink teal-blue */
+  --color-sonnet: #4f6b34; /* general — ink green */
+  --color-opus: #6a3f86; /* hard reasoning — ink violet */
+  --color-warn: #a96414; /* attention / cost — ochre */
+
+  --color-text: #2c2114; /* sepia-black ink */
+  --color-muted: #6c5b3f; /* mid sepia */
+  --color-faint: #9b865f; /* faint sepia */
+  --color-cream: #f6efdc; /* light paper, for type over the photo plate */
+  --color-slate: #2c2114;
+
+  /* Zilla Slab — a letterpress-flavored slab serif for headlines (the manual's display
+     face). Spectral carries body copy as a true reading serif. Courier Prime is the
+     typewriter that stamps every label, form field, and data readout. */
+  --font-display: 'Zilla Slab', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Spectral', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Courier Prime', 'Courier New', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* interactive elements always get the pointer cursor */
+  button:not(:disabled),
+  [role='button'],
+  a[href],
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
+  /* visible keyboard focus, in the accent so it reads on the dark base */
+  :where(a[href], button:not(:disabled), [role='button'], summary, input, select, textarea, [tabindex]:not([tabindex='-1'])):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: 0;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-cream);
+  }
+
+  /* NOTE: global page textures are intentionally off while the style gallery is live —
+     each style in src/components/styles/ carries its own scoped grain/grade so the dark
+     and brutalist options aren't tinted by a paper overlay. */
+}
+
+@layer utilities {
+  /* Headlines: mono, tight, slightly de-tracked. Reads as a label/command, not a banner. */
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  /* an even tighter, all-mono "this is a console" headline variant */
+  .font-console {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* The brand signature: a dot-matrix grid. Tiny cream dots on a tight lattice, used
+     as atmospheric section backgrounds. Radially masked so it never fights the copy. */
+  .bg-dotmatrix {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-text) 14%, transparent) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 72%);
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 72%);
+  }
+  /* denser, dimmer variant for panel interiors */
+  .bg-dotmatrix-tight {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-text) 9%, transparent) 1px, transparent 1.3px);
+    background-size: 14px 14px;
+  }
+  /* dot lattice for the "how it works" board — circles, echoing the StatusWave mark
+     (the brand is dots, never ruled squares). */
+  .bg-grid {
+    background-image: radial-gradient(circle, var(--color-line-soft) 1.4px, transparent 1.8px);
+    background-size: 30px 30px;
+  }
+
+  /* the console backdrop behind the hero — the same logo dot lattice, denser, radially
+     masked so it fades around the mark. The brand signature, not a ruled grid. */
+  .bg-schematic {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-text) 11%, transparent) 1.5px, transparent 2px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 30%, transparent 85%);
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 30%, transparent 85%);
+  }
+
+  /* the corner ticks that bracket a panel like a viewfinder / instrument readout */
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+    pointer-events: none;
+  }
+  .corner-ticks::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-ticks::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  /* hairline animated meter sweep used on capability bento cells */
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--color-line) 70%, transparent) 0,
+      color-mix(in srgb, var(--color-line) 70%, transparent) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  /* Model badges — input/colorways tied to per-task model choice. */
+  .badge-haiku {
+    color: var(--color-haiku);
+    background-color: color-mix(in srgb, var(--color-haiku) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-haiku) 30%, transparent);
+  }
+  .badge-sonnet {
+    color: var(--color-sonnet);
+    background-color: color-mix(in srgb, var(--color-sonnet) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-sonnet) 30%, transparent);
+  }
+  .badge-opus {
+    color: var(--color-opus);
+    background-color: color-mix(in srgb, var(--color-opus) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-opus) 30%, transparent);
+  }
+  .badge-accent {
+    color: color-mix(in srgb, var(--color-accent) 92%, #ffffff);
+    background-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 34%, transparent);
+  }
+
+  .bar-haiku { background-color: var(--color-haiku); }
+  .bar-sonnet { background-color: var(--color-sonnet); }
+  .bar-opus { background-color: var(--color-opus); }
+
+  /* ── 1950s operator hero treatment ───────────────────────────────────────
+     The colorized switchboard photo is the conceptual anchor: the original
+     operator connected the calls; this app connects the agents. We grade it
+     toward a warm archival tone, scrim it for legibility, and vignette the
+     edges so it reads as cinematic backdrop, not a stock hero. */
+  .hero-img {
+    filter: saturate(0.88) contrast(1.04) brightness(0.9) sepia(0.16);
+  }
+  /* darkening scrim: holds the nav at top, fades to the page base at the
+     bottom so the section dissolves seamlessly into what follows. */
+  .hero-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 9, 11, 0.86) 0%,
+        rgba(7, 9, 11, 0.6) 26%,
+        rgba(7, 9, 11, 0.58) 52%,
+        rgba(11, 13, 16, 0.93) 86%,
+        var(--color-bg) 100%
+      ),
+      radial-gradient(118% 90% at 62% 42%, transparent 24%, rgba(7, 9, 11, 0.74) 100%);
+  }
+  /* a soft column of shade directly behind the headline block, so copy stays
+     legible no matter what tone of the photograph sits behind it */
+  .hero-readbed {
+    background: radial-gradient(60% 52% at 50% 46%, rgba(7, 9, 11, 0.66), transparent 75%);
+  }
+  /* a faint amber-cream wash pulled from the switchboard lamps + a cool signal
+     bloom — the duotone that ties the photo to the ops palette. */
+  .hero-wash {
+    background:
+      radial-gradient(70% 55% at 28% 30%, rgba(47, 227, 154, 0.08), transparent 62%),
+      radial-gradient(60% 60% at 78% 64%, rgba(255, 180, 84, 0.07), transparent 60%);
+    mix-blend-mode: screen;
+  }
+  /* deep instrument vignette around the whole frame */
+  .hero-vignette {
+    box-shadow: inset 0 0 200px 48px rgba(7, 9, 11, 0.92);
+  }
+
+  /* ── the operator photograph, printed as a duotone figure plate ────────────
+     graded toward sepia ink, screened with a halftone dot pattern so it reads as
+     a photo reproduced in a manual rather than a glossy web image. */
+  .plate-photo {
+    filter: grayscale(0.4) sepia(0.5) contrast(1.06) brightness(0.99) saturate(0.82);
+  }
+  .plate-halftone {
+    background-image: radial-gradient(circle, rgba(44, 33, 20, 0.55) 0.5px, transparent 1px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+    opacity: 0.22;
+  }
+  .plate-tone {
+    background: linear-gradient(180deg, rgba(154, 51, 36, 0.1), rgba(78, 56, 26, 0.12));
+    mix-blend-mode: multiply;
+  }
+  /* a hard letterpress offset — the printed-ink drop used on plates + buttons */
+  .letterpress {
+    box-shadow: 4px 4px 0 0 rgba(44, 33, 20, 0.22);
+  }
+
+  /* full-bleed hero: a warm sepia scrim over the duotone photo so cream type reads,
+     fading to the page stock at the foot so the cover dissolves into the manual */
+  .hero-archival-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(26, 18, 10, 0.8) 0%,
+        rgba(26, 18, 10, 0.46) 28%,
+        rgba(26, 18, 10, 0.54) 58%,
+        rgba(36, 26, 14, 0.86) 90%,
+        var(--color-bg) 100%
+      ),
+      radial-gradient(120% 92% at 60% 40%, transparent 20%, rgba(18, 12, 6, 0.72) 100%);
+  }
+
+  /* thin, in-palette scrollbar */
+  .ops-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+  .ops-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+  .ops-scroll::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 99px; }
+  .ops-scroll::-webkit-scrollbar-track { background: transparent; }
+}
+
+/* reveal-on-scroll, intentionally restrained */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── StatusWave: the brand mark's per-dot twinkle ───────────────────────────
+   Each dot scales up + shifts gray→white at mid-cycle for a subtle "thinking"
+   shimmer. Timings (duration + negative delay) are set per dot in JS so the
+   field desyncs organically. Greyscale only — the mark never uses the accent. */
+@keyframes sw-twinkle {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(0.5);
+    fill: #b7a17a;
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1);
+    fill: #3a2c1a;
+  }
+}
+
+/* soft "thinking" glow that breathes behind the hero mark */
+@keyframes sw-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+.sw-glow {
+  animation: sw-glow 7s ease-in-out infinite;
+}
+
+/* ── live-status motifs ─────────────────────────────────────────────────── */
+
+/* the breathing "live" dot on the in-flight tool / nav status */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.live-dot {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* the scanning shimmer on an in-flight timeline row */
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent);
+  animation: scan 2.4s ease-in-out infinite;
+}
+
+/* staggered boot-in for the hero console panes — feels like the app windows mounting */
+@keyframes boot-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.boot-in {
+  opacity: 0;
+  animation: boot-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* the hero status ticker scrolls horizontally, like a NOC marquee */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker 34s linear infinite;
+}
+
+/* blinking caret for the terminal mock */
+@keyframes caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.caret {
+  animation: caret 1.05s step-end infinite;
+}
+
+/* growing bars in the cost dashboard, run once on reveal */
+@keyframes grow-w {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.is-in .bar-grow {
+  transform-origin: left;
+  animation: grow-w 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .live-dot,
+  .scanline::after,
+  .caret,
+  .boot-in,
+  .ticker-track,
+  .sw-glow,
+  .is-in .bar-grow {
+    animation: none;
+  }
+  /* hold the StatusWave dots static (flat gray, no scale) when reduce is set */
+  svg[aria-label='Operator'] circle {
+    animation: none !important;
+    transform: scale(1) !important;
+    opacity: 0.5 !important;
+    fill: #6c5b3f !important;
+  }
+  .boot-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── animated Operator brand mark (used across the themed heroes) ───────────
+   the dot-disc twinkles dim→bright; colors come from per-mark CSS vars so it
+   shimmers in whatever theme it sits in. A soft glow breathes behind it. */
+@keyframes mark-twinkle {
+  0%, 100% { opacity: 0.28; transform: scale(0.55); fill: var(--dot-dim, #5b6168); }
+  50% { opacity: 0.96; transform: scale(1); fill: var(--dot-bright, #f6f8f7); }
+}
+@keyframes mark-glow {
+  0%, 100% { opacity: 0.45; transform: scale(0.94); }
+  50% { opacity: 0.8; transform: scale(1.06); }
+}
+.mark-glow { animation: mark-glow 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  svg[aria-label='Operator'] circle {
+    animation: none !important;
+    transform: scale(1) !important;
+    opacity: 0.6 !important;
+    fill: var(--dot-bright, #6c5b3f) !important;
+  }
+  .mark-glow { animation: none; }
+}
