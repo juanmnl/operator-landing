@@ -82,7 +82,7 @@ export default function Hero() {
             </div>
 
             <span className="mt-6 block font-mono text-[10.5px] uppercase tracking-[0.14em] text-cream/55">
-              macOS · Tauri 2 · ~10 MB · nothing else to install
+              macOS · ~10 MB · nothing else to install
             </span>
           </div>
 

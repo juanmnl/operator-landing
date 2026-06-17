@@ -76,7 +76,7 @@ export default function Footer() {
             </a>
           </span>
           <span className="text-faint/80">
-            React 19 + Vite + Tailwind 4 on Tauri 2 (Rust) · embedded PTY + transcript tailer
+React + Vite + Tailwind · embedded PTY + transcript tailer
           </span>
         </div>
       </div>
