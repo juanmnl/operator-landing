@@ -1,26 +1,30 @@
 # Operator — landing page
 
-Marketing site for **Operator**, a macOS desktop app that observes and orchestrates
-Claude Code: a live orchestration timeline, isolated git worktrees, in-app diff review, usage/cost.
-Stack: Vite + React + Tailwind v4. The app itself lives at `../operator`.
+Marketing site for **Operator**, a macOS desktop app that observes and orchestrates Claude Code:
+a live orchestration timeline, isolated git worktrees, in-app diff review, usage/cost.
+**Plain HTML/CSS/JS — no framework, no build step, no dependencies.** The app itself lives at
+`../operator`.
 
-## Assets
-- Static assets (images, logos, icons) go in **`public/`**, never `dist/` — `vite build` wipes `dist/`.
-- Prefer the dev server for verification; avoid `npm run build` while iterating.
-- The hero switchboard-operator image (`public/hero.jpg`) is **AI-generated (flora.ai)**, NOT a real
-  photograph. Never caption it as an archival/historical photo (no "Fig. 1 … c. 1953" framing, no
-  real-date claims). Treat it as an evocative illustration only.
+## Files
+- `index.html` — markup (hero, footer, ⌘K palette)
+- `styles.css` — themes as `data-theme` custom-property blocks + layout
+- `main.js` — theme switching, ⌘K command palette, the animated dot-disc mark, OS-aware shortcut
+- `public/` — static assets (hero image, logo marks, icons, favicon), referenced as `public/…`
+
+## Run
+Static files — serve with any static server (`python3 -m http.server 5173`, `npx serve .`).
+No build, no `npm`.
 
 ## Theming
 - The landing stays within **Operator's own themes**, ported from the app
-  (`../operator/src/renderer/themes/`): Mission Control, 1984, Mr Pink, Light.
-  Palettes live in `src/components/styles/operatorThemes.js`.
+  (`../operator/src/renderer/themes/`): Mission Control, 1984, Mr Pink, Light. Each is a
+  `html[data-theme="…"]` block of CSS variables in `styles.css`; `main.js` swaps the attribute.
 
 ## Design conventions
-- **Do NOT use the pulsating / glowing "live" status dot** (a small accent dot with a pulse
-  or box-shadow glow). The user dislikes it as a generic AI tell. Do not add it back unless
-  the user explicitly asks for it.
+- **Do NOT use the pulsating / glowing "live" status dot** (a small accent dot with a pulse or
+  box-shadow glow). The user dislikes it as a generic AI tell. Don't add it unless asked.
 - Avoid other generic "AI-designed" tells: decorative flanked eyebrow labels, `·`-separated
-  metadata salad, and stack-bragging footers. Favor intentional, editorial typesetting.
-- The animated brand mark (the Operator dot-disc that twinkles) is fine and wanted — that is
-  separate from the banned status dot.
+  metadata salad, stack-bragging footers. Favor intentional, editorial typesetting.
+- The animated brand mark (the dot-disc that twinkles) is wanted — separate from the banned dot.
+- The hero image (`public/hero.jpg`) is **AI-generated (flora.ai)**, not a real photograph;
+  never caption it as archival/historical (no "c. 1953" framing).
