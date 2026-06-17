@@ -20,6 +20,15 @@ No build, no `npm`.
   (`../operator/src/renderer/themes/`): Mission Control, 1984, Mr Pink, Light. Each is a
   `html[data-theme="…"]` block of CSS variables in `styles.css`; `main.js` swaps the attribute.
 
+## Copy & links
+- Hero headline is **"Mission control for working agents."** (leads directly — no eyebrow above it).
+- All three CTAs (Download for macOS, View on GitHub, footer GitHub) point to
+  **`https://github.com/juanmnl/operator/releases`** — the app repo is **private**, so link to
+  releases, not source.
+- The macOS app icon (`public/icon-source.svg`) is used as the **favicon only**. It was tried in
+  the hero (next to the CTA, then above the headline) and removed — keep it out of the hero unless
+  asked.
+
 ## Design conventions
 - **Do NOT use the pulsating / glowing "live" status dot** (a small accent dot with a pulse or
   box-shadow glow). The user dislikes it as a generic AI tell. Don't add it unless asked.
