@@ -86,9 +86,12 @@
       .t-mono { font-family: var(--font-mono); font-size: 0.85rem; color: color-mix(in srgb, var(--fg) 80%, transparent); }
       .t-micro { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
 
-      /* component demos */
-      .ds-demos { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem 1.6rem; align-items: start; }
-      .ds-cap { margin-top: 0.55rem; font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+      /* component demos — each loose component sits in a consistent card */
+      .ds-demos { display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); gap: 1rem; align-items: stretch; }
+      .ds-card { display: flex; flex-direction: column; min-height: 158px; padding: 1.1rem 0.95rem 0.85rem; border: 1px solid var(--border); border-radius: 12px; background: color-mix(in srgb, var(--surface) 40%, var(--bg)); }
+      .ds-stage { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.55rem; }
+      .ds-cap { margin-top: 0.9rem; padding-top: 0.7rem; border-top: 1px solid color-mix(in srgb, var(--border) 65%, transparent); font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+      .ds-cap .ds-name { color: color-mix(in srgb, var(--fg) 62%, transparent); }
       .ds-inline { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: center; }
       .ds-panelframe { max-width: 460px; }
 
@@ -181,35 +184,39 @@
                 <span class="panel-name">panel-name · context</span>
                 <span class="panel-flag">flag</span>
               </figcaption>
-              <div style="padding: 1.1rem 0.95rem; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);">— body slot —</div>
+              <div style="padding: 0.85rem 0.95rem; font-family: var(--font-mono); font-size: 11px; color: var(--muted); opacity: 0.75;">— body slot —</div>
               <div class="panel-foot"><span><b>meta</b> left</span><span class="foot-right">meta right</span></div>
             </figure>
           </div>
         </div>
 
         <div class="ds-demos">
-          <div class="ds-demo">
-            <div class="ds-inline">
-              <span class="badge b-opus">opus</span>
-              <span class="badge b-sonnet">sonnet</span>
-              <span class="badge b-haiku">haiku</span>
-              <span class="badge b-plan">opusplan</span>
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="ds-inline">
+                <span class="badge b-opus">opus</span>
+                <span class="badge b-sonnet">sonnet</span>
+                <span class="badge b-haiku">haiku</span>
+                <span class="badge b-plan">opusplan</span>
+              </div>
             </div>
             <div class="ds-cap">Model badges — <span class="ds-name">.badge.b-opus / .b-sonnet / .b-haiku / .b-plan</span></div>
           </div>
 
-          <div class="ds-demo">
-            <div class="ds-inline">
-              <span class="pstatus ps-approved">approved</span>
-              <span class="pstatus ps-denied">denied</span>
-              <span class="pstatus ps-pending">pending</span>
-              <span class="pstatus ps-auto">auto</span>
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="ds-inline">
+                <span class="pstatus ps-approved">approved</span>
+                <span class="pstatus ps-denied">denied</span>
+                <span class="pstatus ps-pending">pending</span>
+                <span class="pstatus ps-auto">auto</span>
+              </div>
             </div>
             <div class="ds-cap">Permission pills — <span class="ds-name">.pstatus.ps-approved / ps-denied / ps-pending / ps-auto</span></div>
           </div>
 
-          <div class="ds-demo">
-            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+          <div class="ds-card">
+            <div class="ds-stage" style="gap:0.6rem;">
               <div class="bar"><span class="bar-fill f-opus" style="--w: 92%"></span></div>
               <div class="bar"><span class="bar-fill f-sonnet" style="--w: 58%"></span></div>
               <div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div>
@@ -218,30 +225,36 @@
             <div class="ds-cap">Meters — <span class="ds-name">.bar &gt; .bar-fill</span> · progress <span class="ds-name">.ppbar</span></div>
           </div>
 
-          <div class="ds-demo">
-            <div class="convo" style="padding:0;">
-              <div class="msg is-user"><div class="bubble is-user">a human prompt</div></div>
-              <div class="msg is-agent"><div class="bubble is-agent">an agent reply<span class="caret" aria-hidden="true"></span></div></div>
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="convo" style="padding:0;">
+                <div class="msg is-user"><div class="bubble is-user">a human prompt</div></div>
+                <div class="msg is-agent"><div class="bubble is-agent">an agent reply<span class="caret" aria-hidden="true"></span></div></div>
+              </div>
             </div>
             <div class="ds-cap">Chat bubbles + caret — <span class="ds-name">.bubble.is-user / .is-agent · .caret</span></div>
           </div>
 
-          <div class="ds-demo">
-            <div class="plan" style="padding:0;">
-              <div class="todo done"><span class="tg">✓</span><span class="tt">completed step</span></div>
-              <div class="todo active"><span class="tg">▸</span><span class="tt">in-progress step</span></div>
-              <div class="todo"><span class="tg">○</span><span class="tt">pending step</span></div>
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="plan" style="padding:0;">
+                <div class="todo done"><span class="tg">✓</span><span class="tt">completed step</span></div>
+                <div class="todo active"><span class="tg">▸</span><span class="tt">in-progress step</span></div>
+                <div class="todo"><span class="tg">○</span><span class="tt">pending step</span></div>
+              </div>
             </div>
             <div class="ds-cap">Plan todos — <span class="ds-name">.todo.done / .active</span> (colour + glyph, no fills)</div>
           </div>
 
-          <div class="ds-demo">
-            <div class="sessions" style="border:1px solid var(--border); border-radius:10px; overflow:hidden;">
-              <div class="sess running"><span class="sess-name">running session</span><span class="sess-sub">⤷ 2</span><span class="sess-phase">running</span></div>
-              <div class="sess waiting"><span class="sess-name">your-turn session</span><span class="sess-phase">your turn</span></div>
-              <div class="sess"><span class="sess-name">idle session</span><span class="sess-phase">idle</span></div>
+          <div class="ds-card" style="padding-left:0; padding-right:0;">
+            <div class="ds-stage" style="justify-content:flex-start;">
+              <div class="sessions">
+                <div class="sess running"><span class="sess-name">running session</span><span class="sess-sub">⤷ 2</span><span class="sess-phase">running</span></div>
+                <div class="sess waiting"><span class="sess-name">your-turn session</span><span class="sess-phase">your turn</span></div>
+                <div class="sess"><span class="sess-name">idle session</span><span class="sess-phase">idle</span></div>
+              </div>
             </div>
-            <div class="ds-cap">Status rows — <span class="ds-name">.sess.running / .waiting</span> (accent border = live)</div>
+            <div class="ds-cap" style="margin-left:0.95rem; margin-right:0.95rem;">Status rows — <span class="ds-name">.sess.running / .waiting</span> (accent border = live)</div>
           </div>
         </div>
 
