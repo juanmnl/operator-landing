@@ -45,6 +45,10 @@
       .ds-brand b { font-family: var(--font-disp); font-weight: 700; font-size: 0.98rem; letter-spacing: -0.01em; }
       .ds-brand span { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
       .ds-back { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+      .ds-nav { display: flex; gap: 1rem; }
+      .ds-nav a { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+      .ds-nav a:hover { color: var(--fg); text-decoration: none; }
+      @media (max-width: 760px) { .ds-nav { display: none; } }
       .ds-themes { margin-left: auto; display: flex; gap: 0.4rem; flex-wrap: wrap; }
       .ds-theme { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.6rem; border: 1px solid var(--border); border-radius: 99px; background: var(--surface); color: var(--muted); font-family: var(--font-mono); font-size: 11px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
       .ds-theme:hover { color: var(--fg); }
@@ -58,7 +62,8 @@
       .ds-hero h1 { margin: 0.6rem 0 0; font-family: var(--font-disp); font-weight: 700; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.03; letter-spacing: -0.03em; }
       .ds-hero p { margin: 1rem 0 0; font-size: 1.05rem; line-height: 1.6; color: color-mix(in srgb, var(--fg) 70%, transparent); }
 
-      .ds-sec { margin-top: clamp(2.75rem, 6vw, 4.5rem); }
+      .ds-sec { margin-top: clamp(2.75rem, 6vw, 4.5rem); scroll-margin-top: 72px; }
+      @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
       .ds-eyebrow { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
       .ds-h { margin: 0.5rem 0 0; font-family: var(--font-disp); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; }
       .ds-lead { margin: 0.55rem 0 0; max-width: 46rem; color: color-mix(in srgb, var(--fg) 68%, transparent); line-height: 1.6; }
@@ -116,6 +121,11 @@
         <b>Operator</b><span>design system</span>
       </span>
       <a class="ds-back" href="index.html">← landing</a>
+      <nav class="ds-nav" aria-label="Sections">
+        <a href="#elements">Elements</a>
+        <a href="#components">Components</a>
+        <a href="#views">Views</a>
+      </nav>
       <div class="ds-themes" role="group" aria-label="Theme">
         <button class="ds-theme" data-k="mission-control" aria-pressed="false" aria-label="Mission Control"><span class="sw" style="background:#2fe39a"></span><span class="lbl">Mission Control</span></button>
         <button class="ds-theme" data-k="1984" aria-pressed="false" aria-label="1984"><span class="sw" style="background:#46BDFF"></span><span class="lbl">1984</span></button>
@@ -136,7 +146,7 @@
       </div>
 
       <!-- ════════════════ ELEMENTS ════════════════ -->
-      <section class="ds-sec">
+      <section class="ds-sec" id="elements">
         <span class="ds-eyebrow">Elements</span>
         <h2 class="ds-h">Tokens &amp; type</h2>
         <p class="ds-lead">Each theme is one block of CSS custom properties. Components never hard-code a colour — they reference these, so a theme swap re-skins everything at once.</p>
@@ -172,7 +182,7 @@
       </section>
 
       <!-- ════════════════ COMPONENTS ════════════════ -->
-      <section class="ds-sec">
+      <section class="ds-sec" id="components">
         <span class="ds-eyebrow">Components</span>
         <h2 class="ds-h">The kit</h2>
         <p class="ds-lead">Small, composable pieces. Class names are shown beneath each so you can lift them straight from <code class="ds-name">styles.css</code>.</p>
@@ -302,7 +312,7 @@
       </section>
 
       <!-- ════════════════ VIEWS ════════════════ -->
-      <section class="ds-sec">
+      <section class="ds-sec" id="views">
         <span class="ds-eyebrow">Views</span>
         <h2 class="ds-h">Assembled</h2>
         <p class="ds-lead">The components composed into the real panels. These are lifted verbatim from the landing — the same markup, the same classes.</p>
