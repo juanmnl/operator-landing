@@ -130,6 +130,231 @@
         </div>
       </section>
 
+      <!-- app samples — coded mockups of Operator's core views, themed in CSS -->
+      <section class="samples" id="samples" aria-labelledby="samples-title">
+        <div class="samples-wrap">
+          <div class="samples-lede">
+            <span class="samples-kicker">A look inside</span>
+            <h2 class="samples-title" id="samples-title">The work, made legible.</h2>
+            <p class="samples-sub">
+              No screenshots — these are the real views, rebuilt in the browser: the orchestration
+              tree of nested tool calls and subagent delegations, staged diffs reviewed in place,
+              each task sealed in its own git worktree, and a call log that meters every token
+              against the model that spent it.
+            </p>
+          </div>
+
+          <div class="samples-grid">
+            <!-- orchestration timeline -->
+            <figure class="panel panel-tree">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">orchestration · session 7c1f</span>
+                <span class="panel-flag">live</span>
+              </figcaption>
+
+              <div class="tree">
+                <div class="row" style="--d: 0">
+                  <span class="g">▸</span><span class="lbl">refactor auth module</span>
+                  <span class="meta">orchestrator</span><span class="badge b-opus">opus</span>
+                  <span class="dur">running</span>
+                </div>
+                <div class="row" style="--d: 1">
+                  <span class="g">◇</span><span class="lbl">Read</span>
+                  <span class="meta">src/auth/session.ts</span><span class="dur">0.4s</span>
+                </div>
+                <div class="row" style="--d: 1">
+                  <span class="g">◇</span><span class="lbl">Grep</span>
+                  <span class="meta">'refreshToken'</span><span class="dur">0.2s</span>
+                </div>
+                <div class="row" style="--d: 1">
+                  <span class="g">⤷</span><span class="lbl">delegate › extract-types</span>
+                  <span class="badge b-haiku">haiku</span><span class="dur">2.1s</span>
+                </div>
+                <div class="row" style="--d: 2">
+                  <span class="g">◇</span><span class="lbl">Read</span>
+                  <span class="meta">types/auth.d.ts</span><span class="dur">0.3s</span>
+                </div>
+                <div class="row" style="--d: 1">
+                  <span class="g">⤷</span><span class="lbl">delegate › write-tests</span>
+                  <span class="badge b-sonnet">sonnet</span><span class="dur dur-live" data-tick>3.2s</span>
+                </div>
+                <div class="row is-live" style="--d: 2">
+                  <span class="g">◆</span><span class="lbl">Edit</span>
+                  <span class="meta">auth/session.test.ts</span><span class="dur dur-live" data-tick>3.2s</span>
+                </div>
+                <div class="row is-queued" style="--d: 2">
+                  <span class="g">◇</span><span class="lbl">Bash</span>
+                  <span class="meta">npm test</span><span class="dur">queued</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span><b>3</b> tools</span>
+                <span><b>2</b> subagents</span>
+                <span class="foot-right">worktree <em>auth-refactor</em></span>
+              </div>
+            </figure>
+
+            <!-- call log / usage -->
+            <figure class="panel panel-cost">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">usage · last 7 days</span>
+                <span class="panel-total">total <b>$25.34</b></span>
+              </figcaption>
+
+              <div class="cost-body">
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-opus">opus</span><span class="model-cost">$18.40</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-opus" style="--w: 92%"></span></div>
+                  <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
+                </div>
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-sonnet">sonnet</span><span class="model-cost">$6.10</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-sonnet" style="--w: 58%"></span></div>
+                  <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
+                </div>
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-haiku">haiku</span><span class="model-cost">$0.84</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div>
+                  <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
+                </div>
+
+                <div class="time-grid">
+                  <div class="time-cell">
+                    <span class="time-label">API time</span><span class="time-val">14m 02s</span>
+                  </div>
+                  <div class="time-cell">
+                    <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Built from the same transcripts the timeline reads — nothing sent anywhere.</span>
+              </div>
+            </figure>
+
+            <!-- in-app diff review -->
+            <figure class="panel panel-diff">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">review · auth/session.ts</span>
+                <span class="panel-stat"><span class="stat-add">+3</span> <span class="stat-del">−1</span></span>
+              </figcaption>
+
+              <div class="diff">
+                <div class="dhunk">@@ -18,7 +18,9 @@ export async function refresh(token)</div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">  export async function refresh(token: string) {</span></div>
+                <div class="dline del"><span class="dsign">-</span><span class="dcode">    const res = await fetch('/api/refresh')</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">    const res = await fetch('/api/refresh', {</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">      headers: { authorization: `Bearer ${token}` },</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">    })</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">    if (!res.ok) throw new AuthError(res.status)</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">    return res.json()</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">  }</span></div>
+              </div>
+
+              <div class="panel-foot">
+                <span><b>2</b> of <b>5</b> files reviewed</span>
+                <span class="foot-right">stage &amp; approve without leaving the window</span>
+              </div>
+            </figure>
+
+            <!-- isolated worktrees -->
+            <figure class="panel panel-trees">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">worktrees</span>
+                <span class="panel-flag">3 active</span>
+              </figcaption>
+
+              <div class="trees">
+                <div class="wt wt-active">
+                  <span class="wt-g">◆</span><span class="wt-branch">auth-refactor</span>
+                  <span class="badge b-opus">opus</span>
+                  <span class="wt-stat">running</span>
+                  <span class="wt-diff"><span class="stat-add">+142</span> <span class="stat-del">−38</span></span>
+                </div>
+                <div class="wt">
+                  <span class="wt-g">◇</span><span class="wt-branch">docs-pass</span>
+                  <span class="badge b-haiku">haiku</span>
+                  <span class="wt-stat">ready</span>
+                  <span class="wt-diff"><span class="stat-add">+9</span> <span class="stat-del">−2</span></span>
+                </div>
+                <div class="wt wt-done">
+                  <span class="wt-g">◇</span><span class="wt-branch">flaky-tests</span>
+                  <span class="badge b-sonnet">sonnet</span>
+                  <span class="wt-stat">merged</span>
+                  <span class="wt-diff wt-muted">→ main</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Every task gets its own git worktree — branches never collide with main.</span>
+              </div>
+            </figure>
+
+            <!-- conversation -->
+            <figure class="panel panel-convo">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">conversation · refactor auth module</span>
+                <span class="panel-flag">streaming</span>
+              </figcaption>
+
+              <div class="convo">
+                <div class="msg is-user">
+                  <div class="bubble is-user">Refactor auth so the token is passed explicitly, then update the tests.</div>
+                </div>
+                <div class="msg is-agent">
+                  <div class="bubble is-agent">
+                    On it — I'll thread the token through <code>refresh()</code> and adjust the suite.
+                    <span class="msg-tool">◆ Edit · auth/session.test.ts</span>
+                  </div>
+                </div>
+                <div class="msg is-agent">
+                  <div class="bubble is-agent is-stream">Running <code>npm test</code> to confirm the change<span class="caret" aria-hidden="true"></span></div>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span><b>sonnet</b> · write-tests</span>
+                <span class="foot-right">every turn kept, nothing leaves the machine</span>
+              </div>
+            </figure>
+
+            <!-- plan mode -->
+            <figure class="panel panel-plan">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">plan mode</span>
+                <span class="plan-prog"><b>3</b>/5 done <span class="ppbar" aria-hidden="true"><i style="--w: 60%"></i></span></span>
+              </figcaption>
+
+              <div class="plan">
+                <div class="todo done"><span class="tg">✓</span><span class="tt">Map the token flow through session.ts</span></div>
+                <div class="todo done"><span class="tg">✓</span><span class="tt">Thread the token into refresh()</span></div>
+                <div class="todo done"><span class="tg">✓</span><span class="tt">Extract the shared AuthError type</span></div>
+                <div class="todo active"><span class="tg">▸</span><span class="tt">Update auth/session.test.ts</span></div>
+                <div class="todo"><span class="tg">○</span><span class="tt">Run the suite and note coverage</span></div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">The agent's own TodoWrite, rendered live — ticks off as it works.</span>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <footer class="footer">
         <div class="footer-wrap">
           <span class="foot-brand">

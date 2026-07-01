@@ -5,12 +5,17 @@ a live orchestration timeline, isolated git worktrees, in-app diff review, usage
 **Plain HTML/CSS/JS — no framework, no build step, no dependencies.** The app itself lives at
 `../operator`.
 
-**Scope:** a single hero + footer only — no marketing sections (problem / features / etc.).
+**Scope:** hero + a single "app samples" section + footer. The samples section shows coded
+mockups of Operator's real views as `.panel` figures in a 2-col grid (wide-left / narrow-right):
+orchestration timeline, in-app diff review, isolated git worktrees, usage/cost, conversation,
+plan mode. Each panel mirrors a real component in `../operator/src/renderer/components/session/`.
+No other marketing sections (problem / features / etc.).
 
 ## Files
-- `index.html` — markup (hero, footer, ⌘K palette)
-- `styles.css` — themes as `data-theme` custom-property blocks + layout
-- `main.js` — theme switching, ⌘K command palette, the animated dot-disc mark, OS-aware shortcut
+- `index.html` — markup (hero, app samples, footer, ⌘K palette)
+- `styles.css` — themes as `data-theme` custom-property blocks + layout (incl. the app-samples panels)
+- `main.js` — theme switching, ⌘K command palette, the animated dot-disc mark, OS-aware shortcut,
+  the live-tick counter on the sample orchestration row
 - `public/` — static assets (hero image, logo marks, icons, favicon), referenced as `public/…`
 
 ## Run
@@ -37,5 +42,14 @@ No build, no `npm`.
 - Avoid other generic "AI-designed" tells: decorative flanked eyebrow labels, `·`-separated
   metadata salad, stack-bragging footers. Favor intentional, editorial typesetting.
 - The animated brand mark (the dot-disc that twinkles) is wanted — separate from the banned dot.
+- The app-samples panels convey "live" state without the banned dot: a `LIVE` text flag, an
+  accent left-border on the in-flight row, and a ticking duration counter (`data-tick` in
+  `main.js`). Keep it that way — no pulsing/glowing status dot here either.
+- The diff-review + worktree panels use theme-agnostic add/remove colours (green/red) via
+  `--add-fg` / `--del-fg` on `.samples`, with a `data-theme='light'` override — they are the one
+  intentional exception to "stay within the theme's accent," since red/green reads as diff.
+- The conversation panel's streaming reply ends in a blinking `.caret` (a text cursor, accent-
+  coloured) — this is a text caret, NOT the banned status dot; it's fine, and it respects
+  `prefers-reduced-motion`. The plan panel shows status by colour/glyph only (✓ ▸ ○), no fills.
 - The hero image (`public/hero.jpg`) is **AI-generated (flora.ai)**, not a real photograph;
   never caption it as archival/historical (no "c. 1953" framing).

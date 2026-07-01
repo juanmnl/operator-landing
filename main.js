@@ -175,3 +175,14 @@ window.addEventListener('keydown', (e) => {
 })
 
 renderPalette()
+
+/* ── live tick on the in-flight sample row ─────────────────────────────── */
+const tickEls = document.querySelectorAll('[data-tick]')
+if (tickEls.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let t = 3.2
+  setInterval(() => {
+    t = t > 12 ? 0.4 : +(t + 0.1).toFixed(1)
+    const s = t.toFixed(1) + 's'
+    tickEls.forEach((el) => (el.textContent = s))
+  }, 100)
+}
