@@ -50,6 +50,8 @@
       .ds-theme:hover { color: var(--fg); }
       .ds-theme[aria-pressed='true'] { color: var(--fg); border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
       .ds-theme .sw { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, 0.35); }
+      /* collapse the switcher to colour dots on small screens */
+      @media (max-width: 680px) { .ds-theme .lbl { display: none; } .ds-theme { gap: 0; padding: 0.4rem; } }
 
       .ds-main { max-width: 1140px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem) 6rem; }
       .ds-hero { max-width: 46rem; }
@@ -95,9 +97,10 @@
       .ds-inline { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: center; }
       .ds-panelframe { max-width: 460px; }
 
-      /* views */
-      .ds-views { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
-      @media (min-width: 900px) { .ds-views { grid-template-columns: 1.5fr 1fr; gap: 1.5rem; } }
+      /* views — masonry columns so shorter panels don't leave gaps under taller ones */
+      .ds-views { columns: 1; column-gap: 1.5rem; }
+      @media (min-width: 900px) { .ds-views { columns: 2; } }
+      .ds-views > figure { width: 100%; margin: 0 0 1.5rem; break-inside: avoid; }
 
       .ds-note { margin-top: 1.5rem; padding: 0.85rem 1rem; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 5%, transparent); font-size: 0.9rem; line-height: 1.55; color: color-mix(in srgb, var(--fg) 78%, transparent); }
       .ds-note b { color: var(--fg); }
@@ -114,10 +117,10 @@
       </span>
       <a class="ds-back" href="index.html">← landing</a>
       <div class="ds-themes" role="group" aria-label="Theme">
-        <button class="ds-theme" data-k="mission-control" aria-pressed="false"><span class="sw" style="background:#2fe39a"></span>Mission Control</button>
-        <button class="ds-theme" data-k="1984" aria-pressed="false"><span class="sw" style="background:#46BDFF"></span>1984</button>
-        <button class="ds-theme" data-k="mr-pink" aria-pressed="false"><span class="sw" style="background:#D58FDB"></span>Mr Pink</button>
-        <button class="ds-theme" data-k="light" aria-pressed="false"><span class="sw" style="background:#8e44ad"></span>Light</button>
+        <button class="ds-theme" data-k="mission-control" aria-pressed="false" aria-label="Mission Control"><span class="sw" style="background:#2fe39a"></span><span class="lbl">Mission Control</span></button>
+        <button class="ds-theme" data-k="1984" aria-pressed="false" aria-label="1984"><span class="sw" style="background:#46BDFF"></span><span class="lbl">1984</span></button>
+        <button class="ds-theme" data-k="mr-pink" aria-pressed="false" aria-label="Mr Pink"><span class="sw" style="background:#D58FDB"></span><span class="lbl">Mr Pink</span></button>
+        <button class="ds-theme" data-k="light" aria-pressed="false" aria-label="Light"><span class="sw" style="background:#8e44ad"></span><span class="lbl">Light</span></button>
       </div>
     </header>
 
