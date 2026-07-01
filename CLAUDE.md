@@ -16,6 +16,11 @@ terminal cwd/pid/`OPERATOR_DEV_PORT`) are pulled from `../operator/src/shared/ty
 
 ## Files
 - `index.html` — markup (hero, app samples, footer, ⌘K palette)
+- `design-system.html` — standalone styleguide page: Elements (tokens + type), Components (the
+  panel kit), Views (composed panels). Reuses `styles.css` verbatim + a self-contained inline
+  `<style>` (`ds-*` chrome) and its own 4-theme switcher (shares the `op-theme` localStorage key
+  with the landing). It re-declares the diff `--add-fg`/`--del-fg` tokens at `html` scope so
+  pills/diffs render outside a `.samples` ancestor. Not linked from the landing (kept clean).
 - `styles.css` — themes as `data-theme` custom-property blocks + layout (incl. the app-samples panels)
 - `main.js` — theme switching, ⌘K command palette, the animated dot-disc mark, OS-aware shortcut,
   the live-tick counter on the sample orchestration row
