@@ -7,9 +7,12 @@ a live orchestration timeline, isolated git worktrees, in-app diff review, usage
 
 **Scope:** hero + a single "app samples" section + footer. The samples section shows coded
 mockups of Operator's real views as `.panel` figures in a 2-col grid (wide-left / narrow-right):
-orchestration timeline, in-app diff review, isolated git worktrees, usage/cost, conversation,
-plan mode. Each panel mirrors a real component in `../operator/src/renderer/components/session/`.
-No other marketing sections (problem / features / etc.).
+orchestration timeline, usage/cost, in-app diff review, worktrees, conversation, plan mode,
+terminal, concurrent sessions, permission decisions, agent library. Each panel mirrors a real
+component/type in `../operator` — labels and states (session phases `running`/`waiting`/`idle`/
+`compacting`, permission statuses `approved`/`denied`/`pending`/`auto`, per-agent model + scope,
+terminal cwd/pid/`OPERATOR_DEV_PORT`) are pulled from `../operator/src/shared/types.ts` and the
+`components/` there, so keep them accurate if the app changes. No other marketing sections.
 
 ## Files
 - `index.html` — markup (hero, app samples, footer, ⌘K palette)

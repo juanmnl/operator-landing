@@ -351,6 +351,135 @@
                 <span class="foot-note">The agent's own TodoWrite, rendered live — ticks off as it works.</span>
               </div>
             </figure>
+
+            <!-- terminal -->
+            <figure class="panel panel-term">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">terminal · auth-refactor</span>
+                <span class="panel-flag">zsh</span>
+              </figcaption>
+
+              <div class="term">
+                <div class="term-line term-prompt">~/operator <b>❯</b> claude</div>
+                <div class="term-line"><span class="term-accent">◆</span> Refactoring the auth module…</div>
+                <div class="term-line term-dim">  Read src/auth/session.ts · Grep 'refreshToken'</div>
+                <div class="term-line term-dim">  Dev server is running: http://localhost:5273/</div>
+                <div class="term-line term-ok">  ✓ 24 passed</div>
+                <div class="term-line term-prompt">~/operator <b>❯</b> <span class="caret" aria-hidden="true"></span></div>
+              </div>
+
+              <div class="panel-foot">
+                <span>pid <b>48213</b></span>
+                <span>OPERATOR_DEV_PORT <b>5273</b></span>
+                <span class="foot-right">a real pty, not a re-render</span>
+              </div>
+            </figure>
+
+            <!-- concurrent sessions -->
+            <figure class="panel panel-sessions">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">sessions</span>
+                <span class="panel-flag">4 open</span>
+              </figcaption>
+
+              <div class="sessions">
+                <div class="sess running">
+                  <span class="sess-name">refactor auth module</span>
+                  <span class="sess-sub">⤷ 2</span>
+                  <span class="sess-phase">running</span>
+                </div>
+                <div class="sess waiting">
+                  <span class="sess-name">port the theme system</span>
+                  <span class="sess-phase">your turn</span>
+                </div>
+                <div class="sess">
+                  <span class="sess-name">sweep flaky tests</span>
+                  <span class="sess-phase">idle</span>
+                </div>
+                <div class="sess">
+                  <span class="sess-name">compact session log</span>
+                  <span class="sess-phase">compacting…</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Run several agents at once — each tinted by what it's doing right now.</span>
+              </div>
+            </figure>
+
+            <!-- permission decisions -->
+            <figure class="panel panel-perms">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">permissions · your rules, applied</span>
+                <span class="panel-flag">4 rules</span>
+              </figcaption>
+
+              <div class="perms">
+                <div class="perm">
+                  <span class="pg">◇</span><span class="ptool">Read</span>
+                  <span class="ptarget">src/auth/session.ts</span>
+                  <span class="pstatus ps-auto">auto</span>
+                </div>
+                <div class="perm">
+                  <span class="pg">◆</span><span class="ptool">Edit</span>
+                  <span class="ptarget">auth/session.test.ts</span>
+                  <span class="pstatus ps-approved">approved</span>
+                </div>
+                <div class="perm">
+                  <span class="pg">◇</span><span class="ptool">Bash</span>
+                  <span class="ptarget">rm -rf node_modules</span>
+                  <span class="pstatus ps-denied">denied</span>
+                </div>
+                <div class="perm">
+                  <span class="pg">◇</span><span class="ptool">WebFetch</span>
+                  <span class="ptarget">api.stripe.com</span>
+                  <span class="pstatus ps-pending">pending</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Every tool call clears the rules you set — approve, deny, or auto — before it runs.</span>
+              </div>
+            </figure>
+
+            <!-- agent library -->
+            <figure class="panel panel-agents">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">agents</span>
+                <span class="panel-flag">5 defined</span>
+              </figcaption>
+
+              <div class="agents">
+                <div class="agt">
+                  <span class="agt-name">extract-types</span>
+                  <span class="badge b-haiku">haiku</span><span class="agt-scope">project</span>
+                </div>
+                <div class="agt">
+                  <span class="agt-name">write-tests</span>
+                  <span class="badge b-sonnet">sonnet</span><span class="agt-scope">project</span>
+                </div>
+                <div class="agt">
+                  <span class="agt-name">security-review</span>
+                  <span class="badge b-opus">opus</span><span class="agt-scope">user</span>
+                </div>
+                <div class="agt">
+                  <span class="agt-name">plan-architect</span>
+                  <span class="badge b-plan">opusplan</span><span class="agt-scope">project</span>
+                </div>
+                <div class="agt">
+                  <span class="agt-name">docs-writer</span>
+                  <span class="badge b-haiku">haiku</span><span class="agt-scope">user</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Pick the model per agent — cheap models for grunt work, the pricey one where it pays off.</span>
+              </div>
+            </figure>
           </div>
         </div>
       </section>
