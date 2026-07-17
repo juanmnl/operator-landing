@@ -277,25 +277,122 @@ function onVisible(el, start, stop, threshold = 0.35) {
   })
 })()
 
-/* usage — the meter keeps metering */
+/* usage — the meter keeps metering (tokens, never dollars) */
 ;(() => {
   const panel = $('.panel-cost')
   if (!panel) return
   const total = $('.panel-total b', panel)
-  const opus = $$('.model', panel)[0]
-  const cost = $('.model-cost', opus)
-  const fill = $('.bar-fill', opus)
-  const out = $$('.model-toks span', opus)[1]
+  const top = $$('.model', panel)[0]
+  const count = $('.model-cost', top)
+  const fill = $('.bar-fill', top)
+  const out = $$('.model-toks span', top)[1]
   let drift = 0, t = null
   onVisible(panel, () => {
     t = setInterval(() => {
-      drift = drift > 0.42 ? 0 : drift + 0.02 + Math.random() * 0.02
-      total.textContent = '$' + (25.34 + drift).toFixed(2)
-      cost.textContent = '$' + (18.4 + drift * 0.82).toFixed(2)
-      fill.style.setProperty('--w', Math.min(92 + drift * 8, 97).toFixed(1) + '%')
-      out.textContent = 'out ' + Math.round(340 + drift * 180) + 'K'
+      drift = drift > 1.4 ? 0 : drift + 0.08 + Math.random() * 0.08
+      total.textContent = (25.6 + drift).toFixed(1) + 'M'
+      count.textContent = (12.7 + drift * 0.8).toFixed(1) + 'M'
+      fill.style.setProperty('--w', Math.min(92 + drift * 3, 97).toFixed(1) + '%')
+      out.textContent = 'out ' + Math.round(610 + drift * 90) + 'K'
     }, 4600)
   }, () => clearInterval(t))
+})()
+
+/* roster — lanes trade who's in flight, on their own periods */
+;(() => {
+  const panel = $('.panel-roster')
+  if (!panel) return
+  const [orc, code, res, des, rev, qa] = $$('.lane', panel)
+  const flag = $('.panel-flag', panel)
+  const set = (lane, mode, text) => {
+    lane.classList.toggle('running', mode === 'running')
+    lane.classList.toggle('busy', mode === 'busy')
+    lane.classList.toggle('waiting', mode === 'waiting')
+    $('.lane-phase', lane).textContent = text
+  }
+  const base = () => {
+    set(orc, 'running', 'running')
+    set(code, 'busy', 'running')
+    set(res, '', 'idle')
+    set(des, 'waiting', 'your turn')
+    set(rev, '', 'idle')
+    set(qa, '', 'idle')
+    flag.textContent = '2 running'
+  }
+  let n = 0, t = null
+  onVisible(panel, () => {
+    base()
+    t = setInterval(() => {
+      n++
+      // the accent border wanders between the two in-flight lanes
+      if (n % 2) {
+        const lead = orc.classList.contains('running')
+        set(orc, lead ? 'busy' : 'running', 'running')
+        set(code, lead ? 'running' : 'busy', 'running')
+      }
+      if (n % 3 === 0) {
+        const on = !res.classList.contains('busy')
+        set(res, on ? 'busy' : '', on ? 'running' : 'idle')
+        flag.textContent = on ? '3 running' : '2 running'
+      }
+      if (n % 5 === 0) {
+        const waiting = des.classList.contains('waiting')
+        set(des, waiting ? 'busy' : 'waiting', waiting ? 'running' : 'your turn')
+      }
+      if (n % 7 === 0) {
+        const on = !qa.classList.contains('busy')
+        set(qa, on ? 'busy' : '', on ? 'running' : 'idle')
+      }
+    }, 3100)
+  }, () => {
+    clearInterval(t)
+    base()
+  })
+})()
+
+/* task queue — the queue drains: running lands as a diff, the next task picks up */
+;(() => {
+  const panel = $('.panel-queue')
+  if (!panel) return
+  const rows = $$('.task', panel)
+  const shipped = $('.panel-foot b', panel)
+  // per frame, per row: [state, glyph, stat, lane shown]
+  const FRAMES = [
+    [['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'queued', 1], ['', '○', 'backlog', 0]],
+    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'backlog', 0]],
+    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'queued', 1]],
+    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1]],
+  ]
+  const DONE = [1, 2, 2, 3]
+  let f = 0, t = null
+  const render = (frame) => {
+    FRAMES[frame].forEach(([state, glyph, stat, laneOn], i) => {
+      const row = rows[i]
+      const changed = row.dataset.state !== state + stat
+      row.dataset.state = state + stat
+      row.className = 'task' + (state ? ' ' + state : '')
+      $('.task-g', row).textContent = glyph
+      $('.task-stat', row).textContent = stat
+      $('.task-lane', row).hidden = !laneOn
+      if (changed && frame !== 0) {
+        row.classList.remove('pop')
+        void row.offsetWidth
+        row.classList.add('pop')
+      }
+    })
+    shipped.textContent = DONE[frame]
+  }
+  onVisible(panel, () => {
+    f = 0
+    render(0)
+    t = setInterval(() => {
+      f = (f + 1) % FRAMES.length
+      render(f)
+    }, 4400)
+  }, () => {
+    clearInterval(t)
+    render(0)
+  })
 })()
 
 /* diff — lines draw in each time the panel enters */

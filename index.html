@@ -7,7 +7,7 @@
     <title>Operator · You run the agents</title>
     <meta
       name="description"
-      content="Operator is a macOS desktop app for Claude Code. You run the agents. Operator makes the work visible and steerable: every tool call, diff, and dollar on one live board, each task sealed in its own git worktree, nothing leaving your machine."
+      content="Operator is a macOS desktop app for Claude Code. You run the agents. Operator makes the work visible and steerable: every tool call, diff, and delegation on one live board, each task sealed in its own git worktree, nothing leaving your machine."
     />
     <meta name="author" content="juanmnl" />
     <link rel="canonical" href="https://juanmnl.com/operator-app/" />
@@ -64,7 +64,7 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "A macOS desktop app for Claude Code. You run the agents. Operator makes the work visible and steerable: a live orchestration timeline, isolated git worktrees, in-app diff review, and a usage & cost dashboard.",
+        "description": "A macOS desktop app for Claude Code. You run the agents. Operator makes the work visible and steerable: a live orchestration timeline, a roster of agent lanes with a task queue, isolated git worktrees, and in-app diff review.",
         "author": { "@type": "Person", "name": "juanmnl" }
       }
     </script>
@@ -106,7 +106,7 @@
               <h1 class="headline">You run the&nbsp;agents.</h1>
               <p class="lede">
                 Operator makes the work visible and steerable: every tool call, diff, and
-                dollar on one live board, each task sealed in its own git worktree, nothing
+                delegation on one live board, each task sealed in its own git worktree, nothing
                 leaving your machine.
               </p>
               <div class="cta-row">
@@ -140,9 +140,9 @@
             <h2 class="samples-title" id="samples-title">The work, made legible.</h2>
             <p class="samples-sub">
               No screenshots. These are the real views, rebuilt in the browser: the orchestration
-              tree of nested tool calls and subagent delegations, staged diffs reviewed in place,
-              each task sealed in its own git worktree, and a call log that meters every token
-              against the model that spent it.
+              tree of nested tool calls and subagent delegations, a roster of agent lanes working
+              through the project's task queue, each task sealed in its own git worktree, and
+              staged diffs reviewed in place.
             </p>
           </div>
 
@@ -198,75 +198,90 @@
               </div>
             </figure>
 
-            <!-- call log / usage -->
-            <figure class="panel panel-cost">
+            <!-- roster: the project's agent lanes -->
+            <figure class="panel panel-roster">
               <figcaption class="panel-bar">
                 <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="panel-name">usage · last 7 days</span>
-                <span class="panel-total">est. <b>$25.34</b></span>
+                <span class="panel-name">roster · operator</span>
+                <span class="panel-flag">2 running</span>
               </figcaption>
 
-              <div class="cost-body">
-                <div class="model">
-                  <div class="model-head">
-                    <span class="badge b-opus">opus</span><span class="model-cost">$18.40</span>
-                  </div>
-                  <div class="bar"><span class="bar-fill f-opus" style="--w: 92%"></span></div>
-                  <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
+              <div class="lanes">
+                <div class="lane running">
+                  <span class="lane-name">orchestrator</span>
+                  <span class="badge b-fable">fable</span>
+                  <span class="lane-phase">running</span>
                 </div>
-                <div class="model">
-                  <div class="model-head">
-                    <span class="badge b-sonnet">sonnet</span><span class="model-cost">$6.10</span>
-                  </div>
-                  <div class="bar"><span class="bar-fill f-sonnet" style="--w: 58%"></span></div>
-                  <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
+                <div class="lane busy">
+                  <span class="lane-name">code</span>
+                  <span class="badge b-opus">opus</span>
+                  <span class="lane-phase">running</span>
                 </div>
-                <div class="model">
-                  <div class="model-head">
-                    <span class="badge b-haiku">haiku</span><span class="model-cost">$0.84</span>
-                  </div>
-                  <div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div>
-                  <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
+                <div class="lane">
+                  <span class="lane-name">research</span>
+                  <span class="badge b-sonnet">sonnet</span>
+                  <span class="lane-phase">idle</span>
                 </div>
-
-                <div class="time-grid">
-                  <div class="time-cell">
-                    <span class="time-label">API time</span><span class="time-val">14m 02s</span>
-                  </div>
-                  <div class="time-cell">
-                    <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
-                  </div>
+                <div class="lane waiting">
+                  <span class="lane-name">design</span>
+                  <span class="badge b-sonnet">sonnet</span>
+                  <span class="lane-phase">your turn</span>
+                </div>
+                <div class="lane">
+                  <span class="lane-name">review</span>
+                  <span class="badge b-opus">opus</span>
+                  <span class="lane-phase">idle</span>
+                </div>
+                <div class="lane">
+                  <span class="lane-name">qa</span>
+                  <span class="badge b-haiku">haiku</span>
+                  <span class="lane-phase">idle</span>
                 </div>
               </div>
 
               <div class="panel-foot">
-                <span class="foot-note">Your local token counts, priced at API list rates. An estimate, and nothing sent anywhere.</span>
+                <span class="foot-note">Staff the project once. Each lane pins a model, effort, and permissions; a session launches against it in one click.</span>
               </div>
             </figure>
 
-            <!-- in-app diff review -->
-            <figure class="panel panel-diff">
+            <!-- task queue -->
+            <figure class="panel panel-queue">
               <figcaption class="panel-bar">
                 <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="panel-name">review · auth/session.ts</span>
-                <span class="panel-stat"><span class="stat-add">+3</span> <span class="stat-del">−1</span></span>
+                <span class="panel-name">task queue · operator</span>
+                <span class="panel-flag">1 running</span>
               </figcaption>
 
-              <div class="diff">
-                <div class="dhunk">@@ -18,7 +18,9 @@ export async function refresh(token)</div>
-                <div class="dline"><span class="dsign"> </span><span class="dcode">  export async function refresh(token: string) {</span></div>
-                <div class="dline del"><span class="dsign">-</span><span class="dcode">    const res = await fetch('/api/refresh')</span></div>
-                <div class="dline add"><span class="dsign">+</span><span class="dcode">    const res = await fetch('/api/refresh', {</span></div>
-                <div class="dline add"><span class="dsign">+</span><span class="dcode">      headers: { authorization: `Bearer ${token}` },</span></div>
-                <div class="dline add"><span class="dsign">+</span><span class="dcode">    })</span></div>
-                <div class="dline"><span class="dsign"> </span><span class="dcode">    if (!res.ok) throw new AuthError(res.status)</span></div>
-                <div class="dline"><span class="dsign"> </span><span class="dcode">    return res.json()</span></div>
-                <div class="dline"><span class="dsign"> </span><span class="dcode">  }</span></div>
+              <div class="tasks">
+                <div class="task done">
+                  <span class="task-g">✓</span>
+                  <span class="task-text">Fix the tray icon in dark mode</span>
+                  <span class="task-lane">design</span>
+                  <span class="task-stat">diff ready</span>
+                </div>
+                <div class="task active">
+                  <span class="task-g">◆</span>
+                  <span class="task-text">Refactor the auth module</span>
+                  <span class="task-lane">code</span>
+                  <span class="task-stat">running</span>
+                </div>
+                <div class="task">
+                  <span class="task-g">○</span>
+                  <span class="task-text">Write release notes for 0.4</span>
+                  <span class="task-lane">research</span>
+                  <span class="task-stat">queued</span>
+                </div>
+                <div class="task">
+                  <span class="task-g">○</span>
+                  <span class="task-text">Sweep the flaky retry test</span>
+                  <span class="task-lane" hidden>qa</span>
+                  <span class="task-stat">backlog</span>
+                </div>
               </div>
 
               <div class="panel-foot">
-                <span><b>2</b> of <b>5</b> files reviewed</span>
-                <span class="foot-right">commit, merge, or discard without leaving the window</span>
+                <span><b>1</b> of <b>4</b> shipped</span>
+                <span class="foot-right">finished tasks come back as a diff to review</span>
               </div>
             </figure>
 
@@ -484,6 +499,78 @@
 
               <div class="panel-foot">
                 <span class="foot-note">One prompt to four agents at once, each sealed in its own worktree. Keep the best diff.</span>
+              </div>
+            </figure>
+
+            <!-- in-app diff review -->
+            <figure class="panel panel-diff">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">review · auth/session.ts</span>
+                <span class="panel-stat"><span class="stat-add">+3</span> <span class="stat-del">−1</span></span>
+              </figcaption>
+
+              <div class="diff">
+                <div class="dhunk">@@ -18,7 +18,9 @@ export async function refresh(token)</div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">  export async function refresh(token: string) {</span></div>
+                <div class="dline del"><span class="dsign">-</span><span class="dcode">    const res = await fetch('/api/refresh')</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">    const res = await fetch('/api/refresh', {</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">      headers: { authorization: `Bearer ${token}` },</span></div>
+                <div class="dline add"><span class="dsign">+</span><span class="dcode">    })</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">    if (!res.ok) throw new AuthError(res.status)</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">    return res.json()</span></div>
+                <div class="dline"><span class="dsign"> </span><span class="dcode">  }</span></div>
+              </div>
+
+              <div class="panel-foot">
+                <span><b>2</b> of <b>5</b> files reviewed</span>
+                <span class="foot-right">commit, merge, or discard without leaving the window</span>
+              </div>
+            </figure>
+
+            <!-- usage, token-framed -->
+            <figure class="panel panel-cost">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">usage · last 7 days</span>
+                <span class="panel-total"><b>25.6M</b> tokens</span>
+              </figcaption>
+
+              <div class="cost-body">
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-sonnet">sonnet</span><span class="model-cost">12.7M</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-sonnet" style="--w: 92%"></span></div>
+                  <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
+                </div>
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-haiku">haiku</span><span class="model-cost">7.2M</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-haiku" style="--w: 52%"></span></div>
+                  <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
+                </div>
+                <div class="model">
+                  <div class="model-head">
+                    <span class="badge b-opus">opus</span><span class="model-cost">5.6M</span>
+                  </div>
+                  <div class="bar"><span class="bar-fill f-opus" style="--w: 41%"></span></div>
+                  <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
+                </div>
+
+                <div class="time-grid">
+                  <div class="time-cell">
+                    <span class="time-label">API time</span><span class="time-val">14m 02s</span>
+                  </div>
+                  <div class="time-cell">
+                    <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">Token counts parsed from your own local transcripts: what drove usage, and where the time went. Nothing sent anywhere.</span>
               </div>
             </figure>
           </div>

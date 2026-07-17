@@ -246,6 +246,8 @@ html.js .samples .panel.in { opacity: 1; transform: none; }
 .b-opus { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, transparent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .b-sonnet { color: color-mix(in srgb, var(--fg) 80%, transparent); border-color: color-mix(in srgb, var(--fg) 30%, transparent); }
 .b-haiku { color: var(--muted); border-color: color-mix(in srgb, var(--fg) 18%, transparent); }
+/* the flagship gets the only filled badge */
+.b-fable { color: var(--accent-fg); border-color: var(--accent); background: var(--accent); }
 
 /* orchestration tree */
 .tree { padding: 0.6rem 0.95rem; }
@@ -370,6 +372,30 @@ html.js .samples .panel.in { opacity: 1; transform: none; }
 
 /* fan-out index chip */
 .fan-ix { flex: none; font-size: 9.5px; line-height: 1; padding: 2px 5px; border-radius: 3px; border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* roster — the project's agent lanes */
+.lanes { padding: 0.35rem 0; }
+.lane { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.95rem; font-family: var(--font-mono); font-size: 11.5px; border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }
+.lane:last-child { border-bottom: 0; }
+.lane-name { flex: none; color: color-mix(in srgb, var(--fg) 82%, transparent); }
+.lane-phase { margin-left: auto; flex: none; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.lane.running { border-left: 2px solid var(--accent); padding-left: calc(0.95rem - 2px); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.lane.running .lane-name { color: var(--fg); }
+.lane.running .lane-phase, .lane.busy .lane-phase, .lane.waiting .lane-phase { color: var(--accent); }
+
+/* task queue */
+.tasks { padding: 0.35rem 0; }
+.task { display: flex; align-items: center; gap: 0.55rem; padding: 0.62rem 0.95rem; font-size: 12.5px; line-height: 1.4; border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }
+.task:last-child { border-bottom: 0; }
+.task-g { flex: none; width: 14px; text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.task-text { flex: 0 1 auto; color: color-mix(in srgb, var(--fg) 88%, transparent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.task-lane { flex: none; font-family: var(--font-mono); font-size: 9.5px; line-height: 1; padding: 2px 5px; border-radius: 3px; border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent); color: var(--muted); }
+.task-stat { margin-left: auto; flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+.task.active { border-left: 2px solid var(--accent); padding-left: calc(0.95rem - 2px); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.task.active .task-text { color: var(--fg); }
+.task.active .task-g, .task.active .task-stat { color: var(--accent); }
+.task.done .task-g { color: var(--add-fg); }
+.task.done .task-text { color: var(--muted); }
 
 /* agent library */
 .agents { padding: 0.35rem 0; }

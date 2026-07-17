@@ -206,13 +206,14 @@
           <div class="ds-card">
             <div class="ds-stage">
               <div class="ds-inline">
+                <span class="badge b-fable">fable</span>
                 <span class="badge b-opus">opus</span>
                 <span class="badge b-sonnet">sonnet</span>
                 <span class="badge b-haiku">haiku</span>
                 <span class="badge b-plan">opusplan</span>
               </div>
             </div>
-            <div class="ds-cap">Model badges · <span class="ds-name">.badge.b-opus / .b-sonnet / .b-haiku / .b-plan</span></div>
+            <div class="ds-cap">Model badges · <span class="ds-name">.badge.b-fable / .b-opus / .b-sonnet / .b-haiku / .b-plan</span> · the flagship gets the only fill</div>
           </div>
 
           <div class="ds-card">
@@ -255,6 +256,17 @@
               </div>
             </div>
             <div class="ds-cap" style="margin-left:0.95rem; margin-right:0.95rem;">Status rows · <span class="ds-name">.sess.running / .waiting</span> (accent border = live)</div>
+          </div>
+
+          <div class="ds-card" style="padding-left:0; padding-right:0;">
+            <div class="ds-stage" style="justify-content:flex-start;">
+              <div class="tasks">
+                <div class="task done"><span class="task-g">✓</span><span class="task-text">a shipped task</span><span class="task-lane">code</span><span class="task-stat">diff ready</span></div>
+                <div class="task active"><span class="task-g">◆</span><span class="task-text">a dispatched task</span><span class="task-lane">design</span><span class="task-stat">running</span></div>
+                <div class="task"><span class="task-g">○</span><span class="task-text">a backlog task</span><span class="task-stat">backlog</span></div>
+              </div>
+            </div>
+            <div class="ds-cap" style="margin-left:0.95rem; margin-right:0.95rem;">Task rows + lane chip · <span class="ds-name">.task.done / .active · .task-lane</span></div>
           </div>
         </div>
 
@@ -375,20 +387,38 @@
             <div class="panel-foot"><span><b>3</b> tools</span><span><b>2</b> subagents</span><span class="foot-right">worktree <em>auth-refactor</em></span></div>
           </figure>
 
-          <!-- usage -->
+          <!-- roster -->
+          <figure class="panel">
+            <figcaption class="panel-bar">
+              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-name">roster · operator</span>
+              <span class="panel-flag">2 running</span>
+            </figcaption>
+            <div class="lanes">
+              <div class="lane running"><span class="lane-name">orchestrator</span><span class="badge b-fable">fable</span><span class="lane-phase">running</span></div>
+              <div class="lane busy"><span class="lane-name">code</span><span class="badge b-opus">opus</span><span class="lane-phase">running</span></div>
+              <div class="lane"><span class="lane-name">research</span><span class="badge b-sonnet">sonnet</span><span class="lane-phase">idle</span></div>
+              <div class="lane waiting"><span class="lane-name">design</span><span class="badge b-sonnet">sonnet</span><span class="lane-phase">your turn</span></div>
+              <div class="lane"><span class="lane-name">review</span><span class="badge b-opus">opus</span><span class="lane-phase">idle</span></div>
+              <div class="lane"><span class="lane-name">qa</span><span class="badge b-haiku">haiku</span><span class="lane-phase">idle</span></div>
+            </div>
+            <div class="panel-foot"><span class="foot-note">Staff the project once. Each lane pins a model, effort, and permissions; a session launches against it in one click.</span></div>
+          </figure>
+
+          <!-- usage, token-framed -->
           <figure class="panel">
             <figcaption class="panel-bar">
               <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
               <span class="panel-name">usage · last 7 days</span>
-              <span class="panel-total">est. <b>$25.34</b></span>
+              <span class="panel-total"><b>25.6M</b> tokens</span>
             </figcaption>
             <div class="cost-body">
-              <div class="model"><div class="model-head"><span class="badge b-opus">opus</span><span class="model-cost">$18.40</span></div><div class="bar"><span class="bar-fill f-opus" style="--w: 92%"></span></div><div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div></div>
-              <div class="model"><div class="model-head"><span class="badge b-sonnet">sonnet</span><span class="model-cost">$6.10</span></div><div class="bar"><span class="bar-fill f-sonnet" style="--w: 58%"></span></div><div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div></div>
-              <div class="model"><div class="model-head"><span class="badge b-haiku">haiku</span><span class="model-cost">$0.84</span></div><div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div><div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div></div>
+              <div class="model"><div class="model-head"><span class="badge b-sonnet">sonnet</span><span class="model-cost">12.7M</span></div><div class="bar"><span class="bar-fill f-sonnet" style="--w: 92%"></span></div><div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div></div>
+              <div class="model"><div class="model-head"><span class="badge b-haiku">haiku</span><span class="model-cost">7.2M</span></div><div class="bar"><span class="bar-fill f-haiku" style="--w: 52%"></span></div><div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div></div>
+              <div class="model"><div class="model-head"><span class="badge b-opus">opus</span><span class="model-cost">5.6M</span></div><div class="bar"><span class="bar-fill f-opus" style="--w: 41%"></span></div><div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div></div>
               <div class="time-grid"><div class="time-cell"><span class="time-label">API time</span><span class="time-val">14m 02s</span></div><div class="time-cell"><span class="time-label">Wall time</span><span class="time-val">1h 38m</span></div></div>
             </div>
-            <div class="panel-foot"><span class="foot-note">Your local token counts, priced at API list rates. An estimate, and nothing sent anywhere.</span></div>
+            <div class="panel-foot"><span class="foot-note">Token counts parsed from your own local transcripts: what drove usage, and where the time went. Nothing sent anywhere.</span></div>
           </figure>
 
           <!-- agents -->
@@ -410,8 +440,8 @@
         </div>
 
         <div class="ds-note">
-          The landing runs the full set of ten views: terminal, worktrees, fan-out, plan, conversation,
-          sessions and more. <a href="index.html">See them in context →</a>
+          The landing runs the full set of twelve views: the task queue, terminal, worktrees, fan-out,
+          plan, conversation, sessions and more. <a href="index.html">See them in context →</a>
         </div>
       </section>
 

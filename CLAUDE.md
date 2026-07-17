@@ -8,15 +8,21 @@ a live orchestration timeline, isolated git worktrees, in-app diff review, usage
 **Scope:** hero + a single "app samples" section + a closing CTA ("Operator, standing by.",
 user-requested 2026-07-01) + footer (brand row with nav, base row with brand line + OS-aware
 ⌘K hint + copyright). The samples section shows coded
-mockups of Operator's real views as `.panel` figures in a 2-col grid (wide-left / narrow-right):
-orchestration timeline, usage/cost, in-app diff review, worktrees, conversation, plan mode,
-terminal, concurrent sessions, agent library, fan-out (10 panels; the permissions panel was
-removed 2026-07-02 because Claude now runs mostly in auto mode, and the fan-out panel replaced
-it — same prompt to N agents, each in its own worktree, per-agent `fanIndex/fanTotal` chips). Each panel mirrors a real
-component/type in `../operator` — labels and states (session phases `running`/`waiting`/`idle`/
-`compacting`, per-agent model + scope, terminal cwd/pid/`OPERATOR_DEV_PORT`) are pulled from
-`../operator/src/shared/types.ts` and the `components/` there, so keep them accurate if the app
-changes. No other marketing sections.
+mockups of Operator's real views as `.panel` figures in a 2-col grid (wide-left / narrow-right),
+12 panels in this order: orchestration timeline, roster, task queue, worktrees, conversation,
+plan mode, terminal, concurrent sessions, agent library, fan-out, in-app diff review, usage.
+The permissions panel was removed 2026-07-02 (Claude now runs mostly in auto mode); fan-out
+replaced it (same prompt to N agents, each in its own worktree, per-agent `fanIndex/fanTotal`
+chips). The roster + task queue panels were added 2026-07-16, mirroring the app's `Role` (agent
+lanes that pin a model, e.g. orchestrator=fable) and `ProjectTask` (backlog → running → done,
+finished tasks land as a diff) types; `fable` gets the only filled model badge (`.b-fable`).
+The usage panel was **demoted to last and token-framed the same day** (the user finds cost
+estimates unrealistic): token counts per model, API/wall time, **no dollar figures anywhere**,
+and the hero lede says "every tool call, diff, and delegation" (was "dollar"). Each panel
+mirrors a real component/type in `../operator` — labels and states (session phases `running`/
+`waiting`/`idle`/`compacting`, per-agent model + scope, terminal cwd/pid/`OPERATOR_DEV_PORT`)
+are pulled from `../operator/src/shared/types.ts` and the `components/` there, so keep them
+accurate if the app changes. No other marketing sections.
 
 ## Files
 - `index.html` — markup (hero, app samples, footer, ⌘K palette)
@@ -31,7 +37,8 @@ changes. No other marketing sections.
 - `main.js` — theme switching, ⌘K command palette, the animated dot-disc mark, OS-aware shortcut,
   and the **live-panel conductor**: each app-sample panel loops its own small state machine while
   on screen (orchestration durations tick and the live row hands off, the reply streams, the
-  terminal typewrites, plan todos tick, usage/worktree numbers drift, session phases wander). All IntersectionObserver-gated (paused off-screen),
+  terminal typewrites, plan todos tick, usage/worktree numbers drift, session phases wander,
+  roster lanes trade the in-flight border, the task queue drains task by task). All IntersectionObserver-gated (paused off-screen),
   desynced periods per panel, and fully static under `prefers-reduced-motion` (the HTML markup
   is the frozen fallback). Panels also scroll-reveal (gated behind an `html.js` class so no-JS
   stays visible).
