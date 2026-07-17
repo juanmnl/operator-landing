@@ -8,17 +8,20 @@ a live orchestration timeline, isolated git worktrees, in-app diff review, usage
 **Scope:** hero + a single "app samples" section + a closing CTA ("Operator, standing by.",
 user-requested 2026-07-01) + footer (brand row with nav, base row with brand line + OS-aware
 ⌘K hint + copyright). The samples section shows coded
-mockups of Operator's real views as `.panel` figures in a 2-col grid (wide-left / narrow-right),
-12 panels in this order: orchestration timeline, roster, task queue, worktrees, conversation,
-plan mode, terminal, concurrent sessions, agent library, fan-out, in-app diff review, usage.
+mockups of Operator's real views as `.panel` figures laid out as **spotlight rows** (`.spot`,
+user-requested 2026-07-16 over the old dense 2-col grid): one feature per row, a copy column
+(kicker + title + 2 sentences) beside its panel(s), sides alternating via `:nth-child(even)`,
+generous gaps. 7 spots / 12 panels: orchestration (solo), roster + task queue, worktrees +
+fan-out, conversation + plan, terminal + sessions, agent library (solo), diff review + usage.
+Related panels stack inside one `.spot-panels` column; on mobile each spot is copy-then-panels.
 The permissions panel was removed 2026-07-02 (Claude now runs mostly in auto mode); fan-out
 replaced it (same prompt to N agents, each in its own worktree, per-agent `fanIndex/fanTotal`
 chips). The roster + task queue panels were added 2026-07-16, mirroring the app's `Role` (agent
 lanes that pin a model, e.g. orchestrator=fable) and `ProjectTask` (backlog → running → done,
 finished tasks land as a diff) types; `fable` gets the only filled model badge (`.b-fable`).
-The usage panel was **demoted to last and token-framed the same day** (the user finds cost
-estimates unrealistic): token counts per model, API/wall time, **no dollar figures anywhere**,
-and the hero lede says "every tool call, diff, and delegation" (was "dollar"). Each panel
+The usage panel was **demoted to the last spot and token-framed the same day** (the user finds
+cost estimates unrealistic): token counts per model, API/wall time, **no dollar figures
+anywhere**, and the hero lede says "every tool call, diff, and delegation" (was "dollar"). Each panel
 mirrors a real component/type in `../operator` — labels and states (session phases `running`/
 `waiting`/`idle`/`compacting`, per-agent model + scope, terminal cwd/pid/`OPERATOR_DEV_PORT`)
 are pulled from `../operator/src/shared/types.ts` and the `components/` there, so keep them

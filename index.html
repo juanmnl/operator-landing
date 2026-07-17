@@ -147,7 +147,19 @@
             </p>
           </div>
 
-          <div class="samples-grid">
+          <div class="spots">
+            <!-- 1 · orchestration -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Orchestration</span>
+                <h3 class="spot-title">Every move, watched live.</h3>
+                <p class="spot-text">
+                  Nested tool calls, subagent delegations, ticking durations. Operator rebuilds
+                  the timeline from Claude Code's own transcripts, so nothing needs installing
+                  and nothing gets missed.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- orchestration timeline -->
             <figure class="panel panel-tree">
               <figcaption class="panel-bar">
@@ -198,7 +210,21 @@
                 <span class="foot-right">worktree <em>auth-refactor</em></span>
               </div>
             </figure>
+              </div>
+            </article>
 
+            <!-- 2 · roster + task queue -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Roster &amp; queue</span>
+                <h3 class="spot-title">Staff it once. Queue the work.</h3>
+                <p class="spot-text">
+                  Each lane pins a model, effort, and permissions, so launching a session is one
+                  click. Queue tasks against the roster and they dispatch, run, and come back
+                  done.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- roster: the project's agent lanes -->
             <figure class="panel panel-roster">
               <figcaption class="panel-bar">
@@ -285,7 +311,21 @@
                 <span class="foot-right">finished tasks come back as a diff to review</span>
               </div>
             </figure>
+              </div>
+            </article>
 
+            <!-- 3 · worktrees + fan-out -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Worktrees &amp; fan-out</span>
+                <h3 class="spot-title">Parallel, without collisions.</h3>
+                <p class="spot-text">
+                  Every task runs in its own git worktree, so several agents can work one repo
+                  without stepping on each other. Fan a single prompt out to N attempts and keep
+                  the best diff.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- isolated worktrees -->
             <figure class="panel panel-trees">
               <figcaption class="panel-bar">
@@ -320,6 +360,60 @@
               </div>
             </figure>
 
+            <!-- fan-out -->
+            <figure class="panel panel-fan">
+              <figcaption class="panel-bar">
+                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-name">fan-out · fix the flaky retry test</span>
+                <span class="panel-flag">4 agents</span>
+              </figcaption>
+
+              <div class="trees">
+                <div class="wt wt-active">
+                  <span class="wt-g">◆</span><span class="wt-branch">retry-fix-1</span>
+                  <span class="fan-ix">1/4</span>
+                  <span class="wt-stat">running</span>
+                  <span class="wt-diff"><span class="stat-add">+21</span> <span class="stat-del">−9</span></span>
+                </div>
+                <div class="wt">
+                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-2</span>
+                  <span class="fan-ix">2/4</span>
+                  <span class="wt-stat">your turn</span>
+                  <span class="wt-diff"><span class="stat-add">+14</span> <span class="stat-del">−3</span></span>
+                </div>
+                <div class="wt">
+                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-3</span>
+                  <span class="fan-ix">3/4</span>
+                  <span class="wt-stat">running</span>
+                  <span class="wt-diff"><span class="stat-add">+47</span> <span class="stat-del">−18</span></span>
+                </div>
+                <div class="wt">
+                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-4</span>
+                  <span class="fan-ix">4/4</span>
+                  <span class="wt-stat">queued</span>
+                  <span class="wt-diff wt-muted">+0 −0</span>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                <span class="foot-note">One prompt to four agents at once, each sealed in its own worktree. Keep the best diff.</span>
+              </div>
+            </figure>
+              </div>
+            </article>
+
+            <!-- 4 · conversation + plan -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Conversation &amp; plan</span>
+                <h3 class="spot-title">The thinking, readable.</h3>
+                <p class="spot-text">
+                  The conversation streams as it happens, and the agent's own plan ticks off
+                  beside it. You always know what it is doing now and what it intends to do
+                  next.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- conversation -->
             <figure class="panel panel-convo">
               <figcaption class="panel-bar">
@@ -369,7 +463,21 @@
                 <span class="foot-note">The agent's own TodoWrite, rendered live. It ticks off as it works.</span>
               </div>
             </figure>
+              </div>
+            </article>
 
+            <!-- 5 · terminal + sessions -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Terminal &amp; sessions</span>
+                <h3 class="spot-title">Real terminals, many at once.</h3>
+                <p class="spot-text">
+                  Every session is a real pty you can type into, with its own reserved dev-server
+                  port. The sidebar tints each one by what it is doing right now: running,
+                  waiting on you, compacting, idle.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- terminal -->
             <figure class="panel panel-term">
               <figcaption class="panel-bar">
@@ -426,7 +534,21 @@
                 <span class="foot-note">Run several agents at once, each tinted by what it's doing right now.</span>
               </div>
             </figure>
+              </div>
+            </article>
 
+            <!-- 6 · agent library -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Agent library</span>
+                <h3 class="spot-title">The right model for every job.</h3>
+                <p class="spot-text">
+                  A visual editor over your .claude/agents files. Haiku for extraction, Sonnet
+                  for the everyday, Opus where it pays off: the model is picked per agent, right
+                  at the point of choice.
+                </p>
+              </div>
+              <div class="spot-panels">
             <!-- agent library -->
             <figure class="panel panel-agents">
               <figcaption class="panel-bar">
@@ -462,47 +584,21 @@
                 <span class="foot-note">Pick the model per agent: cheap models for grunt work, the pricey one where it pays off.</span>
               </div>
             </figure>
-
-            <!-- fan-out -->
-            <figure class="panel panel-fan">
-              <figcaption class="panel-bar">
-                <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="panel-name">fan-out · fix the flaky retry test</span>
-                <span class="panel-flag">4 agents</span>
-              </figcaption>
-
-              <div class="trees">
-                <div class="wt wt-active">
-                  <span class="wt-g">◆</span><span class="wt-branch">retry-fix-1</span>
-                  <span class="fan-ix">1/4</span>
-                  <span class="wt-stat">running</span>
-                  <span class="wt-diff"><span class="stat-add">+21</span> <span class="stat-del">−9</span></span>
-                </div>
-                <div class="wt">
-                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-2</span>
-                  <span class="fan-ix">2/4</span>
-                  <span class="wt-stat">your turn</span>
-                  <span class="wt-diff"><span class="stat-add">+14</span> <span class="stat-del">−3</span></span>
-                </div>
-                <div class="wt">
-                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-3</span>
-                  <span class="fan-ix">3/4</span>
-                  <span class="wt-stat">running</span>
-                  <span class="wt-diff"><span class="stat-add">+47</span> <span class="stat-del">−18</span></span>
-                </div>
-                <div class="wt">
-                  <span class="wt-g">◇</span><span class="wt-branch">retry-fix-4</span>
-                  <span class="fan-ix">4/4</span>
-                  <span class="wt-stat">queued</span>
-                  <span class="wt-diff wt-muted">+0 −0</span>
-                </div>
               </div>
+            </article>
 
-              <div class="panel-foot">
-                <span class="foot-note">One prompt to four agents at once, each sealed in its own worktree. Keep the best diff.</span>
+            <!-- 7 · review + usage -->
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="spot-kicker">Review &amp; usage</span>
+                <h3 class="spot-title">It comes back as a diff.</h3>
+                <p class="spot-text">
+                  Review each session's changes in place, then commit, merge, or discard without
+                  leaving the window. The usage view keeps the token counts honest, parsed from
+                  your own local transcripts.
+                </p>
               </div>
-            </figure>
-
+              <div class="spot-panels">
             <!-- in-app diff review -->
             <figure class="panel panel-diff">
               <figcaption class="panel-bar">
@@ -574,6 +670,8 @@
                 <span class="foot-note">Token counts parsed from your own local transcripts: what drove usage, and where the time went. Nothing sent anywhere.</span>
               </div>
             </figure>
+              </div>
+            </article>
           </div>
         </div>
       </section>
