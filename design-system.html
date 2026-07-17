@@ -29,10 +29,8 @@
     <style>
       /* ── design-system page chrome (ds-*) — the primitives themselves come from styles.css ── */
 
-      /* diff add/remove tokens (mirrors the .samples scope in styles.css) so pills/diffs render
-         anywhere on this page, not only inside a .samples ancestor */
-      html { --add-fg: #4ec9a0; --del-fg: #e2686b; --add-bg: color-mix(in srgb, #4ec9a0 15%, transparent); --del-bg: color-mix(in srgb, #e2686b 14%, transparent); }
-      html[data-theme='light'] { --add-fg: #1a7f5e; --del-fg: #b23b3b; --add-bg: color-mix(in srgb, #1a7f5e 12%, transparent); --del-bg: color-mix(in srgb, #b23b3b 11%, transparent); }
+      /* diff add/remove tokens now live in each theme block in styles.css, so nothing is
+         re-declared here */
 
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); -webkit-font-smoothing: antialiased; transition: background-color 0.35s ease, color 0.35s ease; }
@@ -107,7 +105,7 @@
       @media (min-width: 900px) { .ds-views { columns: 2; } }
       .ds-views > figure { width: 100%; margin: 0 0 1.5rem; break-inside: avoid; }
 
-      .ds-note { margin-top: 1.5rem; padding: 0.85rem 1rem; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 5%, transparent); font-size: 0.9rem; line-height: 1.55; color: color-mix(in srgb, var(--fg) 78%, transparent); }
+      .ds-note { margin-top: 1.5rem; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; line-height: 1.55; color: color-mix(in srgb, var(--fg) 78%, transparent); }
       .ds-note b { color: var(--fg); }
 
       .ds-foot { margin-top: 4rem; padding-top: 1.4rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
@@ -124,6 +122,7 @@
       <nav class="ds-nav" aria-label="Sections">
         <a href="#elements">Elements</a>
         <a href="#components">Components</a>
+        <a href="#motion">Motion</a>
         <a href="#views">Views</a>
       </nav>
       <div class="ds-themes" role="group" aria-label="Theme">
@@ -139,7 +138,7 @@
         <span class="ds-eyebrow">Operator · design system</span>
         <h1>The parts the panels are made of.</h1>
         <p>
-          Every app-sample on the landing is built from the same small kit — a themed set of tokens,
+          Every app-sample on the landing is built from the same small kit: a themed set of tokens,
           a handful of composable components, and the views that assemble them. Switch themes above;
           everything here reads from the exact CSS the app ships.
         </p>
@@ -149,11 +148,11 @@
       <section class="ds-sec" id="elements">
         <span class="ds-eyebrow">Elements</span>
         <h2 class="ds-h">Tokens &amp; type</h2>
-        <p class="ds-lead">Each theme is one block of CSS custom properties. Components never hard-code a colour — they reference these, so a theme swap re-skins everything at once.</p>
+        <p class="ds-lead">Each theme is one block of CSS custom properties. Components never hard-code a colour. They reference these, so a theme swap re-skins everything at once.</p>
 
         <div class="ds-block">
           <div class="ds-block-h"><h3>Colour</h3><code>html[data-theme="…"]</code></div>
-          <p>Values update live as you change theme — these chips read the resolved custom properties.</p>
+          <p>Values update live as you change theme. These chips read the resolved custom properties.</p>
           <div class="ds-swatches">
             <div class="ds-swatch" data-var="bg"><div class="chip" style="background:var(--bg)"></div><div class="meta"><span class="vn">--bg</span><span class="vv"></span></div></div>
             <div class="ds-swatch" data-var="bg-deep"><div class="chip" style="background:var(--bg-deep)"></div><div class="meta"><span class="vn">--bg-deep</span><span class="vv"></span></div></div>
@@ -170,13 +169,13 @@
 
         <div class="ds-block">
           <div class="ds-block-h"><h3>Type</h3><code>--font-disp · --font-body · --font-mono</code></div>
-          <p>Sora sets headlines, Archivo carries prose, JetBrains Mono handles everything data — code, labels, metrics, timings.</p>
+          <p>Sora sets headlines, Archivo carries prose, JetBrains Mono handles everything data: code, labels, metrics, timings.</p>
           <div class="ds-type">
-            <div class="ds-spec"><span class="lab">Display — Sora 700 · --font-disp</span><div class="t-disp">Mission control for working agents.</div></div>
-            <div class="ds-spec"><span class="lab">Title — Sora 600</span><div class="t-title">The work, made legible.</div></div>
-            <div class="ds-spec"><span class="lab">Body — Archivo 400 · --font-body</span><div class="t-body">These are the real views, rebuilt in the browser — no screenshots.</div></div>
-            <div class="ds-spec"><span class="lab">Mono — JetBrains Mono 400 · --font-mono</span><div class="t-mono">delegate › write-tests · 3.2s · +142 −38</div></div>
-            <div class="ds-spec"><span class="lab">Micro — mono, uppercase, tracked</span><div class="t-micro">A look inside</div></div>
+            <div class="ds-spec"><span class="lab">Display · Sora 700 · --font-disp</span><div class="t-disp">You run the agents.</div></div>
+            <div class="ds-spec"><span class="lab">Title · Sora 600</span><div class="t-title">The work, made legible.</div></div>
+            <div class="ds-spec"><span class="lab">Body · Archivo 400 · --font-body</span><div class="t-body">These are the real views, rebuilt in the browser. No screenshots.</div></div>
+            <div class="ds-spec"><span class="lab">Mono · JetBrains Mono 400 · --font-mono</span><div class="t-mono">delegate › write-tests · 3.2s · +142 −38</div></div>
+            <div class="ds-spec"><span class="lab">Micro · mono, uppercase, tracked</span><div class="t-micro">A look inside</div></div>
           </div>
         </div>
       </section>
@@ -197,7 +196,7 @@
                 <span class="panel-name">panel-name · context</span>
                 <span class="panel-flag">flag</span>
               </figcaption>
-              <div style="padding: 0.85rem 0.95rem; font-family: var(--font-mono); font-size: 11px; color: var(--muted); opacity: 0.75;">— body slot —</div>
+              <div style="padding: 0.85rem 0.95rem; font-family: var(--font-mono); font-size: 11px; color: var(--muted); opacity: 0.75;">body slot</div>
               <div class="panel-foot"><span><b>meta</b> left</span><span class="foot-right">meta right</span></div>
             </figure>
           </div>
@@ -213,19 +212,7 @@
                 <span class="badge b-plan">opusplan</span>
               </div>
             </div>
-            <div class="ds-cap">Model badges — <span class="ds-name">.badge.b-opus / .b-sonnet / .b-haiku / .b-plan</span></div>
-          </div>
-
-          <div class="ds-card">
-            <div class="ds-stage">
-              <div class="ds-inline">
-                <span class="pstatus ps-approved">approved</span>
-                <span class="pstatus ps-denied">denied</span>
-                <span class="pstatus ps-pending">pending</span>
-                <span class="pstatus ps-auto">auto</span>
-              </div>
-            </div>
-            <div class="ds-cap">Permission pills — <span class="ds-name">.pstatus.ps-approved / ps-denied / ps-pending / ps-auto</span></div>
+            <div class="ds-cap">Model badges · <span class="ds-name">.badge.b-opus / .b-sonnet / .b-haiku / .b-plan</span></div>
           </div>
 
           <div class="ds-card">
@@ -235,7 +222,7 @@
               <div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div>
               <span class="ppbar" aria-hidden="true" style="width:100%"><i style="--w: 60%"></i></span>
             </div>
-            <div class="ds-cap">Meters — <span class="ds-name">.bar &gt; .bar-fill</span> · progress <span class="ds-name">.ppbar</span></div>
+            <div class="ds-cap">Meters · <span class="ds-name">.bar &gt; .bar-fill</span> · progress <span class="ds-name">.ppbar</span></div>
           </div>
 
           <div class="ds-card">
@@ -245,7 +232,7 @@
                 <div class="msg is-agent"><div class="bubble is-agent">an agent reply<span class="caret" aria-hidden="true"></span></div></div>
               </div>
             </div>
-            <div class="ds-cap">Chat bubbles + caret — <span class="ds-name">.bubble.is-user / .is-agent · .caret</span></div>
+            <div class="ds-cap">Chat bubbles + caret · <span class="ds-name">.bubble.is-user / .is-agent · .caret</span></div>
           </div>
 
           <div class="ds-card">
@@ -256,7 +243,7 @@
                 <div class="todo"><span class="tg">○</span><span class="tt">pending step</span></div>
               </div>
             </div>
-            <div class="ds-cap">Plan todos — <span class="ds-name">.todo.done / .active</span> (colour + glyph, no fills)</div>
+            <div class="ds-cap">Plan todos · <span class="ds-name">.todo.done / .active</span> (colour + glyph, no fills)</div>
           </div>
 
           <div class="ds-card" style="padding-left:0; padding-right:0;">
@@ -267,7 +254,7 @@
                 <div class="sess"><span class="sess-name">idle session</span><span class="sess-phase">idle</span></div>
               </div>
             </div>
-            <div class="ds-cap" style="margin-left:0.95rem; margin-right:0.95rem;">Status rows — <span class="ds-name">.sess.running / .waiting</span> (accent border = live)</div>
+            <div class="ds-cap" style="margin-left:0.95rem; margin-right:0.95rem;">Status rows · <span class="ds-name">.sess.running / .waiting</span> (accent border = live)</div>
           </div>
         </div>
 
@@ -303,11 +290,63 @@
           </div>
         </div>
 
+        <div class="ds-block">
+          <div class="ds-block-h"><h3>Buttons</h3><code>.btn-primary · .btn-ghost</code></div>
+          <p>Mono, uppercase, square-cornered. The primary is the only accent fill on the page; the ghost is a bordered echo of it.</p>
+          <div class="ds-inline" style="font-family: var(--font-mono); font-size: 13px;">
+            <a class="btn btn-primary" href="#components" onclick="return false">Download for macOS</a>
+            <a class="btn btn-ghost" href="#components" onclick="return false">Release notes</a>
+          </div>
+        </div>
+
         <div class="ds-note">
-          <b>The one house rule:</b> “live” is shown with an accent left-border, a text flag, or a ticking value —
+          <b>The one house rule:</b> “live” is shown with an accent left-border, a text flag, or a ticking value,
           never a pulsing/glowing status dot. That dot reads as a generic AI tell, so it stays out. The only
           animation-as-liveness we allow is a text caret (<span class="ds-name">.caret</span>) and the duration
-          tick — both respect <span class="ds-name">prefers-reduced-motion</span>.
+          tick; both respect <span class="ds-name">prefers-reduced-motion</span>.
+        </div>
+      </section>
+
+      <!-- ════════════════ MOTION ════════════════ -->
+      <section class="ds-sec" id="motion">
+        <span class="ds-eyebrow">Motion</span>
+        <h2 class="ds-h">Liveness, not decoration</h2>
+        <p class="ds-lead">
+          Motion here always means state change: a value ticking, text streaming, a row handing off.
+          On the landing every panel loops its own small state machine while it is on screen, each on
+          its own period, the way the mark's dots each twinkle on their own cycle. Panels pause when
+          they scroll away; under <span class="ds-name">prefers-reduced-motion</span> the static
+          markup is the whole experience.
+        </p>
+
+        <div class="ds-demos" style="margin-top: 1.75rem;">
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="t-mono">◆ Edit auth/session.test.ts <span class="dur-live" data-ds-tick>3.2s</span></div>
+            </div>
+            <div class="ds-cap">Duration tick · the in-flight tool counts up 10×/s; the only animation is the number changing</div>
+          </div>
+
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="t-body">streaming a reply<span class="caret" aria-hidden="true"></span></div>
+            </div>
+            <div class="ds-cap">Text caret · <span class="ds-name">.caret</span> blinks in hard steps like a terminal cursor, never fades</div>
+          </div>
+
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="t-mono"><span data-ds-ellipsis>compacting…</span></div>
+            </div>
+            <div class="ds-cap">Phase wander · session phases drift on their own desynced timers</div>
+          </div>
+
+          <div class="ds-card">
+            <div class="ds-stage">
+              <div class="t-mono" data-ds-reveal>panel enters: rise 16px, fade in</div>
+            </div>
+            <div class="ds-cap">Enter reveal · panels rise as they scroll in, staggered 110ms per batch, IntersectionObserver-gated</div>
+          </div>
         </div>
       </section>
 
@@ -315,7 +354,7 @@
       <section class="ds-sec" id="views">
         <span class="ds-eyebrow">Views</span>
         <h2 class="ds-h">Assembled</h2>
-        <p class="ds-lead">The components composed into the real panels. These are lifted verbatim from the landing — the same markup, the same classes.</p>
+        <p class="ds-lead">The components composed into the real panels. These are lifted verbatim from the landing: the same markup, the same classes.</p>
 
         <div class="ds-views" style="margin-top: 1.75rem;">
           <!-- orchestration -->
@@ -341,7 +380,7 @@
             <figcaption class="panel-bar">
               <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
               <span class="panel-name">usage · last 7 days</span>
-              <span class="panel-total">total <b>$25.34</b></span>
+              <span class="panel-total">est. <b>$25.34</b></span>
             </figcaption>
             <div class="cost-body">
               <div class="model"><div class="model-head"><span class="badge b-opus">opus</span><span class="model-cost">$18.40</span></div><div class="bar"><span class="bar-fill f-opus" style="--w: 92%"></span></div><div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div></div>
@@ -349,23 +388,7 @@
               <div class="model"><div class="model-head"><span class="badge b-haiku">haiku</span><span class="model-cost">$0.84</span></div><div class="bar"><span class="bar-fill f-haiku" style="--w: 24%"></span></div><div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div></div>
               <div class="time-grid"><div class="time-cell"><span class="time-label">API time</span><span class="time-val">14m 02s</span></div><div class="time-cell"><span class="time-label">Wall time</span><span class="time-val">1h 38m</span></div></div>
             </div>
-            <div class="panel-foot"><span class="foot-note">Built from the same transcripts the timeline reads — nothing sent anywhere.</span></div>
-          </figure>
-
-          <!-- permissions -->
-          <figure class="panel">
-            <figcaption class="panel-bar">
-              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="panel-name">permissions · your rules, applied</span>
-              <span class="panel-flag">4 rules</span>
-            </figcaption>
-            <div class="perms">
-              <div class="perm"><span class="pg">◇</span><span class="ptool">Read</span><span class="ptarget">src/auth/session.ts</span><span class="pstatus ps-auto">auto</span></div>
-              <div class="perm"><span class="pg">◆</span><span class="ptool">Edit</span><span class="ptarget">auth/session.test.ts</span><span class="pstatus ps-approved">approved</span></div>
-              <div class="perm"><span class="pg">◇</span><span class="ptool">Bash</span><span class="ptarget">rm -rf node_modules</span><span class="pstatus ps-denied">denied</span></div>
-              <div class="perm"><span class="pg">◇</span><span class="ptool">WebFetch</span><span class="ptarget">api.stripe.com</span><span class="pstatus ps-pending">pending</span></div>
-            </div>
-            <div class="panel-foot"><span class="foot-note">Every tool call clears the rules you set — approve, deny, or auto — before it runs.</span></div>
+            <div class="panel-foot"><span class="foot-note">Your local token counts, priced at API list rates. An estimate, and nothing sent anywhere.</span></div>
           </figure>
 
           <!-- agents -->
@@ -382,17 +405,17 @@
               <div class="agt"><span class="agt-name">plan-architect</span><span class="badge b-plan">opusplan</span><span class="agt-scope">project</span></div>
               <div class="agt"><span class="agt-name">docs-writer</span><span class="badge b-haiku">haiku</span><span class="agt-scope">user</span></div>
             </div>
-            <div class="panel-foot"><span class="foot-note">Pick the model per agent — cheap models for grunt work, the pricey one where it pays off.</span></div>
+            <div class="panel-foot"><span class="foot-note">Pick the model per agent: cheap models for grunt work, the pricey one where it pays off.</span></div>
           </figure>
         </div>
 
         <div class="ds-note">
-          The landing runs the full set of ten views — terminal, worktrees, plan, conversation, sessions and
-          more. <a href="index.html">See them in context →</a>
+          The landing runs the full set of ten views: terminal, worktrees, fan-out, plan, conversation,
+          sessions and more. <a href="index.html">See them in context →</a>
         </div>
       </section>
 
-      <div class="ds-foot">Operator · design system · built from styles.css — no framework, no build step.</div>
+      <div class="ds-foot">Operator · design system · built from styles.css, no framework, no build step.</div>
     </main>
 
     <script>
@@ -419,6 +442,32 @@
 
       document.querySelectorAll('.ds-theme').forEach((b) => b.addEventListener('click', () => setTheme(b.dataset.k)))
       setTheme(root.getAttribute('data-theme') || 'light')
+
+      // motion demos: tiny loops, skipped entirely under reduced motion
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const tick = document.querySelector('[data-ds-tick]')
+        if (tick) {
+          let v = 3.2
+          setInterval(() => {
+            v = v > 14 ? 0.4 : +(v + 0.1).toFixed(1)
+            tick.textContent = v.toFixed(1) + 's'
+          }, 100)
+        }
+        const ell = document.querySelector('[data-ds-ellipsis]')
+        if (ell) {
+          const frames = ['compacting', 'compacting.', 'compacting..', 'compacting…']
+          let i = 0
+          setInterval(() => (ell.textContent = frames[(i = (i + 1) % frames.length)]), 800)
+        }
+        const rev = document.querySelector('[data-ds-reveal]')
+        if (rev) {
+          setInterval(() => {
+            rev.classList.remove('pop')
+            void rev.offsetWidth
+            rev.classList.add('pop')
+          }, 3200)
+        }
+      }
     </script>
   </body>
 </html>
