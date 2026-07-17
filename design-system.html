@@ -7,11 +7,12 @@
     <title>Operator · Design system</title>
     <meta name="description" content="The design primitives behind Operator's app-sample panels: tokens, components, and composed views, across all four themes." />
 
-    <!-- apply the saved theme before first paint to avoid a flash -->
+    <!-- land on a random theme before first paint: every load is a fresh look -->
     <script>
-      try {
-        document.documentElement.setAttribute('data-theme', localStorage.getItem('op-theme') || 'light')
-      } catch (e) {}
+      document.documentElement.setAttribute(
+        'data-theme',
+        ['mission-control', '1984', 'mr-pink', 'light'][Math.floor(Math.random() * 4)]
+      )
     </script>
 
     <link rel="icon" type="image/svg+xml" href="public/icon-source.svg" />
@@ -460,10 +461,10 @@
         })
       }
 
+      // theme picks apply for the page session only; every load lands on a random theme
       function setTheme(k) {
         if (!(k in THEMES)) k = 'light'
         root.setAttribute('data-theme', k)
-        try { localStorage.setItem('op-theme', k) } catch (e) {}
         document.querySelectorAll('.ds-theme').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === k)))
         // theme-color meta uses each theme's page bg, read from the resolved token
         if (meta) meta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim() || '#0b0d10')

@@ -29,11 +29,12 @@
     />
     <meta name="twitter:image" content="https://juanmnl.com/operator-app/icon-source.png" />
 
-    <!-- apply the saved theme before first paint to avoid a flash -->
+    <!-- land on a random theme before first paint: every load is a fresh look -->
     <script>
-      try {
-        document.documentElement.setAttribute('data-theme', localStorage.getItem('op-theme') || 'light')
-      } catch (e) {}
+      document.documentElement.setAttribute(
+        'data-theme',
+        ['mission-control', '1984', 'mr-pink', 'light'][Math.floor(Math.random() * 4)]
+      )
     </script>
 
     <link rel="icon" type="image/svg+xml" href="public/icon-source.svg" />

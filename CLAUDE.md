@@ -52,6 +52,9 @@ No build, no `npm`.
 - The landing stays within **Operator's own themes**, ported from the app
   (`../operator/src/renderer/themes/`): Mission Control, 1984, Mr Pink, Light. Each is a
   `html[data-theme="…"]` block of CSS variables in `styles.css`; `main.js` swaps the attribute.
+- **Every load/reload lands on a random theme** (user-requested 2026-07-16): an inline head
+  script on both pages picks one of the four pre-paint. ⌘K / switcher picks apply for the page
+  session only; nothing persists (the old `op-theme` localStorage key is gone).
 
 ## Copy & links
 - Hero headline is **"You run the agents."** with the lede "Operator makes the work visible and

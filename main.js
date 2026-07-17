@@ -16,12 +16,11 @@ const SHORTCUT = isMac ? '⌘K' : 'Ctrl K'
 function currentTheme() {
   return root.getAttribute('data-theme') || 'light'
 }
+/* every load lands on a random theme (set pre-paint in the head); ⌘K picks
+   apply for the page session only — nothing persists */
 function applyTheme(key) {
   if (!THEMES.some((t) => t.key === key)) return
   root.setAttribute('data-theme', key)
-  try {
-    localStorage.setItem('op-theme', key)
-  } catch (e) {}
   const t = THEMES.find((x) => x.key === key)
   const meta = document.querySelector('meta[name="theme-color"]')
   if (meta) meta.setAttribute('content', t.bg)
@@ -174,7 +173,7 @@ window.addEventListener('keydown', (e) => {
   }
 })
 
-renderPalette()
+applyTheme(currentTheme()) // sync the theme-color meta + palette to the random boot theme
 
 /* ── live panels — a small conductor per view ──────────────────────────────
    Like the mark's dots, each sample panel loops its own tiny state machine on
