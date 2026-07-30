@@ -1,19 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b0d10" />
+    <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f8f7" media="(prefers-color-scheme: light)" />
     <title>Operator · Design system</title>
-    <meta name="description" content="The design primitives behind Operator's app-sample panels: tokens, components, and composed views, across all four themes." />
-
-    <!-- land on a random theme before first paint: every load is a fresh look -->
-    <script>
-      document.documentElement.setAttribute(
-        'data-theme',
-        ['mission-control', '1984', 'mr-pink', 'light'][Math.floor(Math.random() * 4)]
-      )
-    </script>
+    <meta name="description" content="The design primitives behind Operator's app-sample panels: the two colour tiers, tokens, components, motion rules, and composed views." />
 
     <link rel="icon" type="image/svg+xml" href="public/icon-source.svg" />
     <link rel="icon" type="image/png" sizes="any" href="public/icon-source.png" />
@@ -22,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
     />
     <!-- the shared system: every component class lives here, same as the landing -->
     <link rel="stylesheet" href="styles.css" />
@@ -30,8 +23,8 @@
     <style>
       /* ── design-system page chrome (ds-*) — the primitives themselves come from styles.css ── */
 
-      /* diff add/remove tokens now live in each theme block in styles.css, so nothing is
-         re-declared here */
+      /* diff add/remove tokens are true tokens in styles.css (one pair per colour
+         scheme), so nothing is re-declared here */
 
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); -webkit-font-smoothing: antialiased; transition: background-color 0.35s ease, color 0.35s ease; }
@@ -126,11 +119,10 @@
         <a href="#motion">Motion</a>
         <a href="#views">Views</a>
       </nav>
-      <div class="ds-themes" role="group" aria-label="Theme">
-        <button class="ds-theme" data-k="mission-control" aria-pressed="false" aria-label="Mission Control"><span class="sw" style="background:#2fe39a"></span><span class="lbl">Mission Control</span></button>
-        <button class="ds-theme" data-k="1984" aria-pressed="false" aria-label="1984"><span class="sw" style="background:#46BDFF"></span><span class="lbl">1984</span></button>
-        <button class="ds-theme" data-k="mr-pink" aria-pressed="false" aria-label="Mr Pink"><span class="sw" style="background:#D58FDB"></span><span class="lbl">Mr Pink</span></button>
-        <button class="ds-theme" data-k="light" aria-pressed="false" aria-label="Light"><span class="sw" style="background:#8e44ad"></span><span class="lbl">Light</span></button>
+      <div class="ds-themes" role="group" aria-label="Appearance">
+        <button class="ds-theme" data-k="system" aria-pressed="false" aria-label="Follow the system"><span class="sw" style="background:linear-gradient(90deg,#0b0d10 50%,#f6f8f7 50%)"></span><span class="lbl">System</span></button>
+        <button class="ds-theme" data-k="dark" aria-pressed="false" aria-label="Dark"><span class="sw" style="background:#0b0d10"></span><span class="lbl">Dark</span></button>
+        <button class="ds-theme" data-k="light" aria-pressed="false" aria-label="Light"><span class="sw" style="background:#f6f8f7"></span><span class="lbl">Light</span></button>
       </div>
     </header>
 
@@ -139,9 +131,10 @@
         <span class="ds-eyebrow">Operator · design system</span>
         <h1>The parts the panels are made of.</h1>
         <p>
-          Every app-sample on the landing is built from the same small kit: a themed set of tokens,
-          a handful of composable components, and the views that assemble them. Switch themes above;
-          everything here reads from the exact CSS the app ships.
+          Every specimen on the landing is built from the same small kit: two tiers of colour, a
+          handful of composable components, and the views that assemble them. Colour follows your
+          system; pin light or dark above to compare. Everything here reads the exact CSS the
+          landing ships.
         </p>
       </div>
 
@@ -149,11 +142,11 @@
       <section class="ds-sec" id="elements">
         <span class="ds-eyebrow">Elements</span>
         <h2 class="ds-h">Tokens &amp; type</h2>
-        <p class="ds-lead">Each theme is one block of CSS custom properties. Components never hard-code a colour. They reference these, so a theme swap re-skins everything at once.</p>
+        <p class="ds-lead">Colour comes in two tiers. <code>--page-*</code> is the document ground, a cooler slate; <code>--op-*</code> is the app's own chrome, Mission Control, ported from the app. A specimen has to read as an object on the page, not as the page. The panel kit below is aliased onto the <code>--op-*</code> tier, so components never hard-code a colour.</p>
 
         <div class="ds-block">
-          <div class="ds-block-h"><h3>Colour</h3><code>html[data-theme="…"]</code></div>
-          <p>Values update live as you change theme. These chips read the resolved custom properties.</p>
+          <div class="ds-block-h"><h3>App chrome</h3><code>--op-* · aliased to the panel kit</code></div>
+          <p>What every specimen is painted with. These chips read the resolved custom properties, so they update live when you switch light and dark.</p>
           <div class="ds-swatches">
             <div class="ds-swatch" data-var="bg"><div class="chip" style="background:var(--bg)"></div><div class="meta"><span class="vn">--bg</span><span class="vv"></span></div></div>
             <div class="ds-swatch" data-var="bg-deep"><div class="chip" style="background:var(--bg-deep)"></div><div class="meta"><span class="vn">--bg-deep</span><span class="vv"></span></div></div>
@@ -169,12 +162,27 @@
         </div>
 
         <div class="ds-block">
-          <div class="ds-block-h"><h3>Type</h3><code>--font-disp · --font-body · --font-mono</code></div>
-          <p>Sora sets headlines, Archivo carries prose, JetBrains Mono handles everything data: code, labels, metrics, timings.</p>
+          <div class="ds-block-h"><h3>Page ground</h3><code>--page-*</code></div>
+          <p>The document the specimens sit on. Deliberately a cooler slate than the app chrome above, so a panel reads as an object placed on the page.</p>
+          <div class="ds-swatches">
+            <div class="ds-swatch" data-var="page-bg"><div class="chip" style="background:var(--page-bg)"></div><div class="meta"><span class="vn">--page-bg</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="page-panel"><div class="chip" style="background:var(--page-panel)"></div><div class="meta"><span class="vn">--page-panel</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="page-fg"><div class="chip" style="background:var(--page-fg)"></div><div class="meta"><span class="vn">--page-fg</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="page-muted"><div class="chip" style="background:var(--page-muted)"></div><div class="meta"><span class="vn">--page-muted</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="page-border"><div class="chip" style="background:var(--page-border)"></div><div class="meta"><span class="vn">--page-border</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="page-accent"><div class="chip" style="background:var(--page-accent)"></div><div class="meta"><span class="vn">--page-accent</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="warn"><div class="chip" style="background:var(--warn)"></div><div class="meta"><span class="vn">--warn</span><span class="vv"></span></div></div>
+            <div class="ds-swatch" data-var="stop"><div class="chip" style="background:var(--stop)"></div><div class="meta"><span class="vn">--stop</span><span class="vv"></span></div></div>
+          </div>
+        </div>
+
+        <div class="ds-block">
+          <div class="ds-block-h"><h3>Type</h3><code>--sans · --mono</code></div>
+          <p>Two faces, no display face. Archivo carries headlines and prose, leaning on weight and tight tracking rather than a third typeface; JetBrains Mono handles everything data: code, labels, metrics, timings, and the small tracked section heads.</p>
           <div class="ds-type">
-            <div class="ds-spec"><span class="lab">Display · Sora 700 · --font-disp</span><div class="t-disp">You run the agents.</div></div>
-            <div class="ds-spec"><span class="lab">Title · Sora 600</span><div class="t-title">The work, made legible.</div></div>
-            <div class="ds-spec"><span class="lab">Body · Archivo 400 · --font-body</span><div class="t-body">These are the real views, rebuilt in the browser. No screenshots.</div></div>
+            <div class="ds-spec"><span class="lab">Headline · Archivo 600 · --sans</span><div class="t-disp">You run the agents.</div></div>
+            <div class="ds-spec"><span class="lab">Title · Archivo 600</span><div class="t-title">The work, made legible.</div></div>
+            <div class="ds-spec"><span class="lab">Body · Archivo 400 · --sans</span><div class="t-body">These are the real views, rebuilt in the browser. No screenshots.</div></div>
             <div class="ds-spec"><span class="lab">Mono · JetBrains Mono 400 · --font-mono</span><div class="t-mono">delegate › write-tests · 3.2s · +142 −38</div></div>
             <div class="ds-spec"><span class="lab">Micro · mono, uppercase, tracked</span><div class="t-micro">A look inside</div></div>
           </div>
@@ -289,7 +297,7 @@
 
         <div class="ds-block">
           <div class="ds-block-h"><h3>Diff lines</h3><code>.diff · .dhunk · .dline.add / .del</code></div>
-          <p>The one place we step outside the theme accent: add/remove use fixed green/red tokens, because that reads as “diff” everywhere.</p>
+          <p>The one place we step outside the accent: add/remove use fixed green/red tokens, because that reads as “diff” everywhere.</p>
           <div class="ds-panelframe">
             <figure class="panel">
               <div class="diff">
@@ -370,6 +378,125 @@
         <p class="ds-lead">The components composed into the real panels. These are lifted verbatim from the landing: the same markup, the same classes.</p>
 
         <div class="ds-views" style="margin-top: 1.75rem;">
+          <!-- project gallery — the launcher -->
+          <figure class="panel">
+            <figcaption class="panel-bar">
+              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-name">projects · 19</span>
+              <span class="gal-filter">filter…</span>
+              <span class="gal-rollup">3 agents at work</span>
+            </figcaption>
+            <div class="gal-body">
+              <div class="band">Active<span class="rule"></span></div>
+              <div class="pgrid">
+                <div class="pcard">
+                  <div class="nm">operator<span class="act acc">2 running</span></div>
+                  <div class="orbs"><span class="orb run"></span><span class="orb wait"></span><span class="orb"></span></div>
+                  <div class="pmeta">~/Developer/operator<span class="t">4m</span></div>
+                </div>
+                <div class="pcard">
+                  <div class="nm">el-encanto<span class="act acc">1 needs you</span></div>
+                  <div class="orbs"><span class="orb wait"></span><span class="orb"></span></div>
+                  <div class="pmeta">~/Developer/el-encanto<span class="t">2h</span></div>
+                </div>
+                <div class="pcard">
+                  <div class="nm">mantel<span class="act">6 lanes</span></div>
+                  <div class="pmeta">~/Developer/mantel<span class="t">1d</span></div>
+                </div>
+              </div>
+              <div class="band">Previous · 11<span class="rule"></span></div>
+              <div class="prow"><span class="nm">FastTrack</span><span class="pth">~/Developer/FastTrack</span><span class="t">last ran 6w ago</span></div>
+              <div class="prow"><span class="nm">uwazi_web</span><span class="pth">~/Documents/uwazi_web</span><span class="t">last ran 5w ago</span></div>
+            </div>
+            <div class="panel-foot"><span class="foot-note">A shelved project recedes structurally (card → row), never by group opacity.</span></div>
+          </figure>
+
+          <!-- project rail + scoped sidebar -->
+          <figure class="panel">
+            <figcaption class="panel-bar">
+              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-name">scoped to operator</span>
+              <span class="panel-flag">4 open</span>
+            </figcaption>
+            <div class="shell">
+              <div class="prail">
+                <span class="ptile cur laneink" style="--lane: var(--l-operator); background: color-mix(in srgb, var(--l-operator) 16%, transparent); border-color: color-mix(in srgb, var(--l-operator) 38%, transparent)">OP<span class="ppip" style="background: var(--accent)"></span></span>
+                <span class="ptile laneink" style="--lane: var(--l-design); background: color-mix(in srgb, var(--l-design) 16%, transparent); border-color: color-mix(in srgb, var(--l-design) 38%, transparent)">EE</span>
+                <span class="psep"></span>
+                <span class="ptile" style="border-style: dashed; border-color: var(--border); color: var(--muted)">+</span>
+              </div>
+              <div class="sbar">
+                <div class="sb-head"><span class="sb-logo"></span>operator</div>
+                <div class="chan-row"><span class="hash">#</span>channel<span class="unread">3</span></div>
+                <div class="sb-label">Agents<span class="add">+</span></div>
+                <div class="slane on"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
+                <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
+                <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
+                <div class="sb-foot">1 active<span class="v">v0.11.0</span></div>
+              </div>
+              <div class="canv">
+                <div class="canv-head"><span class="hash">#</span>channel<span class="sub">6 lanes · 1 running</span></div>
+                <div class="canv-feed">
+                  <div class="canv-msg">
+                    <span class="canv-who laneink" style="--lane: var(--l-code)">Code</span><span class="canv-chip ok">posted</span>
+                    <span class="canv-txt">Rail landed. Tiles are colour and acronym.</span>
+                  </div>
+                  <div class="canv-msg">
+                    <span class="canv-who laneink" style="--lane: var(--l-research)">Research</span><span class="canv-chip wait">held</span>
+                    <span class="canv-txt">Implement the reply sentinel per the brief.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-foot"><span class="foot-note">Projects are rounded squares, sessions stay circles.</span></div>
+          </figure>
+
+          <!-- project channel -->
+          <figure class="panel">
+            <figcaption class="panel-bar">
+              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-name"># operator · channel</span>
+              <span class="panel-flag">3 new</span>
+            </figcaption>
+            <div class="feed">
+              <div class="crule"><span class="r"></span><span>Today</span><span class="r"></span></div>
+              <div class="cmsg">
+                <div class="av laneink" style="--lane: var(--l-code); background: color-mix(in srgb, var(--l-code) 16%, transparent); border-color: color-mix(in srgb, var(--l-code) 38%, transparent)">CO</div>
+                <div>
+                  <div class="chdr"><span class="who laneink" style="--lane: var(--l-code)">Code</span><span class="arrow">→ project</span><span class="cts">19:02</span><span class="cchip ok">posted</span></div>
+                  <div class="ctext">Rail landed. Tiles are colour and acronym, status on a corner pip.</div>
+                </div>
+              </div>
+              <div class="cmsg">
+                <div class="av laneink" style="--lane: var(--l-research); background: color-mix(in srgb, var(--l-research) 16%, transparent); border-color: color-mix(in srgb, var(--l-research) 38%, transparent)">RE</div>
+                <div>
+                  <div class="chdr"><span class="who laneink" style="--lane: var(--l-research)">Research</span><span class="arrow">→ Code</span><span class="cts">19:14</span><span class="cchip wait">held · needs your approval</span></div>
+                  <div class="ctext">Implement the reply sentinel per <code>dev/briefs/reply-impl.md</code>.</div>
+                  <div class="cacts"><span class="cbtn pri">Approve &amp; send</span><span class="cbtn">Decline</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-foot"><span class="foot-note">Read-only for now. Chips carry the delivery state, which is the whole design.</span></div>
+          </figure>
+
+          <!-- structured transcript -->
+          <figure class="panel">
+            <figcaption class="panel-bar">
+              <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-name">transcript · refactor auth</span>
+              <span class="panel-flag">live</span>
+            </figcaption>
+            <div class="tx">
+              <div class="tx-user">Refactor auth so the token is passed explicitly, then update the tests.</div>
+              <div class="tx-prose">I'll thread the token through <code>refresh()</code>, then adjust the suite.</div>
+              <div class="trun"><span class="tg">◇</span><span class="tname">Read 7 files</span></div>
+              <div class="trun"><span class="tg">◇</span><span class="tname">Searched 3 times</span></div>
+              <div class="trun"><span class="tg">◇</span><span class="tname">Delegated to a subagent</span><span class="tcaller">write-tests</span></div>
+              <div class="tx-prose">Edited <code>auth/session.test.ts</code><span class="caret" aria-hidden="true"></span></div>
+            </div>
+            <div class="tx-sig"><span>Editing</span><span class="tx-stop">Stop</span></div>
+          </figure>
+
           <!-- orchestration -->
           <figure class="panel">
             <figcaption class="panel-bar">
@@ -398,8 +525,9 @@
             <div class="lanes">
               <div class="lane running"><span class="lane-name">orchestrator</span><span class="badge b-fable">fable</span><span class="lane-phase">running</span></div>
               <div class="lane busy"><span class="lane-name">code</span><span class="badge b-opus">opus</span><span class="lane-phase">running</span></div>
-              <div class="lane"><span class="lane-name">research</span><span class="badge b-sonnet">sonnet</span><span class="lane-phase">idle</span></div>
               <div class="lane waiting"><span class="lane-name">design</span><span class="badge b-sonnet">sonnet</span><span class="lane-phase">your turn</span></div>
+              <div class="band">Ready · <b>3</b><span class="rule"></span></div>
+              <div class="lane"><span class="lane-name">research</span><span class="badge b-sonnet">sonnet</span><span class="lane-phase">idle</span></div>
               <div class="lane"><span class="lane-name">review</span><span class="badge b-opus">opus</span><span class="lane-phase">idle</span></div>
               <div class="lane"><span class="lane-name">qa</span><span class="badge b-haiku">haiku</span><span class="lane-phase">idle</span></div>
             </div>
@@ -451,8 +579,7 @@
 
     <script>
       const root = document.documentElement
-      const THEMES = { 'mission-control': '#2fe39a', '1984': '#46BDFF', 'mr-pink': '#D58FDB', light: '#8e44ad' }
-      const meta = document.querySelector('meta[name="theme-color"]')
+      const SYS = window.matchMedia('(prefers-color-scheme: dark)')
 
       function paintVars() {
         const cs = getComputedStyle(root)
@@ -461,18 +588,20 @@
         })
       }
 
-      // theme picks apply for the page session only; every load lands on a random theme
-      function setTheme(k) {
-        if (!(k in THEMES)) k = 'light'
-        root.setAttribute('data-theme', k)
+      /* Colour follows the system. This switcher pins light or dark for the page
+         session only so both can be inspected side by side; nothing persists. */
+      function setMode(k) {
+        if (k === 'light' || k === 'dark') root.setAttribute('data-theme', k)
+        else (k = 'system'), root.removeAttribute('data-theme')
         document.querySelectorAll('.ds-theme').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === k)))
-        // theme-color meta uses each theme's page bg, read from the resolved token
-        if (meta) meta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim() || '#0b0d10')
         paintVars()
       }
 
-      document.querySelectorAll('.ds-theme').forEach((b) => b.addEventListener('click', () => setTheme(b.dataset.k)))
-      setTheme(root.getAttribute('data-theme') || 'light')
+      document.querySelectorAll('.ds-theme').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.k)))
+      SYS.addEventListener('change', () => {
+        if (!root.hasAttribute('data-theme')) paintVars()
+      })
+      setMode('system')
 
       // motion demos: tiny loops, skipped entirely under reduced motion
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

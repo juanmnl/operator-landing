@@ -1,31 +1,41 @@
-// Operator landing — vanilla JS. Theme switching (⌘K palette), the animated dot-disc
-// brand mark, and OS-aware shortcut labels. No framework, no build.
+// Operator landing — vanilla JS. The ⌘K section jump, the animated dot-disc brand
+// mark, OS-aware shortcut labels, and the live-panel conductor. No framework, no
+// build. Colour comes from the system (prefers-color-scheme); there is no theme
+// switcher, so ⌘K navigates instead.
 
-const THEMES = [
-  { key: 'mission-control', name: 'Mission Control', bg: '#0b0d10', accent: '#2fe39a' },
-  { key: '1984', name: '1984', bg: '#0d0f31', accent: '#46BDFF' },
-  { key: 'mr-pink', name: 'Mr Pink', bg: '#22222A', accent: '#D58FDB' },
-  { key: 'light', name: 'Light', bg: '#F7F7F5', accent: '#8e44ad' },
-]
-
-const root = document.documentElement
 const isMac = /mac|iphone|ipad|ipod/i.test(navigator.platform || navigator.userAgent || '')
 const SHORTCUT = isMac ? '⌘K' : 'Ctrl K'
 
-/* ── theme ─────────────────────────────────────────────────────────────── */
-function currentTheme() {
-  return root.getAttribute('data-theme') || 'light'
+/* ── the jump targets, read off the document itself ────────────────────── */
+function buildTargets() {
+  const out = []
+  document.querySelectorAll('section[id]').forEach((sec) => {
+    // the closing CTA is listed once, explicitly, at the end
+    if (sec.classList.contains('closing')) return
+    const h = sec.querySelector('h2')
+    if (h) out.push({ id: sec.id, ix: '§', name: h.textContent.trim(), hint: 'section' })
+    // each feature card inside it, numbered by its own tag
+    sec.querySelectorAll('.opt').forEach((card) => {
+      const tag = card.querySelector('.tag')
+      const name = card.querySelector('.opt-name')
+      if (!tag || !name) return
+      const id = 'feature-' + tag.textContent.trim()
+      card.id = id
+      card.style.scrollMarginTop = '20px'
+      out.push({ id, ix: tag.textContent.trim(), name: name.textContent.trim(), hint: '' })
+    })
+  })
+  out.push({ id: 'download', ix: '↓', name: 'Download for macOS', hint: 'releases' })
+  return out
 }
-/* every load lands on a random theme (set pre-paint in the head); ⌘K picks
-   apply for the page session only — nothing persists */
-function applyTheme(key) {
-  if (!THEMES.some((t) => t.key === key)) return
-  root.setAttribute('data-theme', key)
-  const t = THEMES.find((x) => x.key === key)
-  const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.setAttribute('content', t.bg)
-  renderPalette()
+const TARGETS = buildTargets()
+
+function jumpTo(id) {
+  const el = document.getElementById(id)
+  if (!el) return
+  el.scrollIntoView({ behavior: REDUCED_Q.matches ? 'auto' : 'smooth', block: 'start' })
 }
+const REDUCED_Q = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 /* ── animated brand mark ───────────────────────────────────────────────── */
 function rand(i) {
@@ -85,28 +95,35 @@ let activeIdx = 0
 
 function filtered() {
   const q = paletteInput.value.trim().toLowerCase()
-  return THEMES.filter((t) => t.name.toLowerCase().includes(q))
+  return TARGETS.filter((t) => t.name.toLowerCase().includes(q))
 }
 function renderPalette() {
   if (!paletteList) return
   const list = filtered()
-  const cur = currentTheme()
   if (activeIdx >= list.length) activeIdx = Math.max(0, list.length - 1)
   paletteList.innerHTML = ''
   list.forEach((t, i) => {
     const b = document.createElement('button')
     b.type = 'button'
     b.className = 'palette-item' + (i === activeIdx ? ' active' : '')
-    b.innerHTML =
-      `<span class="sw" style="background:${t.bg};box-shadow:inset 0 0 0 2px ${t.accent}"></span>` +
-      `<span>${t.name}</span>` +
-      (t.key === cur ? '<span class="current">current</span>' : '')
+    const ix = document.createElement('span')
+    ix.className = 'ix'
+    ix.textContent = t.ix
+    const nm = document.createElement('span')
+    nm.textContent = t.name
+    b.append(ix, nm)
+    if (t.hint) {
+      const h = document.createElement('span')
+      h.className = 'hint'
+      h.textContent = t.hint
+      b.appendChild(h)
+    }
     b.addEventListener('mouseenter', () => {
       activeIdx = i
       highlight()
     })
     b.addEventListener('click', () => {
-      applyTheme(t.key)
+      jumpTo(t.id)
       closePalette()
     })
     paletteList.appendChild(b)
@@ -118,7 +135,7 @@ function highlight() {
 function openPalette() {
   palette.hidden = false
   paletteInput.value = ''
-  activeIdx = Math.max(0, filtered().findIndex((t) => t.key === currentTheme()))
+  activeIdx = 0
   renderPalette()
   setTimeout(() => paletteInput.focus(), 0)
 }
@@ -136,7 +153,7 @@ const chipKey = document.getElementById('chipKey')
 if (chipKey) chipKey.textContent = SHORTCUT
 document.querySelectorAll('.palette-input .pk, [data-shortcut]').forEach((el) => (el.textContent = SHORTCUT))
 
-document.getElementById('themeBtn')?.addEventListener('click', openPalette)
+document.getElementById('navBtn')?.addEventListener('click', openPalette)
 palette?.addEventListener('mousedown', (e) => {
   if (e.target.hasAttribute('data-close')) closePalette()
 })
@@ -158,7 +175,7 @@ paletteInput?.addEventListener('keydown', (e) => {
     e.preventDefault()
     const t = list[activeIdx]
     if (t) {
-      applyTheme(t.key)
+      jumpTo(t.id)
       closePalette()
     }
   }
@@ -173,7 +190,7 @@ window.addEventListener('keydown', (e) => {
   }
 })
 
-applyTheme(currentTheme()) // sync the theme-color meta + palette to the random boot theme
+renderPalette()
 
 /* ── live panels — a small conductor per view ──────────────────────────────
    Like the mark's dots, each sample panel loops its own tiny state machine on
@@ -187,7 +204,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)]
 
 /* reveal panels as they enter, staggered per batch */
 {
-  const panels = $$('.samples .panel')
+  const panels = $$('.stage .panel')
   const ro = new IntersectionObserver(
     (entries) => {
       entries
@@ -301,7 +318,9 @@ function onVisible(el, start, stop, threshold = 0.35) {
 ;(() => {
   const panel = $('.panel-roster')
   if (!panel) return
-  const [orc, code, res, des, rev, qa] = $$('.lane', panel)
+  // markup order: the working lanes, then the "Ready · N" divider, then the idle ones —
+  // so `design` (which wanders to "your turn") sits ABOVE the divider, never under it
+  const [orc, code, des] = $$('.lane', panel)
   const flag = $('.panel-flag', panel)
   const set = (lane, mode, text) => {
     lane.classList.toggle('running', mode === 'running')
@@ -309,13 +328,11 @@ function onVisible(el, start, stop, threshold = 0.35) {
     lane.classList.toggle('waiting', mode === 'waiting')
     $('.lane-phase', lane).textContent = text
   }
+  // the ready pool below the divider is static in the markup and never touched here
   const base = () => {
     set(orc, 'running', 'running')
     set(code, 'busy', 'running')
-    set(res, '', 'idle')
     set(des, 'waiting', 'your turn')
-    set(rev, '', 'idle')
-    set(qa, '', 'idle')
     flag.textContent = '2 running'
   }
   let n = 0, t = null
@@ -329,23 +346,149 @@ function onVisible(el, start, stop, threshold = 0.35) {
         set(orc, lead ? 'busy' : 'running', 'running')
         set(code, lead ? 'running' : 'busy', 'running')
       }
+      // only the lanes ABOVE the "Ready" divider wander. The three below it are the ready
+      // pool by definition — showing one of them "running" there would contradict the label.
       if (n % 3 === 0) {
-        const on = !res.classList.contains('busy')
-        set(res, on ? 'busy' : '', on ? 'running' : 'idle')
-        flag.textContent = on ? '3 running' : '2 running'
-      }
-      if (n % 5 === 0) {
         const waiting = des.classList.contains('waiting')
         set(des, waiting ? 'busy' : 'waiting', waiting ? 'running' : 'your turn')
+        flag.textContent = waiting ? '3 running' : '2 running'
       }
-      if (n % 7 === 0) {
-        const on = !qa.classList.contains('busy')
-        set(qa, on ? 'busy' : '', on ? 'running' : 'idle')
-      }
+      readyCount()
     }, 3100)
   }, () => {
     clearInterval(t)
     base()
+    readyCount()
+  })
+  // only working lanes get a full row in the app; the "Ready · N" label counts the rest
+  function readyCount() {
+    const el = $('[data-ready]', panel)
+    if (!el) return
+    el.textContent = $$('.lane', panel).filter(
+      (l) => !l.classList.contains('running') && !l.classList.contains('busy') && !l.classList.contains('waiting')
+    ).length
+  }
+})()
+
+/* project gallery — the live card keeps moving, and "last ran" ages */
+;(() => {
+  const panel = $('.panel-gallery')
+  if (!panel) return
+  const cards = $$('.pcard', panel)
+  const act = $('.act', cards[0])
+  const age = $('.pmeta .t', cards[0])
+  const rollup = $('.gal-rollup', panel)
+  // deliberately never "1 needs you" — the el-encanto card holds that state statically
+  const STATES = [
+    ['2 running', '4m', '3 agents at work'],
+    ['3 running', '1m', '4 agents at work'],
+    ['1 running', '2m', '2 agents at work'],
+  ]
+  let i = 0, t = null
+  const render = () => {
+    const [a, g, r] = STATES[i]
+    act.textContent = a
+    act.classList.toggle('acc', true)
+    age.textContent = g
+    rollup.textContent = r
+  }
+  onVisible(panel, () => {
+    i = 0
+    render()
+    t = setInterval(() => {
+      i = (i + 1) % STATES.length
+      render()
+    }, 4100)
+  }, () => {
+    clearInterval(t)
+    i = 0
+    render()
+  })
+})()
+
+/* rail + sidebar — phases wander and the channel accrues unread, as they do in the app */
+;(() => {
+  const panel = $('.panel-nav')
+  if (!panel) return
+  const lanes = $$('.slane', panel)
+  const unread = $('.chan-row .unread', panel)
+  const foot = $('.sb-foot', panel)
+  const PHASES = [
+    [['running', 1], ['your turn', 0], ['idle', 0], ['idle', 0], 1],
+    [['running', 1], ['running', 1], ['idle', 0], ['idle', 0], 2],
+    [['idle', 0], ['running', 1], ['running', 1], ['idle', 0], 2],
+    [['running', 1], ['idle', 0], ['running', 1], ['your turn', 0], 2],
+  ]
+  let f = 0, n = 3, t = null
+  const render = () => {
+    const frame = PHASES[f]
+    lanes.forEach((lane, i) => {
+      const [text, live] = frame[i]
+      const ph = $('.ph', lane)
+      ph.textContent = text
+      ph.classList.toggle('acc', text !== 'idle')
+      // `on` is the SELECTED lane, not the running one — selection doesn't wander
+      lane.classList.toggle('on', i === 0)
+      $('.sdot', lane).style.opacity = live ? '1' : text === 'your turn' ? '.5' : '.35'
+    })
+    foot.firstChild.textContent = frame[4] + ' active'
+  }
+  onVisible(panel, () => {
+    f = 0
+    n = 3
+    render()
+    unread.textContent = n
+    t = setInterval(() => {
+      f = (f + 1) % PHASES.length
+      render()
+      if (f === 0) n = n > 6 ? 3 : n + 1
+      unread.textContent = n
+    }, 3600)
+  }, () => {
+    clearInterval(t)
+    f = 0
+    n = 3
+    render()
+    unread.textContent = n
+  })
+})()
+
+/* channel — a queued message lands, then the room goes quiet again */
+;(() => {
+  const panel = $('.panel-channel')
+  if (!panel) return
+  const msgs = $$('.cmsg', panel)
+  const last = msgs[msgs.length - 1]
+  const chip = $('.cchip', last)
+  const flag = $('.panel-flag', panel)
+  const FRAMES = [
+    ['queued · behind current task', '', '3 new'],
+    ['queued · behind current task', '', '3 new'],
+    ['delivered', 'ok', '4 new'],
+  ]
+  let f = 0, t = null
+  const render = () => {
+    const [label, tone, count] = FRAMES[f]
+    chip.textContent = label
+    chip.className = 'cchip' + (tone ? ' ' + tone : '')
+    flag.textContent = count
+    if (f === 2) {
+      last.classList.remove('pop')
+      void last.offsetWidth
+      last.classList.add('pop')
+    }
+  }
+  onVisible(panel, () => {
+    f = 0
+    render()
+    t = setInterval(() => {
+      f = (f + 1) % FRAMES.length
+      render()
+    }, 3900)
+  }, () => {
+    clearInterval(t)
+    f = 0
+    render()
   })
 })()
 
@@ -421,14 +564,27 @@ function onVisible(el, start, stop, threshold = 0.35) {
   }, () => clearInterval(t))
 })()
 
-/* conversation — the streaming reply actually streams */
+/* transcript — the streaming line streams, and the status line says what it's doing */
 ;(() => {
   const panel = $('.panel-convo')
   if (!panel) return
-  const convo = $('.convo', panel)
-  const bubble = $('.bubble.is-stream', panel)
+  const convo = $('.tx', panel)
+  const bubble = $('.tx-prose.is-stream', panel)
   if (!bubble) return
-  const SEGS = [{ t: 'Running ' }, { c: 'npm test' }, { t: ' to confirm the change' }]
+  // the verbs are lib/chat-signal's, which reports what the agent is DOING, not the tool name
+  const signal = $('[data-signal]', panel)
+  const VERBS = ['Editing', 'Running a command', 'Reading', 'Delegating · 2 subagents', 'Thinking']
+  let vi = 0, vt = null
+  onVisible(panel, () => {
+    vt = setInterval(() => {
+      vi = (vi + 1) % VERBS.length
+      if (signal) signal.textContent = VERBS[vi]
+    }, 2900)
+  }, () => {
+    clearInterval(vt)
+    if (signal) signal.textContent = VERBS[0]
+  })
+  const SEGS = [{ t: 'Edited ' }, { c: 'auth/session.test.ts' }]
   let timers = []
   const later = (fn, ms) => timers.push(setTimeout(fn, ms))
   const run = () => {
