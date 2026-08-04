@@ -161,7 +161,7 @@ No build, no `npm`.
 ## Obsidian project hub
 
 This project has a knowledge-hub note in the Obsidian vault, at:
-`~/Library/Mobile Documents/com~apple~CloudDocs/Vaults/Work Vault/Operator/Operator.md`
+`~/Work Vault/Operator/Operator.md`
 
 Read it for background and prior decisions before starting work here. When you learn something
 worth remembering across sessions (a decision, a status change, a gotcha), add a short note there
