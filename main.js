@@ -406,20 +406,20 @@ function onVisible(el, start, stop, threshold = 0.35) {
   })
 })()
 
-/* rail + sidebar — phases wander and the channel accrues unread, as they do in the app */
+/* the left surface — the open project's agents wander phases; selection stays put */
 ;(() => {
   const panel = $('.panel-nav')
   if (!panel) return
   const lanes = $$('.slane', panel)
-  const unread = $('.chan-row .unread', panel)
-  const foot = $('.sb-foot', panel)
+  const pcount = $('[data-pcount]', panel)
+  // per frame: one entry per agent row, then the open project's running count
   const PHASES = [
-    [['running', 1], ['your turn', 0], ['idle', 0], ['idle', 0], 1],
-    [['running', 1], ['running', 1], ['idle', 0], ['idle', 0], 2],
-    [['idle', 0], ['running', 1], ['running', 1], ['idle', 0], 2],
-    [['running', 1], ['idle', 0], ['running', 1], ['your turn', 0], 2],
+    [['running', 1], ['your turn', 0], ['idle', 0], '1 running'],
+    [['running', 1], ['running', 1], ['idle', 0], '2 running'],
+    [['idle', 0], ['running', 1], ['running', 1], '2 running'],
+    [['running', 1], ['idle', 0], ['your turn', 0], '1 running'],
   ]
-  let f = 0, n = 3, t = null
+  let f = 0, t = null
   const render = () => {
     const frame = PHASES[f]
     lanes.forEach((lane, i) => {
@@ -427,55 +427,51 @@ function onVisible(el, start, stop, threshold = 0.35) {
       const ph = $('.ph', lane)
       ph.textContent = text
       ph.classList.toggle('acc', text !== 'idle')
-      // `on` is the SELECTED lane, not the running one — selection doesn't wander
-      lane.classList.toggle('on', i === 0)
       $('.sdot', lane).style.opacity = live ? '1' : text === 'your turn' ? '.5' : '.35'
     })
-    foot.firstChild.textContent = frame[4] + ' active'
+    // the count on the open project's row is derived, exactly as the app derives it
+    pcount.textContent = frame[3]
   }
   onVisible(panel, () => {
     f = 0
-    n = 3
     render()
-    unread.textContent = n
     t = setInterval(() => {
       f = (f + 1) % PHASES.length
       render()
-      if (f === 0) n = n > 6 ? 3 : n + 1
-      unread.textContent = n
     }, 3600)
   }, () => {
     clearInterval(t)
     f = 0
-    n = 3
     render()
-    unread.textContent = n
   })
 })()
 
-/* channel — a queued message lands, then the room goes quiet again */
+/* dispatch log — the held dispatch gets approved, delivers, and the loop resets */
 ;(() => {
-  const panel = $('.panel-channel')
+  const panel = $('.panel-dispatch')
   if (!panel) return
-  const msgs = $$('.cmsg', panel)
-  const last = msgs[msgs.length - 1]
-  const chip = $('.cchip', last)
-  const flag = $('.panel-flag', panel)
+  const held = $('[data-held]', panel)
+  if (!held) return
+  const chip = $('[data-dchip]', held)
+  const acts = $('[data-dacts]', held)
+  const flag = $('[data-dflag]', panel)
+  // held twice (the gate is a pause, not a beat), then approval delivers it
   const FRAMES = [
-    ['queued · behind current task', '', '3 new'],
-    ['queued · behind current task', '', '3 new'],
-    ['delivered', 'ok', '4 new'],
+    ['held · needs your approval', 'wait', '1 needs approval', 1],
+    ['held · needs your approval', 'wait', '1 needs approval', 1],
+    ['delivered', 'ok', 'approved · delivered', 0],
   ]
   let f = 0, t = null
   const render = () => {
-    const [label, tone, count] = FRAMES[f]
+    const [label, tone, count, showActs] = FRAMES[f]
     chip.textContent = label
-    chip.className = 'cchip' + (tone ? ' ' + tone : '')
+    chip.className = 'cchip ' + tone
     flag.textContent = count
+    acts.style.visibility = showActs ? 'visible' : 'hidden'
     if (f === 2) {
-      last.classList.remove('pop')
-      void last.offsetWidth
-      last.classList.add('pop')
+      held.classList.remove('pop')
+      void held.offsetWidth
+      held.classList.add('pop')
     }
   }
   onVisible(panel, () => {
@@ -492,48 +488,24 @@ function onVisible(el, start, stop, threshold = 0.35) {
   })
 })()
 
-/* task queue — the queue drains: running lands as a diff, the next task picks up */
+/* the board — the running card's duration ticks; states never lie their way across columns */
 ;(() => {
-  const panel = $('.panel-queue')
+  const panel = $('.panel-board')
   if (!panel) return
-  const rows = $$('.task', panel)
-  const shipped = $('.panel-foot b', panel)
-  // per frame, per row: [state, glyph, stat, lane shown]
-  const FRAMES = [
-    [['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'queued', 1], ['', '○', 'backlog', 0]],
-    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'backlog', 0]],
-    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1], ['', '○', 'queued', 1]],
-    [['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['done', '✓', 'diff ready', 1], ['active', '◆', 'running', 1]],
-  ]
-  const DONE = [1, 2, 2, 3]
-  let f = 0, t = null
-  const render = (frame) => {
-    FRAMES[frame].forEach(([state, glyph, stat, laneOn], i) => {
-      const row = rows[i]
-      const changed = row.dataset.state !== state + stat
-      row.dataset.state = state + stat
-      row.className = 'task' + (state ? ' ' + state : '')
-      $('.task-g', row).textContent = glyph
-      $('.task-stat', row).textContent = stat
-      $('.task-lane', row).hidden = !laneOn
-      if (changed && frame !== 0) {
-        row.classList.remove('pop')
-        void row.offsetWidth
-        row.classList.add('pop')
-      }
-    })
-    shipped.textContent = DONE[frame]
-  }
+  const stat = $('[data-bstat]', panel)
+  if (!stat) return
+  let s = 0, t = null
   onVisible(panel, () => {
-    f = 0
-    render(0)
+    s = 254 // pick up mid-run, like every other duration on the page
+    stat.textContent = 'running'
     t = setInterval(() => {
-      f = (f + 1) % FRAMES.length
-      render(f)
-    }, 4400)
+      s += 1
+      const m = Math.floor(s / 60), r = s % 60
+      stat.textContent = 'running · ' + m + 'm ' + (r < 10 ? '0' : '') + r + 's'
+    }, 1000)
   }, () => {
     clearInterval(t)
-    render(0)
+    stat.textContent = 'running'
   })
 })()
 

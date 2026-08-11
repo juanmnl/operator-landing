@@ -41,7 +41,7 @@
       as="image"
       href="public/hero.jpg"
       imagesrcset="public/hero-sm.jpg 1100w, public/hero.jpg 1920w"
-      imagesizes="(max-width: 1120px) 100vw, 1064px"
+      imagesizes="100vw"
       fetchpriority="high"
     />
     <link
@@ -87,7 +87,7 @@
           <img
             src="public/hero.jpg"
             srcset="public/hero-sm.jpg 1100w, public/hero.jpg 1920w"
-            sizes="(max-width: 1120px) 100vw, 1064px"
+            sizes="100vw"
             alt="A telephone operator connecting calls at a switchboard"
             fetchpriority="high"
             decoding="async"
@@ -95,8 +95,9 @@
           <figcaption>Generated image</figcaption>
         </figure>
 
-        <p class="eyebrow">Operator · a macOS app for Claude Code</p>
-        <h1>You run the&nbsp;agents.</h1>
+        <div class="mast-head">
+          <p class="eyebrow">Operator · a macOS app for Claude Code</p>
+          <h1>You run the&nbsp;agents.</h1>
         <p class="standfirst">
           Operator makes the work visible and steerable: every tool call, diff, and delegation on
           one live board, each task sealed in its own git worktree, nothing leaving your machine.
@@ -112,7 +113,11 @@
           <a class="btn btn-ghost" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
             Release notes
           </a>
-          <span class="spec">Free · ~10 MB</span>
+          <a class="btn btn-ghost" href="https://github.com/juanmnl/operator" target="_blank" rel="noreferrer noopener">
+            GitHub
+          </a>
+          <span class="spec">Free · MIT · ~10 MB</span>
+        </div>
         </div>
       </div>
 
@@ -120,9 +125,8 @@
       <section id="projects">
         <h2>Finding your way</h2>
         <p class="sec-lede">
-          Operator is project-first. You land on your projects, pick one, and the whole window
-          scopes to it: its lanes, its sessions, its channel. Nothing from anywhere else is in
-          the way.
+          You land on your projects, pick one, and the whole window scopes to it: its board, its
+          lanes, its sessions. Nothing from another project is in the way.
         </p>
 
         <!-- 01 · project gallery -->
@@ -167,21 +171,21 @@
                 </div>
 
                 <div class="panel-foot">
-                  <span class="foot-note">Archiving is a decision you make, never a guess from a timestamp.</span>
+                  <span class="foot-note">Shelving is a decision you make, never a guess from a timestamp.</span>
                 </div>
               </figure>
             </div>
             <div class="notes">
               <p>
                 Cards for what is active, one-line rows for what you have shelved. A shelved project
-                recedes <em>structurally</em> rather than by being dimmed, and the filter still
-                searches both shelves so nothing becomes unfindable.
+                recedes into a row rather than a dimmed card, and the filter searches both shelves,
+                so nothing becomes unfindable.
               </p>
               <p class="why">
-                Active is a decision (<code>archivedAt</code>), not a measurement. Recency could not
-                carry it: <code>lastActiveAt</code> tracks when a project last <em>did work</em>, not
-                when you looked at it, so a derived split would reshuffle itself between restarts.
-                The orb strip appears only when something is genuinely running.
+                Shelving writes <code>archivedAt</code>. Recency could not carry that split:
+                <code>lastActiveAt</code> tracks when a project last did work, not when you looked
+                at it, so the shelves would reshuffle themselves between restarts. The orb strip
+                appears only when something is running.
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>Nineteen projects stay legible, and the ones at rest get out of the way.</span></li>
@@ -191,12 +195,12 @@
           </div>
         </div>
 
-        <!-- 02 · rail + scoped sidebar -->
+        <!-- 02 · the left surface -->
         <div class="opt">
           <div class="opt-head">
             <span class="tag">02</span>
-            <p class="opt-name">Project rail and scoped sidebar</p>
-            <span class="verdict">one project in view</span>
+            <p class="opt-name">One left surface</p>
+            <span class="verdict">two widths, one list</span>
           </div>
           <div class="opt-body">
             <div class="stage">
@@ -204,67 +208,62 @@
                 <figcaption class="panel-bar">
                   <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
                   <span class="panel-name">scoped to operator</span>
-                  <span class="panel-flag">4 open</span>
+                  <span class="panel-flag">v0.15.1</span>
                 </figcaption>
 
                 <div class="shell">
-                  <div class="prail">
-                    <span class="ptile cur laneink" style="--lane: var(--l-operator); background: color-mix(in srgb, var(--l-operator) 16%, transparent); border-color: color-mix(in srgb, var(--l-operator) 38%, transparent)">OP<span class="ppip" style="background: var(--accent)"></span></span>
-                    <span class="ptile laneink" style="--lane: var(--l-design); background: color-mix(in srgb, var(--l-design) 16%, transparent); border-color: color-mix(in srgb, var(--l-design) 38%, transparent)">EE</span>
-                    <span class="ptile laneink" style="--lane: var(--l-research); background: color-mix(in srgb, var(--l-research) 16%, transparent); border-color: color-mix(in srgb, var(--l-research) 38%, transparent)">MA</span>
-                    <span class="psep"></span>
-                    <span class="ptile" style="border-style: dashed; border-color: var(--border); color: var(--muted)">+</span>
-                  </div>
-
                   <div class="sbar">
-                    <div class="sb-head"><span class="sb-logo"></span>operator</div>
-                    <div class="chan-row"><span class="hash">#</span>channel<span class="unread">3</span></div>
-                    <div class="sb-label">Agents<span class="add">+</span></div>
-                    <div class="slane on"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
+                    <div class="sb-head"><span class="sb-logo"></span>Projects</div>
+                    <div class="sproj open cur laneink" style="--lane: var(--l-operator)"><span class="parrow">▾</span>operator<span class="pcount acc" data-pcount>2 running</span></div>
+                    <div class="slane"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
                     <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
                     <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
-                    <div class="slane"><span class="sdot" style="background: var(--l-review); opacity: .35"></span>Review<span class="ph">idle</span></div>
-                    <div class="sb-foot">1 active<span class="v">v0.11.0</span></div>
+                    <div class="sproj laneink" style="--lane: var(--l-design)"><span class="parrow">▸</span>el-encanto<span class="pcount">1 needs you</span></div>
+                    <div class="sproj laneink" style="--lane: var(--l-research)"><span class="parrow">▸</span>mantel<span class="pcount"></span></div>
+                    <div class="sb-foot"><span class="ring" aria-hidden="true"></span>Plan usage<span class="v">Agents</span></div>
                   </div>
 
                   <div class="canv">
-                    <div class="canv-head"><span class="hash">#</span>channel<span class="sub">6 lanes · 1 running</span></div>
+                    <div class="canv-head">home<span class="sub" data-bsub>Backlog 1 · Running 1 · Waiting 1 · Done 2</span></div>
                     <div class="canv-feed">
                       <div class="canv-msg">
-                        <span class="canv-who laneink" style="--lane: var(--l-code)">Code</span><span class="canv-chip ok">posted</span>
-                        <span class="canv-txt">Rail landed. Tiles are colour and acronym.</span>
+                        <span class="canv-who">Refactor the auth module</span><span class="canv-chip ok">running</span>
+                        <span class="canv-txt">code · in its own worktree</span>
                       </div>
                       <div class="canv-msg">
-                        <span class="canv-who laneink" style="--lane: var(--l-research)">Research</span><span class="canv-chip wait">held</span>
-                        <span class="canv-txt">Implement the reply sentinel per the brief.</span>
+                        <span class="canv-who">Implement the reply sentinel</span><span class="canv-chip wait">held · needs you</span>
+                        <span class="canv-txt">a dispatch from Research, waiting on approval</span>
                       </div>
                       <div class="canv-msg">
-                        <span class="canv-who laneink" style="--lane: var(--l-review)">Review</span><span class="canv-chip">queued</span>
-                        <span class="canv-txt">The parser fires on directives a lane quoted.</span>
+                        <span class="canv-who">Fix the tray icon in dark mode</span><span class="canv-chip">done · green</span>
+                        <span class="canv-txt">design · +14 −3, check passed</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="panel-foot">
-                  <span class="foot-note">Projects are rounded squares, sessions stay circles. A project never reads as an agent.</span>
+                  <span class="foot-note">Collapsed and expanded are the same list. An agent never appears twice.</span>
                 </div>
               </figure>
             </div>
             <div class="notes">
               <p>
-                A persistent rail carries your open projects as colour and acronym tiles with a
-                corner status pip. It owns navigation, so the sidebar header is identity only and
-                the list below it is just this project: its lanes, and the sessions running in them.
+                One component owns the left edge, at two widths: a 60px strip of tiles when
+                collapsed, this 264px list when open. Every active project is on it, and opening
+                one unfolds its agents beneath it. The open project's row is the selection, so the
+                canvas beside it is that project's home: the board.
               </p>
               <p class="why">
-                Scope is durable. It survives opening preferences, usage, or another view, and
-                focusing a session sets it, so you cannot end up looking at one project while
-                acting on another.
+                The old rail-and-sidebar pair kept relisting the same agents 40px apart, because two
+                components each decided, on their own, to list them. One component at two widths
+                cannot disagree with itself: a project's agents appear exactly once, by
+                construction. The foot keeps the plan meter, a ring at a glance; the reading lives
+                in its popover.
               </p>
               <ul class="costs">
-                <li><span class="k plus">gives</span><span>Peripheral awareness of every open project, at no vertical cost.</span></li>
-                <li><span class="k minus">costs</span><span>38px of width, always. Names live in the hover card.</span></li>
+                <li><span class="k plus">gives</span><span>Every active project in peripheral view, and no duplicate lists to reconcile.</span></li>
+                <li><span class="k minus">costs</span><span>Some width, always: 60px collapsed, 264px open. Collapsed, names live in the hover card.</span></li>
               </ul>
             </div>
           </div>
@@ -352,7 +351,7 @@
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>The whole call tree, live, without instrumenting anything.</span></li>
-                <li><span class="k minus">costs</span><span>About a second of lag. Phase is the honest signal, not keystrokes.</span></li>
+                <li><span class="k minus">costs</span><span>About a second of lag, so you watch phases rather than keystrokes.</span></li>
               </ul>
             </div>
           </div>
@@ -406,17 +405,17 @@
                   </div>
 
                   <div class="panel-foot">
-                    <span class="foot-note">The agent's own TodoWrite, rendered live. It ticks off as it works.</span>
+                    <span class="foot-note">The agent's own TodoWrite, rendered live.</span>
                   </div>
                 </figure>
               </div>
             </div>
             <div class="notes">
               <p>
-                The transcript records what the agent <em>did</em>, not only what it said. Tool calls
-                are first-class blocks, and consecutive calls of the same kind coalesce into one line,
-                so a two-hundred-turn session reads as prose with punctuation between it rather than a
-                wall of cards. A delegated run carries the subagent that made it.
+                The transcript records what the agent did, not only what it said. Tool calls are
+                first-class blocks, and consecutive calls of the same kind coalesce into one line, so
+                a two-hundred-turn session reads as prose punctuated by tool runs, not a wall of
+                cards. A delegated run carries the subagent that made it.
               </p>
               <p class="why">
                 The status line says what is happening in words ("Editing", "Running a command",
@@ -426,7 +425,7 @@
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>A record you can audit, and one control that stops the run.</span></li>
-                <li><span class="k minus">costs</span><span>Tool output is capped when stored. Large results are truncated, not lost.</span></li>
+                <li><span class="k minus">costs</span><span>Tool output is capped when stored, so a very large result arrives truncated.</span></li>
               </ul>
             </div>
           </div>
@@ -492,7 +491,7 @@
                   </div>
 
                   <div class="panel-foot">
-                    <span class="foot-note">Each lane tinted by what it is doing right now.</span>
+                    <span class="foot-note">Each session tinted by what it is doing right now.</span>
                   </div>
                 </figure>
               </div>
@@ -500,7 +499,8 @@
             <div class="notes">
               <p>
                 Every session is a real pty you can type into, with its own reserved dev-server port.
-                Take over mid-task, run a command yourself, hand it back.
+                Take over mid-task, run a command yourself, hand it back. A preview tab probes that
+                port, and the usual suspects, and renders whichever dev server actually answers.
               </p>
               <p class="why">
                 The four phases are running, waiting on you, idle, and compacting, taken straight from
@@ -508,7 +508,7 @@
                 poller cannot honestly provide one.
               </p>
               <ul class="costs">
-                <li><span class="k plus">gives</span><span>A terminal you can seize at any moment, not a read-only log.</span></li>
+                <li><span class="k plus">gives</span><span>A terminal you can seize at any moment, mid-task.</span></li>
                 <li><span class="k minus">costs</span><span>One pty per session. These are real processes with real memory.</span></li>
               </ul>
             </div>
@@ -521,16 +521,16 @@
         <h2>Directing</h2>
         <p class="sec-lede">
           Configuration is the tax you pay every time you start an agent. Operator makes you pay it
-          once: lanes that already know their model and permissions, a queue that feeds them, and a
-          room where they say what they found. Lanes should talk. They should not be able to
-          commission each other's work without you.
+          once: lanes that already know their model and permissions, a board that feeds them, and a
+          log of every directive between them. Lanes can ask each other for work. They cannot
+          commission it without you.
         </p>
 
         <!-- 04 · roster + queue -->
         <div class="opt">
           <div class="opt-head">
             <span class="tag">06</span>
-            <p class="opt-name">Roster and task queue</p>
+            <p class="opt-name">Team and the board</p>
             <span class="verdict">one click to launch</span>
           </div>
           <div class="opt-body wide">
@@ -539,7 +539,7 @@
                 <figure class="panel panel-roster">
                   <figcaption class="panel-bar">
                     <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">roster · operator</span>
+                    <span class="panel-name">team · operator</span>
                     <span class="panel-flag">2 running</span>
                   </figcaption>
 
@@ -578,69 +578,73 @@
                   </div>
 
                   <div class="panel-foot">
-                    <span class="foot-note">Each lane pins a model, effort, and permissions.</span>
+                    <span class="foot-note">The coordinator carries the only filled badge.</span>
                   </div>
                 </figure>
 
-                <figure class="panel panel-queue">
+                <figure class="panel panel-board">
                   <figcaption class="panel-bar">
                     <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">task queue · operator</span>
-                    <span class="panel-flag">1 running</span>
+                    <span class="panel-name">board · operator</span>
+                    <span class="panel-flag">project home</span>
                   </figcaption>
 
-                  <div class="tasks">
-                    <div class="task done">
-                      <span class="task-g">✓</span>
-                      <span class="task-text">Fix the tray icon in dark mode</span>
-                      <span class="task-lane">design</span>
-                      <span class="task-stat">diff ready</span>
+                  <div class="board">
+                    <div class="bcol">
+                      <div class="bhead">Backlog · 1</div>
+                      <div class="bcard">
+                        <span class="bt">Write release notes for 0.16</span>
+                        <span class="bmeta">unassigned</span>
+                      </div>
                     </div>
-                    <div class="task active">
-                      <span class="task-g">◆</span>
-                      <span class="task-text">Refactor the auth module</span>
-                      <span class="task-lane">code</span>
-                      <span class="task-stat">running</span>
+                    <div class="bcol">
+                      <div class="bhead">Running · 1</div>
+                      <div class="bcard run">
+                        <span class="bt">Refactor the auth module</span>
+                        <span class="bmeta"><span class="task-lane">code</span><span data-bstat>running</span></span>
+                      </div>
                     </div>
-                    <div class="task">
-                      <span class="task-g">○</span>
-                      <span class="task-text">Write release notes for 0.4</span>
-                      <span class="task-lane">research</span>
-                      <span class="task-stat">queued</span>
+                    <div class="bcol">
+                      <div class="bhead">Waiting · 1</div>
+                      <div class="bcard wait">
+                        <span class="bt">Implement the reply sentinel</span>
+                        <span class="bmeta">held · needs you</span>
+                      </div>
                     </div>
-                    <div class="task">
-                      <span class="task-g">○</span>
-                      <span class="task-text">Sweep the flaky retry test</span>
-                      <span class="task-lane" hidden>qa</span>
-                      <span class="task-stat">backlog</span>
-                    </div>
-                    <div class="task abandoned">
-                      <span class="task-g">⊘</span>
-                      <span class="task-text">Port the theme system</span>
-                      <span class="task-lane">design</span>
-                      <span class="task-stat">abandoned</span>
+                    <div class="bcol">
+                      <div class="bhead">Done · 2</div>
+                      <div class="bcard done">
+                        <span class="bt">Fix the tray icon in dark mode</span>
+                        <span class="bmeta"><span class="task-lane">design</span><span class="stat-add">+14</span> <span class="stat-del">−3</span> · <span data-bcheck>pass</span></span>
+                      </div>
+                      <div class="bcard abn">
+                        <span class="bt">Port the theme system</span>
+                        <span class="bmeta">abandoned</span>
+                      </div>
                     </div>
                   </div>
 
                   <div class="panel-foot">
-                    <span><b>1</b> of <b>4</b> shipped</span>
-                    <span class="foot-right">finished tasks come back as a diff</span>
+                    <span class="foot-note">The card is the task. The agent is a chip on it.</span>
                   </div>
                 </figure>
               </div>
             </div>
             <div class="notes">
               <p>
-                Staff the project once. Each lane pins a model, an effort level, and permissions, so
+                Staff the project once: each lane pins a model, an effort level, and permissions, so
                 starting a correctly configured session is one click rather than a setup ritual you
-                half remember.
+                half remember. Then project home is the board, where the card is the task and the
+                agent is a chip on it. A roster-first home put the workers above the fold and the
+                work below it; this is that, inverted.
               </p>
               <p class="why">
-                Only working lanes get a full row; the rest collapse under <strong>Ready</strong>, one
-                line each and still one click from launching. Queue tasks against that roster and they
-                dispatch, run, and come back as a diff. A task whose lane disappeared is marked
-                <strong>abandoned</strong>, not done: the run ended, but nobody saw the work finish,
-                and calling that "done" is the kind of lie every count downstream repeats.
+                <strong>Waiting</strong> is the column that needs you: a held dispatch, a message
+                that never arrived. Done can mean two things, so the card says which: at completion
+                the project's check command runs in the lane's directory, and the row reads done, or
+                done and green. A task whose lane disappeared is marked <strong>abandoned</strong>,
+                not done: the run ended, but nobody saw the work finish, and calling it done would
+                make every count downstream wrong.
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>Backlog to running to reviewable, without babysitting the handoffs.</span></li>
@@ -650,83 +654,87 @@
           </div>
         </div>
 
-        <!-- 07 · project channel -->
+        <!-- 07 · dispatch log -->
         <div class="opt">
           <div class="opt-head">
             <span class="tag">07</span>
-            <p class="opt-name">The project channel</p>
-            <span class="verdict">read-only for now</span>
+            <p class="opt-name">The dispatch log</p>
+            <span class="verdict">every hop on the record</span>
           </div>
           <div class="opt-body">
             <div class="stage">
-              <figure class="panel panel-channel">
+              <figure class="panel panel-dispatch">
                 <figcaption class="panel-bar">
                   <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                  <span class="panel-name"># operator · channel</span>
-                  <span class="panel-flag">3 new</span>
+                  <span class="panel-name">dispatches · operator</span>
+                  <span class="panel-flag" data-dflag>1 needs approval</span>
                 </figcaption>
 
                 <div class="feed">
                   <div class="crule"><span class="r"></span><span>Today</span><span class="r"></span></div>
 
-                  <div class="cmsg">
-                    <div class="av laneink" style="--lane: var(--l-code); background: color-mix(in srgb, var(--l-code) 16%, transparent); border-color: color-mix(in srgb, var(--l-code) 38%, transparent)">CO</div>
-                    <div>
-                      <div class="chdr">
-                        <span class="who laneink" style="--lane: var(--l-code)">Code</span>
-                        <span class="arrow">→ project</span><span class="cts">19:02</span>
-                        <span class="cchip ok">posted</span>
-                      </div>
-                      <div class="ctext">Rail landed. Tiles are colour and acronym, status on a corner pip. Detail in <code>dev/briefs/rail.md</code>.</div>
+                  <div class="dmsg">
+                    <div class="chdr">
+                      <span class="who laneink" style="--lane: var(--l-operator)">Operator</span>
+                      <span class="arrow">→ Code</span><span class="cts">18:54</span>
+                      <span class="cchip ok">delivered</span>
                     </div>
+                    <div class="ctext">Fix the tray icon in dark mode. Brief in <code>dev/briefs/tray.md</code>.</div>
                   </div>
 
-                  <div class="cmsg">
-                    <div class="av laneink" style="--lane: var(--l-research); background: color-mix(in srgb, var(--l-research) 16%, transparent); border-color: color-mix(in srgb, var(--l-research) 38%, transparent)">RE</div>
-                    <div>
-                      <div class="chdr">
-                        <span class="who laneink" style="--lane: var(--l-research)">Research</span>
-                        <span class="arrow">→ Code</span><span class="cts">19:14</span>
-                        <span class="cchip wait">held · needs your approval</span>
-                      </div>
-                      <div class="ctext">Implement the reply sentinel per <code>dev/briefs/reply-impl.md</code>.</div>
-                      <div class="cacts"><span class="cbtn pri">Approve &amp; send</span><span class="cbtn">Decline</span></div>
+                  <div class="dmsg" data-held>
+                    <div class="chdr">
+                      <span class="who laneink" style="--lane: var(--l-research)">Research</span>
+                      <span class="arrow">→ Code</span><span class="cts">19:14</span>
+                      <span class="cchip wait" data-dchip>held · needs your approval</span>
                     </div>
+                    <div class="ctext">Implement the reply sentinel per <code>dev/briefs/reply-impl.md</code>.</div>
+                    <div class="cacts" data-dacts><span class="cbtn pri">Approve &amp; send</span><span class="cbtn">Decline</span></div>
                   </div>
 
-                  <div class="cmsg">
-                    <div class="av laneink" style="--lane: var(--l-review); background: color-mix(in srgb, var(--l-review) 16%, transparent); border-color: color-mix(in srgb, var(--l-review) 38%, transparent)">RV</div>
-                    <div>
-                      <div class="chdr">
-                        <span class="who laneink" style="--lane: var(--l-review)">Review</span>
-                        <span class="arrow">→ Code</span><span class="cts">19:26</span>
-                        <span class="cchip">queued · behind current task</span>
-                      </div>
-                      <div class="ctext">The dispatch parser fires on directives a lane merely quoted. Anything it reads can commission work.</div>
+                  <div class="dmsg">
+                    <div class="chdr">
+                      <span class="who laneink" style="--lane: var(--l-review)">Review</span>
+                      <span class="arrow">→ Design</span><span class="cts">19:22</span>
+                      <span class="cchip wait">held · pair sending too fast</span>
                     </div>
+                    <div class="ctext">Same finding, third message in a minute. The brake suspends the pair, not the lanes.</div>
+                  </div>
+
+                  <div class="dmsg">
+                    <div class="chdr">
+                      <span class="who laneink" style="--lane: var(--l-code)">Code</span>
+                      <span class="arrow">→ Research</span><span class="cts">19:26</span>
+                      <span class="cchip wait">not delivered · lane wasn't running</span>
+                    </div>
+                    <div class="ctext">Where does the dispatch parser live now?</div>
                   </div>
                 </div>
 
                 <div class="panel-foot">
-                  <span class="foot-note">Read-only for now. This shows what your agents have said to each other; sending lands in the next step.</span>
+                  <span class="foot-note">Nothing here retries on its own. Every chip says why.</span>
                 </div>
               </figure>
             </div>
             <div class="notes">
               <p>
-                Every project gets a room. Lanes post to it when something changed: a task finished,
-                a lane is blocked, or one of them found something that affects another's work. Each
-                line carries an author, a target, and its delivery state.
+                Delegation is a typed directive, on the record. <code>OPERATOR-DISPATCH</code> routes
+                a task to a lane, a reply carries one line between lanes, and every hop lands in this
+                log with its outcome. Results travel another road entirely: a finishing lane hands
+                its work back through <code>operator__report</code>, and it arrives on the board as a
+                task with a diff, not as a message.
               </p>
               <p class="why">
-                That state is the whole design. A lane that is not the coordinator cannot silently
-                commission work: its dispatch is <strong>held</strong> until you approve it. A message
-                to a busy lane is <strong>queued</strong> and read when its current task ends. Saying
-                so on screen is the difference between honest and broken.
+                A lane that is not the coordinator cannot silently commission work: its dispatch is
+                <strong>held</strong> until you approve it. And two agents cannot talk forever: a
+                reply chain that runs several hops with no human in it is braked, a pair trading
+                messages too fast is suspended, and each shows up here as held, with the reason on
+                the chip. The bluntest chip is the honest one: <strong>not delivered</strong>,
+                because a message never starts a lane.
               </p>
               <ul class="costs">
-                <li><span class="k plus">gives</span><span>One place to see what your agents told each other, with a gate on the ones commissioning work.</span></li>
-                <li><span class="k minus">costs</span><span>You cannot post yet. The feed and the approval gate ship first; sending follows.</span></li>
+                <li><span class="k plus">gives</span><span>Who asked whom for what, and how it landed. The whole record, approvals included.</span></li>
+                <li><span class="k minus">costs</span><span>Chips, not chat. The log records deliveries; reading the work still means opening the diff.</span></li>
               </ul>
             </div>
           </div>
@@ -772,7 +780,7 @@
                 </div>
 
                 <div class="panel-foot">
-                  <span class="foot-note">Cheap models for grunt work, the expensive one where it pays off.</span>
+                  <span class="foot-note">opusplan plans with Opus, then builds with Sonnet.</span>
                 </div>
               </figure>
             </div>
@@ -788,7 +796,7 @@
                 in the terminal with Operator closed.
               </p>
               <ul class="costs">
-                <li><span class="k plus">gives</span><span>The model decision made where the job is described, not at launch.</span></li>
+                <li><span class="k plus">gives</span><span>You pick the model where you describe the job, not at launch.</span></li>
                 <li><span class="k minus">costs</span><span>Edits touch real files on disk. Git is your undo.</span></li>
               </ul>
             </div>
@@ -893,13 +901,13 @@
                 without stepping on each other. Nothing touches your working tree until you say so.
               </p>
               <p class="why">
-                Fan-out is the same idea pushed further: one prompt to N agents at once, each sealed in
-                its own worktree and carrying its own index. Four attempts at a hard bug, and you keep
-                the one that actually fixed it.
+                Fan-out is the same idea pushed further: one prompt to N agents at once, each sealed
+                in its own worktree with its own index. You read the diffs side by side and keep the
+                one that actually fixed it.
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>Real parallelism on one repo, with no branch collisions to untangle.</span></li>
-                <li><span class="k minus">costs</span><span>N worktrees is N checkouts of disk, and N diffs to read.</span></li>
+                <li><span class="k minus">costs</span><span>N worktrees means N checkouts on disk, and N diffs to read.</span></li>
               </ul>
             </div>
           </div>
@@ -993,13 +1001,15 @@
                 so it happens where you already are.
               </p>
               <p class="why">
-                Usage counts tokens per model and where the time went, parsed from the transcripts
-                already on your disk. There are no dollar figures anywhere in Operator: what a token
-                costs depends on your plan, and a confident wrong number is worse than none.
+                Usage splits tokens per model into input, output, and cache reads, and shows where
+                the time went. The rail's plan meter applies the same policy to your plan: a ring at
+                a glance, session and weekly windows in the popover. There are no dollar figures
+                anywhere in Operator: what a token costs depends on your plan, and a confident wrong
+                number is worse than none.
               </p>
               <ul class="costs">
                 <li><span class="k plus">gives</span><span>Read the change and land it in one window.</span></li>
-                <li><span class="k minus">costs</span><span>Tokens, not money. Converting them is left to you.</span></li>
+                <li><span class="k minus">costs</span><span>Tokens, not money. You do the conversion.</span></li>
               </ul>
             </div>
           </div>
@@ -1010,9 +1020,8 @@
       <section id="scope">
         <h2>What it does, and what it leaves alone</h2>
         <p class="sec-lede">
-          Operator hosts Claude Code's own CLI over a pty and reads the transcripts it writes. That
-          single fact decides the shape of everything above, including the parts it deliberately
-          will not do.
+          Operator hosts Claude Code's own CLI over a pty and reads the transcripts it writes.
+          Everything above follows from that, including the parts it will not do.
         </p>
         <table>
           <thead>
@@ -1021,7 +1030,7 @@
           <tbody>
             <tr>
               <td>Watch a session as it runs</td><td><span class="can">does</span></td>
-              <td>Claude Code already writes a transcript. Operator tails it, so there is nothing to install into your sessions.</td>
+              <td>Claude Code already writes a transcript. Operator tails the file it writes, so your sessions run exactly as they did before.</td>
             </tr>
             <tr>
               <td>Type into a running session</td><td><span class="can">does</span></td>
@@ -1033,19 +1042,23 @@
             </tr>
             <tr>
               <td>Send one prompt to N agents</td><td><span class="can">does</span></td>
-              <td>Fan-out, each attempt in its own worktree with its own <code>fanIndex</code>. Compare the diffs, keep one.</td>
+              <td>Fan-out, each attempt in its own worktree on its own branch. Compare the diffs, keep one.</td>
             </tr>
             <tr>
               <td>Stop an agent mid-run</td><td><span class="can">does</span></td>
               <td>The composer's send becomes Stop while it works. That is Claude Code's own interrupt, not a kill: the session survives and hands the turn back.</td>
             </tr>
             <tr>
-              <td>Read what your agents told each other</td><td><span class="can">does</span></td>
-              <td>The project channel. A dispatch from a non-coordinator lane is held until you approve it, so no lane silently commissions work.</td>
+              <td>Route work between agents</td><td><span class="can">does</span></td>
+              <td>Dispatches are typed directives on the record. One from a non-coordinator lane is held until you approve it, so no lane silently commissions work.</td>
             </tr>
             <tr>
-              <td>Post to that channel yourself</td><td><span class="cant">not yet</span></td>
-              <td>The feed and the approval gate ship first. The composer is visibly present and inert rather than hidden, because a dead control found by accident is worse.</td>
+              <td>Verify that a finished task is green</td><td><span class="can">does</span></td>
+              <td>At completion, the project's check command runs in the lane's directory. The card reads done, or done and green.</td>
+            </tr>
+            <tr>
+              <td>Let two agents talk forever</td><td><span class="cant">leaves alone</span></td>
+              <td>A reply chain with no human in it hits a hop limit, and a pair sending too fast is suspended. The log shows held, with the reason on the chip.</td>
             </tr>
             <tr>
               <td>Host or proxy the model</td><td><span class="cant">leaves alone</span></td>
@@ -1061,14 +1074,14 @@
             </tr>
             <tr>
               <td>Push a message into a busy lane</td><td><span class="cant">leaves alone</span></td>
-              <td>One submit queue per terminal, with no out-of-band channel into the CLI. A message is queued and read when the current task ends.</td>
+              <td>One submit queue per terminal, with no out-of-band channel into the CLI. A mid-turn message rides the lane's own queue and is read at the turn boundary.</td>
             </tr>
           </tbody>
         </table>
 
         <div class="note">
-          <strong>It is a control room, not a replacement.</strong> Operator does not make Claude
-          Code smarter or take the wheel from you. It makes the work legible while it happens, keeps
+          <strong>Operator is a control room.</strong> It does not make Claude Code smarter, and it
+          does not take the wheel from you. It makes the work legible while it happens, keeps
           parallel attempts from ruining each other, and puts the result in front of you as a diff.
           Everything the agent does is still yours to approve.
         </div>
@@ -1089,8 +1102,8 @@
             </svg>
             Download for macOS
           </a>
-          <a class="btn btn-ghost" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
-            Release notes
+          <a class="btn btn-ghost" href="https://github.com/juanmnl/operator" target="_blank" rel="noreferrer noopener">
+            GitHub
           </a>
         </div>
       </section>
@@ -1107,6 +1120,7 @@
             <a href="#directing">Directing</a>
             <a href="#landing">Landing the work</a>
             <a href="design-system.html">Design system</a>
+            <a href="https://github.com/juanmnl/operator" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
             <a href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">Releases ↗</a>
           </nav>
         </div>

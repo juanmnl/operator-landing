@@ -193,7 +193,7 @@
       <section class="ds-sec" id="components">
         <span class="ds-eyebrow">Components</span>
         <h2 class="ds-h">The kit</h2>
-        <p class="ds-lead">Small, composable pieces. Class names are shown beneath each so you can lift them straight from <code class="ds-name">styles.css</code>.</p>
+        <p class="ds-lead">Small, composable pieces. Class names sit beneath each one, so you can lift them straight from <code class="ds-name">styles.css</code>.</p>
 
         <div class="ds-block">
           <div class="ds-block-h"><h3>Panel shell</h3><code>.panel · .panel-bar · .panel-foot</code></div>
@@ -331,7 +331,7 @@
       <!-- ════════════════ MOTION ════════════════ -->
       <section class="ds-sec" id="motion">
         <span class="ds-eyebrow">Motion</span>
-        <h2 class="ds-h">Liveness, not decoration</h2>
+        <h2 class="ds-h">What is allowed to move</h2>
         <p class="ds-lead">
           Motion here always means state change: a value ticking, text streaming, a row handing off.
           On the landing every panel loops its own small state machine while it is on screen, each on
@@ -411,72 +411,64 @@
             <div class="panel-foot"><span class="foot-note">A shelved project recedes structurally (card → row), never by group opacity.</span></div>
           </figure>
 
-          <!-- project rail + scoped sidebar -->
+          <!-- the left surface (one component, two widths) -->
           <figure class="panel">
             <figcaption class="panel-bar">
               <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
               <span class="panel-name">scoped to operator</span>
-              <span class="panel-flag">4 open</span>
+              <span class="panel-flag">v0.15.1</span>
             </figcaption>
             <div class="shell">
-              <div class="prail">
-                <span class="ptile cur laneink" style="--lane: var(--l-operator); background: color-mix(in srgb, var(--l-operator) 16%, transparent); border-color: color-mix(in srgb, var(--l-operator) 38%, transparent)">OP<span class="ppip" style="background: var(--accent)"></span></span>
-                <span class="ptile laneink" style="--lane: var(--l-design); background: color-mix(in srgb, var(--l-design) 16%, transparent); border-color: color-mix(in srgb, var(--l-design) 38%, transparent)">EE</span>
-                <span class="psep"></span>
-                <span class="ptile" style="border-style: dashed; border-color: var(--border); color: var(--muted)">+</span>
-              </div>
               <div class="sbar">
-                <div class="sb-head"><span class="sb-logo"></span>operator</div>
-                <div class="chan-row"><span class="hash">#</span>channel<span class="unread">3</span></div>
-                <div class="sb-label">Agents<span class="add">+</span></div>
-                <div class="slane on"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
+                <div class="sb-head"><span class="sb-logo"></span>Projects</div>
+                <div class="sproj open cur laneink" style="--lane: var(--l-operator)"><span class="parrow">▾</span>operator<span class="pcount acc">2 running</span></div>
+                <div class="slane"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
                 <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
                 <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
-                <div class="sb-foot">1 active<span class="v">v0.11.0</span></div>
+                <div class="sproj laneink" style="--lane: var(--l-design)"><span class="parrow">▸</span>el-encanto<span class="pcount">1 needs you</span></div>
+                <div class="sb-foot"><span class="ring" aria-hidden="true"></span>Plan usage<span class="v">Agents</span></div>
               </div>
               <div class="canv">
-                <div class="canv-head"><span class="hash">#</span>channel<span class="sub">6 lanes · 1 running</span></div>
+                <div class="canv-head">operator · home<span class="sub">Backlog 1 · Running 1 · Done 2</span></div>
                 <div class="canv-feed">
                   <div class="canv-msg">
-                    <span class="canv-who laneink" style="--lane: var(--l-code)">Code</span><span class="canv-chip ok">posted</span>
-                    <span class="canv-txt">Rail landed. Tiles are colour and acronym.</span>
+                    <span class="canv-who">Refactor the auth module</span><span class="canv-chip ok">running</span>
+                    <span class="canv-txt">code · in its own worktree</span>
                   </div>
                   <div class="canv-msg">
-                    <span class="canv-who laneink" style="--lane: var(--l-research)">Research</span><span class="canv-chip wait">held</span>
-                    <span class="canv-txt">Implement the reply sentinel per the brief.</span>
+                    <span class="canv-who">Fix the tray icon in dark mode</span><span class="canv-chip">done · green</span>
+                    <span class="canv-txt">design · +14 −3, check passed</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="panel-foot"><span class="foot-note">Projects are rounded squares, sessions stay circles.</span></div>
+            <div class="panel-foot"><span class="foot-note">One list at two widths. The open project's agents unfold beneath it.</span></div>
           </figure>
 
-          <!-- project channel -->
+          <!-- dispatch log -->
           <figure class="panel">
             <figcaption class="panel-bar">
               <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="panel-name"># operator · channel</span>
-              <span class="panel-flag">3 new</span>
+              <span class="panel-name">dispatches · operator</span>
+              <span class="panel-flag">1 needs approval</span>
             </figcaption>
             <div class="feed">
               <div class="crule"><span class="r"></span><span>Today</span><span class="r"></span></div>
-              <div class="cmsg">
-                <div class="av laneink" style="--lane: var(--l-code); background: color-mix(in srgb, var(--l-code) 16%, transparent); border-color: color-mix(in srgb, var(--l-code) 38%, transparent)">CO</div>
-                <div>
-                  <div class="chdr"><span class="who laneink" style="--lane: var(--l-code)">Code</span><span class="arrow">→ project</span><span class="cts">19:02</span><span class="cchip ok">posted</span></div>
-                  <div class="ctext">Rail landed. Tiles are colour and acronym, status on a corner pip.</div>
-                </div>
+              <div class="dmsg">
+                <div class="chdr"><span class="who laneink" style="--lane: var(--l-operator)">Operator</span><span class="arrow">→ Code</span><span class="cts">18:54</span><span class="cchip ok">delivered</span></div>
+                <div class="ctext">Fix the tray icon in dark mode. Brief in <code>dev/briefs/tray.md</code>.</div>
               </div>
-              <div class="cmsg">
-                <div class="av laneink" style="--lane: var(--l-research); background: color-mix(in srgb, var(--l-research) 16%, transparent); border-color: color-mix(in srgb, var(--l-research) 38%, transparent)">RE</div>
-                <div>
-                  <div class="chdr"><span class="who laneink" style="--lane: var(--l-research)">Research</span><span class="arrow">→ Code</span><span class="cts">19:14</span><span class="cchip wait">held · needs your approval</span></div>
-                  <div class="ctext">Implement the reply sentinel per <code>dev/briefs/reply-impl.md</code>.</div>
-                  <div class="cacts"><span class="cbtn pri">Approve &amp; send</span><span class="cbtn">Decline</span></div>
-                </div>
+              <div class="dmsg">
+                <div class="chdr"><span class="who laneink" style="--lane: var(--l-research)">Research</span><span class="arrow">→ Code</span><span class="cts">19:14</span><span class="cchip wait">held · needs your approval</span></div>
+                <div class="ctext">Implement the reply sentinel per <code>dev/briefs/reply-impl.md</code>.</div>
+                <div class="cacts"><span class="cbtn pri">Approve &amp; send</span><span class="cbtn">Decline</span></div>
+              </div>
+              <div class="dmsg">
+                <div class="chdr"><span class="who laneink" style="--lane: var(--l-code)">Code</span><span class="arrow">→ Research</span><span class="cts">19:26</span><span class="cchip wait">not delivered · lane wasn't running</span></div>
+                <div class="ctext">Where does the dispatch parser live now?</div>
               </div>
             </div>
-            <div class="panel-foot"><span class="foot-note">Read-only for now. Chips carry the delivery state, which is the whole design.</span></div>
+            <div class="panel-foot"><span class="foot-note">Nothing here retries on its own. Every chip says why.</span></div>
           </figure>
 
           <!-- structured transcript -->
@@ -519,7 +511,7 @@
           <figure class="panel">
             <figcaption class="panel-bar">
               <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="panel-name">roster · operator</span>
+              <span class="panel-name">team · operator</span>
               <span class="panel-flag">2 running</span>
             </figcaption>
             <div class="lanes">
@@ -569,7 +561,7 @@
         </div>
 
         <div class="ds-note">
-          The landing runs the full set of twelve views: the task queue, terminal, worktrees, fan-out,
+          The landing runs the full set of twelve views: the board, terminal, worktrees, fan-out,
           plan, conversation, sessions and more. <a href="index.html">See them in context →</a>
         </div>
       </section>

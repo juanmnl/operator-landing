@@ -97,7 +97,7 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--page-bg); -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+html { background: var(--page-bg); -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0; background: var(--page-bg); color: var(--page-fg);
   font-family: var(--sans); font-size: 15px; line-height: 1.6;
@@ -137,16 +137,38 @@ a { color: inherit; }
 .nav-chip .pk { color: var(--page-accent); }
 
 /* ── masthead ───────────────────────────────────────────────────────────── */
+/* The plate is full-bleed and DISSOLVES into the page ground instead of sitting on it
+   as a framed object: a mask fades its foot to transparent, and the headline block is
+   pulled up into that fade, so the type reads as surfacing out of the image. The mask
+   shows whatever --page-bg is, which is what makes one image work in both schemes. */
 .mast { border-bottom: 1px solid var(--page-border); padding-bottom: 30px; margin-bottom: 52px; }
-.mast-plate { margin: 0 0 30px; }
-.mast-plate img {
-  display: block; width: 100%; aspect-ratio: 24 / 9; object-fit: cover; object-position: 58% 30%;
-  filter: var(--grade); border-radius: 12px; border: 1px solid var(--page-border); background: var(--op-rail);
+.mast-plate {
+  margin: 0; position: relative;
+  width: 100vw; margin-left: calc(50% - 50vw);
 }
-@media (max-width: 700px) { .mast-plate img { aspect-ratio: 16 / 10; } }
+.mast-plate img {
+  display: block; width: 100%; height: clamp(340px, 66vh, 640px);
+  object-fit: cover; object-position: 58% 22%;
+  filter: var(--grade); background: var(--op-rail);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
+}
+/* a page-coloured scrim on top of the mask, so the type never sits on raw halftone */
+.mast-plate::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, var(--page-bg) 2%, transparent 46%);
+}
 .mast-plate figcaption {
-  margin-top: 9px; font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+  position: absolute; right: 28px; bottom: 8px;
+  font-family: var(--mono); font-size: 9px; text-transform: uppercase;
   letter-spacing: 0.16em; color: var(--page-muted);
+}
+.mast-head { position: relative; margin-top: clamp(-150px, -16vh, -72px); }
+@media (prefers-reduced-motion: no-preference) {
+  .mast-plate img { animation: mast-in 1.1s ease both; }
+  .mast-head { animation: mast-rise 0.7s 0.2s ease both; }
+  @keyframes mast-in { from { opacity: 0; } }
+  @keyframes mast-rise { from { opacity: 0; transform: translateY(10px); } }
 }
 
 .eyebrow {
@@ -530,32 +552,37 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
 .laneink { color: color-mix(in srgb, var(--lane), var(--fg) var(--ink-blend)); }
 
 .shell { display: flex; min-height: 232px; font-family: var(--font-mono); }
-.prail { width: 38px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 9px 0; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--bg-deep) 70%, var(--surface)); }
-/* projects are rounded SQUARES; sessions stay circles, so a project never reads as an agent */
-.ptile { position: relative; width: 25px; height: 25px; border-radius: 7px; display: grid; place-items: center; flex: none; font-size: 8.5px; font-weight: 600; letter-spacing: 0.02em; border: 1px solid; }
-.ptile.cur { box-shadow: 0 0 0 2px var(--accent); }
-.ppip { position: absolute; right: -2px; bottom: -2px; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--surface); }
-.psep { width: 16px; height: 1px; background: var(--border); flex: none; }
-.sbar { display: flex; flex-direction: column; width: 172px; flex: none; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--bg-deep) 45%, var(--surface)); }
+/* the left surface (app v0.13+): one component at two widths; the rail-and-sidebar
+   pair, its tiles, and the channel row are gone with the app's own */
+.sbar { display: flex; flex-direction: column; width: 188px; flex: none; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--bg-deep) 45%, var(--surface)); }
 .sb-head { display: flex; align-items: center; gap: 6px; padding: 9px 0.7rem 7px; font-size: 10.5px; font-weight: 600; color: color-mix(in srgb, var(--fg) 88%, transparent); }
 .sb-logo { width: 11px; height: 11px; border-radius: 3px; background: var(--accent); flex: none; opacity: 0.9; }
-.chan-row { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 0.7rem; font-size: 10px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: color-mix(in srgb, var(--fg) 90%, transparent); }
-.chan-row .hash { color: var(--accent); font-size: 11px; }
-.chan-row .unread { margin-left: auto; flex: none; font-size: 8px; line-height: 1; padding: 2px 5px; border-radius: 9px; background: var(--accent); color: var(--accent-fg); font-weight: 700; }
-.sb-label { display: flex; align-items: center; padding: 8px 0.7rem 3px; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); }
-.sb-label .add { margin-left: auto; font-size: 11px; }
 .slane { display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 0.7rem; font-size: 10px; color: color-mix(in srgb, var(--fg) 76%, transparent); }
 .slane.on { background: color-mix(in srgb, var(--fg) 8%, transparent); color: var(--fg); }
 .slane .ph { margin-left: auto; flex: none; font-size: 8.5px; color: var(--muted); }
 .slane .ph.acc { color: var(--accent); }
 .sdot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-.sb-foot { margin-top: auto; display: flex; padding: 6px 0.7rem; border-top: 1px solid var(--border); font-size: 8.5px; color: var(--muted); }
+.sb-foot { margin-top: auto; display: flex; align-items: center; padding: 6px 0.7rem; border-top: 1px solid var(--border); font-size: 8.5px; color: var(--muted); white-space: nowrap; }
 .sb-foot .v { margin-left: auto; }
+
+/* accordion project rows — the one left surface (v0.13+); the open project's row is
+   the selection, and its agents unfold beneath it */
+.sproj { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 0.7rem; font-size: 10.5px; font-weight: 600; color: color-mix(in srgb, var(--fg) 84%, transparent); }
+.sproj.cur { background: color-mix(in srgb, var(--fg) 8%, transparent); color: var(--fg); }
+.sproj .parrow { font-size: 8px; color: var(--muted); width: 8px; flex: none; }
+.sproj .pcount { margin-left: auto; flex: none; font-size: 8.5px; font-weight: 400; color: var(--muted); }
+.sproj .pcount.acc { color: var(--accent); }
+/* the plan meter's resting glance: a ring, never a number (the popover is the reading) */
+.ring {
+  width: 12px; height: 12px; border-radius: 50%; flex: none; margin-right: 5px;
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--bg-deep) 45%, var(--surface)) 58%, transparent 62% 100%),
+    conic-gradient(var(--accent) 0 58%, color-mix(in srgb, var(--fg) 18%, transparent) 58% 100%);
+}
 /* the canvas shows whatever the sidebar has selected — and `# channel` is selected,
    so it renders the channel. A placeholder there contradicted the highlighted row. */
 .canv { flex: 1; min-width: 96px; display: flex; flex-direction: column; overflow: hidden; }
 .canv-head { display: flex; align-items: center; gap: 5px; padding: 8px 0.6rem 7px; border-bottom: 1px solid var(--border); font-size: 9.5px; font-weight: 600; color: color-mix(in srgb, var(--fg) 85%, transparent); }
-.canv-head .hash { color: var(--accent); }
 .canv-head .sub { margin-left: auto; flex: none; font-size: 8px; font-weight: 400; color: var(--muted); white-space: nowrap; }
 .canv-feed { padding: 8px 0.6rem; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .canv-msg { min-width: 0; font-size: 9px; line-height: 1.45; }
@@ -567,9 +594,6 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
 
 /* ── project channel ────────────────────────────────────────────────────── */
 .feed { padding: 0.75rem 0.95rem; display: flex; flex-direction: column; gap: 11px; }
-.cmsg { display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 8px; }
-.av { width: 23px; height: 23px; border-radius: 6px; display: grid; place-items: center; flex: none; font-family: var(--font-mono); font-size: 8px; font-weight: 600; border: 1px solid; }
-.av.you { border-radius: 50%; background: color-mix(in srgb, var(--fg) 12%, transparent); border-color: var(--border); color: color-mix(in srgb, var(--fg) 85%, transparent); }
 .chdr { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; margin-bottom: 2px; }
 .who { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; }
 .arrow, .cts { font-family: var(--font-mono); font-size: 9px; color: var(--muted); }
@@ -584,6 +608,22 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
 .cbtn.pri { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 .crule { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 8.5px; color: var(--muted); }
 .crule .r { flex: 1; height: 1px; background: var(--border); }
+/* dispatch-log rows — the chips vocabulary without the room; reuses .chdr/.ctext/.cacts */
+.dmsg { min-width: 0; }
+
+/* the board — project home since v0.13: the card is the task, the agent is a chip on it */
+.board { flex: 1 1 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: color-mix(in srgb, var(--border) 55%, transparent); font-family: var(--font-mono); }
+.bcol { background: var(--bg); padding: 7px 7px 9px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.bhead { font-size: 8px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); padding-bottom: 2px; white-space: nowrap; }
+.bcard { border: 1px solid var(--border); border-radius: 6px; padding: 6px 7px; display: flex; flex-direction: column; gap: 5px; background: color-mix(in srgb, var(--surface) 55%, transparent); }
+.bcard .bt { font-family: var(--font-body); font-size: 10.5px; line-height: 1.35; color: color-mix(in srgb, var(--fg) 90%, transparent); }
+.bcard .bmeta { display: flex; align-items: center; gap: 5px; font-size: 8.5px; color: var(--muted); flex-wrap: wrap; }
+/* in-flight = accent left border, the house live signal (never a glow) */
+.bcard.run { border-color: color-mix(in srgb, var(--accent) 45%, transparent); border-left: 2px solid var(--accent); }
+.bcard.run .bmeta [data-bstat] { color: var(--accent); }
+.bcard.wait .bmeta { color: var(--warn); }
+.bcard.abn { opacity: 0.75; }
+.bcard.abn .bmeta { color: var(--warn); }
 
 /* ── structured transcript ──────────────────────────────────────────────── */
 .tx { padding: 0.75rem 0.95rem; display: flex; flex-direction: column; gap: 8px; }
