@@ -1,2 +1,7 @@
+# Internal working notes stay local: the repo is public, these are not the product.
+CLAUDE.md
+HANDOFF.md
+AGENTS.md
+
 .DS_Store
 *.local
