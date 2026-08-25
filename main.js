@@ -21,7 +21,11 @@ function buildTargets() {
         .map((n) => n.textContent)
         .join('')
         .trim()
-      out.push({ id: sec.id, ix: '§', name, hint: 'section' })
+      // no index glyph: a section renders as a BAND in the palette, so the index
+      // cell stays empty and only its rule carries through, the way the board's
+      // column rule does. A number here would also collide with the feature
+      // numbers, which run 01-10 in the same list.
+      out.push({ id: sec.id, ix: '', name, hint: 'section' })
     }
     // each feature card inside it, numbered by its own tag
     sec.querySelectorAll('.opt').forEach((card) => {
@@ -114,7 +118,11 @@ function renderPalette() {
   list.forEach((t, i) => {
     const b = document.createElement('button')
     b.type = 'button'
-    b.className = 'palette-item' + (i === activeIdx ? ' active' : '')
+    // sections read as bands and features as rows, so the palette is a miniature
+    // of the document rather than an undifferentiated list
+    b.className =
+      'palette-item ' + (t.hint === 'section' ? 'is-sec' : 'is-feat') +
+      (i === activeIdx ? ' active' : '')
     const ix = document.createElement('span')
     ix.className = 'ix'
     ix.textContent = t.ix
@@ -137,6 +145,8 @@ function renderPalette() {
     })
     paletteList.appendChild(b)
   })
+  const count = document.getElementById('paletteCount')
+  if (count) count.textContent = list.length ? String(list.length).padStart(2, '0') : 'none'
 }
 function highlight() {
   ;[...paletteList.children].forEach((el, i) => el.classList.toggle('active', i === activeIdx))
