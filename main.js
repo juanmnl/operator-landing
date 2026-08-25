@@ -13,7 +13,16 @@ function buildTargets() {
     // the closing CTA is listed once, explicitly, at the end
     if (sec.classList.contains('closing')) return
     const h = sec.querySelector('h2')
-    if (h) out.push({ id: sec.id, ix: '§', name: h.textContent.trim(), hint: 'section' })
+    // the band's range chip (`.sec-n`, e.g. "01 – 02") lives inside the h2 but is
+    // not part of the section's name, so read the head's TEXT NODES only
+    if (h) {
+      const name = Array.from(h.childNodes)
+        .filter((n) => n.nodeType === Node.TEXT_NODE)
+        .map((n) => n.textContent)
+        .join('')
+        .trim()
+      out.push({ id: sec.id, ix: '§', name, hint: 'section' })
+    }
     // each feature card inside it, numbered by its own tag
     sec.querySelectorAll('.opt').forEach((card) => {
       const tag = card.querySelector('.tag')
