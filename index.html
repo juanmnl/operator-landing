@@ -3,8 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1f2329" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#dbe0de" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1f2329" data-base="#1f2329" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#dbe0de" data-base="#dbe0de" media="(prefers-color-scheme: light)" />
+
+    <!-- Appearance is pinned here, BEFORE the stylesheet, or a pinned scheme
+         paints the system one first and flashes. Inline and synchronous on
+         purpose: main.js is a module and therefore deferred, which is far too
+         late for this. `system` stores nothing and removes the attribute. -->
+    <script>
+      try {
+        var a = localStorage.getItem('operator.appearance')
+        if (a === 'dark' || a === 'light') document.documentElement.setAttribute('data-theme', a)
+      } catch (e) {}
+    </script>
     <title>Operator · You run the agents</title>
     <meta
       name="description"

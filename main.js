@@ -1,10 +1,46 @@
-// Operator landing — vanilla JS. The ⌘K section jump, the animated dot-disc brand
-// mark, OS-aware shortcut labels, and the live-panel conductor. No framework, no
-// build. Colour comes from the system (prefers-color-scheme); there is no theme
-// switcher, so ⌘K navigates instead.
+// Operator landing — vanilla JS. The ⌘K palette (jump + appearance), the animated
+// dot-disc brand mark, OS-aware shortcut labels, and the live-panel conductor. No
+// framework, no build.
+//
+// APPEARANCE, not themes. The four skins (Mission Control / 1984 / Mr Pink /
+// Light) were deleted in the 2026-07-30 rebuild and are not coming back: the
+// two-tier palette needs --op-* to stay the real app's chrome. What ⌘K offers is
+// only the choice the CSS already supports — follow the system, or pin one of the
+// two schemes. See the pre-paint script in index.html for why it is set there.
 
 const isMac = /mac|iphone|ipad|ipod/i.test(navigator.platform || navigator.userAgent || '')
 const SHORTCUT = isMac ? '⌘K' : 'Ctrl K'
+
+/* ── appearance ────────────────────────────────────────────────────────────
+   The swatches duplicate --page-bg by hand because a page can only resolve one
+   scheme at a time and this control has to show both. If --page-bg moves in
+   styles.css, move these too. */
+const APPEARANCE_KEY = 'operator.appearance'
+const SWATCH = {
+  system: 'linear-gradient(90deg, #1f2329 50%, #dbe0de 50%)',
+  dark: '#1f2329',
+  light: '#dbe0de',
+}
+const root = document.documentElement
+
+function currentAppearance() {
+  const a = root.getAttribute('data-theme')
+  return a === 'dark' || a === 'light' ? a : 'system'
+}
+function applyAppearance(key) {
+  if (key === 'system') root.removeAttribute('data-theme')
+  else root.setAttribute('data-theme', key)
+  try {
+    key === 'system' ? localStorage.removeItem(APPEARANCE_KEY) : localStorage.setItem(APPEARANCE_KEY, key)
+  } catch (e) {}
+  // the two theme-color metas are media-scoped, so a PINNED scheme has to
+  // overwrite both or the browser chrome keeps following the system
+  const metas = document.querySelectorAll('meta[name="theme-color"]')
+  metas.forEach((m) => {
+    if (key === 'system') m.setAttribute('content', m.dataset.base || m.getAttribute('content'))
+    else m.setAttribute('content', key === 'dark' ? '#1f2329' : '#dbe0de')
+  })
+}
 
 /* ── the jump targets, read off the document itself ────────────────────── */
 function buildTargets() {
@@ -106,9 +142,34 @@ const paletteList = document.getElementById('paletteList')
 const paletteInput = document.getElementById('paletteInput')
 let activeIdx = 0
 
+const APPEARANCE_TARGETS = [
+  { id: 'appearance:system', kind: 'theme', tkey: 'system', ix: '', name: 'System', keys: 'appearance theme auto' },
+  { id: 'appearance:dark', kind: 'theme', tkey: 'dark', ix: '', name: 'Dark', keys: 'appearance theme' },
+  { id: 'appearance:light', kind: 'theme', tkey: 'light', ix: '', name: 'Light', keys: 'appearance theme' },
+]
+function allTargets() {
+  return TARGETS.concat(APPEARANCE_TARGETS)
+}
 function filtered() {
   const q = paletteInput.value.trim().toLowerCase()
-  return TARGETS.filter((t) => t.name.toLowerCase().includes(q))
+  if (!q) return allTargets()
+  return allTargets().filter((t) => (t.name + ' ' + (t.keys || '')).toLowerCase().includes(q))
+}
+/* the matched run is marked in place, so you can see WHY a row survived the
+   filter. Built from text nodes rather than innerHTML: the names come off the
+   document, and this never needs to parse markup to render a name. */
+function nameNode(name, q) {
+  const span = document.createElement('span')
+  span.className = 'nm'
+  const i = q ? name.toLowerCase().indexOf(q) : -1
+  if (i < 0) {
+    span.textContent = name
+    return span
+  }
+  const mark = document.createElement('mark')
+  mark.textContent = name.slice(i, i + q.length)
+  span.append(document.createTextNode(name.slice(0, i)), mark, document.createTextNode(name.slice(i + q.length)))
+  return span
 }
 function renderPalette() {
   if (!paletteList) return
@@ -120,36 +181,59 @@ function renderPalette() {
     b.type = 'button'
     // sections read as bands and features as rows, so the palette is a miniature
     // of the document rather than an undifferentiated list
+    const kind = t.kind === 'theme' ? 'is-theme' : t.hint === 'section' ? 'is-sec' : 'is-feat'
+    // the first appearance row carries the divider, so the group needs no header
+    const firstTheme = t.kind === 'theme' && (i === 0 || list[i - 1].kind !== 'theme')
     b.className =
-      'palette-item ' + (t.hint === 'section' ? 'is-sec' : 'is-feat') +
+      'palette-item ' + kind + (firstTheme ? ' is-theme-first' : '') +
+      (t.kind === 'theme' && currentAppearance() === t.tkey ? ' is-on' : '') +
       (i === activeIdx ? ' active' : '')
     const ix = document.createElement('span')
     ix.className = 'ix'
-    ix.textContent = t.ix
-    const nm = document.createElement('span')
-    nm.textContent = t.name
-    b.append(ix, nm)
-    if (t.hint) {
+    if (t.kind === 'theme') {
+      const sw = document.createElement('i')
+      sw.className = 'sw'
+      sw.style.background = SWATCH[t.tkey]
+      ix.appendChild(sw)
+    } else {
+      ix.textContent = t.ix
+    }
+    b.append(ix, nameNode(t.name, paletteInput.value.trim().toLowerCase()))
+    const hintText = t.kind === 'theme' ? (currentAppearance() === t.tkey ? 'active' : 'appearance') : t.hint
+    if (hintText) {
       const h = document.createElement('span')
       h.className = 'hint'
-      h.textContent = t.hint
+      h.textContent = hintText
       b.appendChild(h)
     }
     b.addEventListener('mouseenter', () => {
       activeIdx = i
       highlight()
     })
-    b.addEventListener('click', () => {
-      jumpTo(t.id)
-      closePalette()
-    })
+    b.addEventListener('click', () => choose(t))
     paletteList.appendChild(b)
   })
   const count = document.getElementById('paletteCount')
   if (count) count.textContent = list.length ? String(list.length).padStart(2, '0') : 'none'
 }
+/* an appearance row applies and STAYS OPEN, so the two schemes can be compared
+   without reopening the palette; a jump target closes it. */
+function choose(t) {
+  if (t.kind === 'theme') {
+    applyAppearance(t.tkey)
+    renderPalette()
+    paletteInput.focus()
+    return
+  }
+  jumpTo(t.id)
+  closePalette()
+}
 function highlight() {
-  ;[...paletteList.children].forEach((el, i) => el.classList.toggle('active', i === activeIdx))
+  const items = [...paletteList.children]
+  items.forEach((el, i) => el.classList.toggle('active', i === activeIdx))
+  // without this the selection walks off the bottom of a scrolling list and the
+  // palette looks like it stopped responding
+  items[activeIdx]?.scrollIntoView({ block: 'nearest' })
 }
 function openPalette() {
   palette.hidden = false
@@ -193,10 +277,7 @@ paletteInput?.addEventListener('keydown', (e) => {
   } else if (e.key === 'Enter') {
     e.preventDefault()
     const t = list[activeIdx]
-    if (t) {
-      jumpTo(t.id)
-      closePalette()
-    }
+    if (t) choose(t)
   }
 })
 

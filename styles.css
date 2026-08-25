@@ -956,6 +956,7 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
   font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
   letter-spacing: 0.14em; color: var(--page-muted);
 }
+.palette-item .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* features are rows */
 .palette-item.is-feat { padding: 0; min-height: 40px; }
 .palette-item.is-feat > :not(.ix) { padding-block: 11px; }
@@ -974,6 +975,35 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
   box-shadow: inset 2px 0 0 var(--page-accent);
 }
 .palette-item.is-sec.active { background: color-mix(in srgb, var(--page-accent) 13%, transparent); }
+
+/* appearance rows. No group header: the first one carries the divider, and a
+   swatch in the index cell says what the row is faster than a label would. */
+.palette-item.is-theme { min-height: 40px; }
+.palette-item.is-theme > :not(.ix) { padding-block: 11px; }
+.palette-item.is-theme-first { border-top: 1px solid var(--page-border); }
+/* the outline has to hold in BOTH schemes: whichever swatch matches the current
+   ground disappears without it (the dark chip on a dark palette, and vice versa) */
+.palette-item .sw {
+  width: 13px; height: 13px; display: block;
+  border: 1px solid var(--page-muted);
+}
+/* the live one reads as accent, and the others stay quiet */
+.palette-item.is-theme.is-on .hint { color: var(--page-accent); }
+
+/* the matched run, so you can see why a row survived the filter */
+.palette-item mark {
+  background: color-mix(in srgb, var(--page-accent) 26%, transparent);
+  color: inherit; border-radius: 0; padding: 0 1px;
+}
+
+/* a short, flat entrance. No bounce, no scale: the palette is a panel arriving,
+   not a notification. */
+@media (prefers-reduced-motion: no-preference) {
+  .palette:not([hidden]) .palette-backdrop { animation: pal-fade 0.14s ease both; }
+  .palette:not([hidden]) .palette-panel { animation: pal-in 0.16s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  @keyframes pal-fade { from { opacity: 0; } }
+  @keyframes pal-in { from { opacity: 0; transform: translateY(-7px); } }
+}
 
 .palette-foot {
   display: flex; align-items: center; justify-content: space-between; flex: none;
