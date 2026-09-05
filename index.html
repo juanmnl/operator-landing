@@ -19,7 +19,7 @@
     <title>Operator · You run the agents</title>
     <meta
       name="description"
-      content="A macOS app for Claude Code. Every tool call, diff, and delegation on one board, every task in its own git worktree, nothing leaving your machine. A personal project, MIT."
+      content="A macOS app for Claude Code. Agent orchestration on one board, every task in its own git worktree, every token counted and none priced. Nothing leaves your machine. A personal project, MIT."
     />
     <meta name="author" content="juanmnl" />
     <link rel="canonical" href="https://juanmnl.com/operator-app/" />
@@ -30,14 +30,14 @@
     <meta property="og:title" content="Operator · You run the agents" />
     <meta
       property="og:description"
-      content="A macOS app for Claude Code. Every tool call, diff, and delegation on one board. A personal project, MIT."
+      content="A macOS app for Claude Code. Orchestrate the agents, count the tokens. A personal project, MIT."
     />
     <meta property="og:image" content="https://juanmnl.com/operator-app/icon-source.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Operator · You run the agents" />
     <meta
       name="twitter:description"
-      content="A macOS app for Claude Code. Every tool call, diff, and delegation on one board. A personal project, MIT."
+      content="A macOS app for Claude Code. Orchestrate the agents, count the tokens. A personal project, MIT."
     />
     <meta name="twitter:image" content="https://juanmnl.com/operator-app/icon-source.png" />
 
@@ -69,7 +69,7 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "A macOS app for Claude Code. Every tool call, diff, and delegation on one board, every task in its own git worktree, nothing leaving your machine. A personal project, MIT.",
+        "description": "A macOS app for Claude Code. Agent orchestration on one board, every task in its own git worktree, every token counted and none priced. Nothing leaves your machine. A personal project, MIT.",
         "author": { "@type": "Person", "name": "juanmnl" }
       }
     </script>
@@ -84,11 +84,10 @@
           <span class="wordmark">Operator</span>
         </a>
         <nav class="topnav" aria-label="Sections">
-          <a href="#projects"><i>01</i>Navigating</a>
-          <a href="#watching"><i>02</i>Watching</a>
-          <a href="#directing"><i>03</i>Directing</a>
-          <a href="#landing"><i>04</i>Landing</a>
-          <a href="#scope"><i>05</i>Scope</a>
+          <a href="#orchestrating"><i>01</i>Orchestrating</a>
+          <a href="#tokens"><i>02</i>Tokens</a>
+          <a href="#scope"><i>03</i>Scope</a>
+          <a href="#why"><i>04</i>Why</a>
         </nav>
         <div class="topbar-right">
           <button class="nav-chip" id="navBtn" type="button" aria-label="Jump to a section">
@@ -115,8 +114,8 @@
           <p class="eyebrow">Operator · a macOS app for Claude Code</p>
           <h1>You run the&nbsp;agents.</h1>
           <p class="standfirst">
-            Every tool call, diff, and delegation on one board. Every task in its own git worktree.
-            Nothing leaves your machine.
+            Every delegation, tool call, and diff on one board. Every task in its own git
+            worktree. Every token counted, none&nbsp;priced.
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
@@ -143,357 +142,14 @@
       </div>
 
       <!-- ══ PROJECTS ══════════════════════════════════════════════════ -->
-      <section id="projects">
-        <h2>Navigating<i class="sec-n">01 – 02</i></h2>
-
-        <!-- 01 · project gallery -->
+      <!-- ══ ORCHESTRATING ═══════════════════════════════════════════ -->
+      <section id="orchestrating">
+        <h2>Orchestrating<i class="sec-n">01 – 05</i></h2>
         <div class="cells">
-          <div class="opt c7 bleed-l" data-n="01">
+          <!-- 01 · team + board -->
+          <div class="opt c12 flush" data-n="01">
             <div class="opt-head">
               <span class="tag">01</span>
-              <p class="opt-name">Pick up any project, mid-flight</p>
-              <span class="verdict">the gallery</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-gallery">
-                  <figcaption class="panel-bar">
-                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">projects · 19</span>
-                    <span class="gal-filter">filter…</span>
-                    <span class="gal-rollup">3 agents at work</span>
-                  </figcaption>
-
-                  <div class="gal-body">
-                    <div class="band">Active<span class="rule"></span></div>
-                    <div class="pgrid">
-                      <div class="pcard">
-                        <div class="nm">operator<span class="act acc">2 running</span></div>
-                        <div class="orbs"><span class="orb run"></span><span class="orb wait"></span><span class="orb"></span></div>
-                        <div class="pmeta">~/Developer/operator<span class="t">4m</span></div>
-                      </div>
-                      <div class="pcard">
-                        <div class="nm">el-encanto<span class="act acc">1 needs you</span></div>
-                        <div class="orbs"><span class="orb wait"></span><span class="orb"></span></div>
-                        <div class="pmeta">~/Developer/el-encanto<span class="t">2h</span></div>
-                      </div>
-                      <div class="pcard">
-                        <div class="nm">mantel<span class="act">6 lanes</span></div>
-                        <div class="pmeta">~/Developer/mantel<span class="t">1d</span></div>
-                      </div>
-                    </div>
-
-                    <div class="band">Previous · 11<span class="rule"></span></div>
-                    <div class="prow"><span class="nm">FastTrack</span><span class="pth">~/Developer/FastTrack</span><span class="t">last ran 6w ago</span></div>
-                    <div class="prow"><span class="nm">uwazi_web</span><span class="pth">~/Documents/uwazi_web</span><span class="t">last ran 5w ago</span></div>
-                  </div>
-
-                  <div class="panel-foot">
-                    <span class="foot-note">Shelving is a decision you make, never a guess from a timestamp.</span>
-                  </div>
-                </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Every repo you work in, with the ones running agents right now saying so. Active
-                  projects are cards, shelved ones are rows, and shelving writes
-                  <code>archivedAt</code> the moment you decide it. Nothing files itself away on a
-                  timer.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 02 · the left surface -->
-          <div class="opt c5 bleed-r" data-n="02">
-            <div class="opt-head">
-              <span class="tag">02</span>
-              <p class="opt-name">Keep every agent in peripheral view</p>
-              <span class="verdict">the left list</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-nav">
-                  <figcaption class="panel-bar">
-                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">scoped to operator</span>
-                    <span class="panel-flag">v0.17.2</span>
-                  </figcaption>
-
-                  <div class="shell">
-                    <div class="sbar">
-                      <div class="sb-head"><span class="sb-logo"></span>Projects</div>
-                      <div class="sproj open cur laneink" style="--lane: var(--l-operator)"><span class="parrow">▾</span>operator<span class="pcount acc" data-pcount>2 running</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
-                      <div class="sproj laneink" style="--lane: var(--l-design)"><span class="parrow">▸</span>el-encanto<span class="pcount">1 needs you</span></div>
-                      <div class="sproj laneink" style="--lane: var(--l-research)"><span class="parrow">▸</span>mantel<span class="pcount"></span></div>
-                      <div class="sb-foot"><span class="ring" aria-hidden="true"></span>Plan usage<span class="v">Agents</span></div>
-                    </div>
-
-                    <div class="canv">
-                      <div class="canv-head">home<span class="sub" data-bsub>Backlog 1 · Running 1 · Waiting 1 · Done 2</span></div>
-                      <div class="canv-feed">
-                        <div class="canv-msg">
-                          <span class="canv-who">Refactor the auth module</span><span class="canv-chip ok">running</span>
-                          <span class="canv-txt">code · in its own worktree</span>
-                        </div>
-                        <div class="canv-msg">
-                          <span class="canv-who">Implement the reply sentinel</span><span class="canv-chip wait">held · needs you</span>
-                          <span class="canv-txt">a dispatch from Research, waiting on approval</span>
-                        </div>
-                        <div class="canv-msg">
-                          <span class="canv-who">Fix the tray icon in dark mode</span><span class="canv-chip">done · green</span>
-                          <span class="canv-txt">design · +14 −3, check passed</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="panel-foot">
-                    <span class="foot-note">Collapsed and expanded are the same list. An agent never appears twice.</span>
-                  </div>
-                </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Every active project stays on screen, and the one you are in unfolds its agents
-                  beneath it. An agent appears exactly once, so there are never two lists to
-                  reconcile. Collapse it to 60px and the same list becomes tiles.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ WATCHING ══════════════════════════════════════════════════ -->
-      <section id="watching">
-        <h2>Watching<i class="sec-n">03 – 05</i></h2>
-
-        <!-- 03 · orchestration -->
-        <div class="cells">
-          <div class="opt c4 r2 flush bleed-l" data-n="03">
-            <div class="opt-head">
-              <span class="tag">03</span>
-              <p class="opt-name">Watch the call tree as it happens</p>
-              <span class="verdict">nothing to install</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-tree">
-                  <figcaption class="panel-bar">
-                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">orchestration · session 7c1f</span>
-                    <span class="panel-flag">live</span>
-                  </figcaption>
-
-                  <div class="tree">
-                    <div class="row" style="--d: 0">
-                      <span class="g">▸</span><span class="lbl">refactor auth module</span>
-                      <span class="meta">orchestrator</span><span class="badge b-opus">opus</span>
-                      <span class="dur">running</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">◇</span><span class="lbl">Read</span>
-                      <span class="meta">src/auth/session.ts</span><span class="dur">0.4s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">◇</span><span class="lbl">Grep</span>
-                      <span class="meta">'refreshToken'</span><span class="dur">0.2s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">⤷</span><span class="lbl">delegate › extract-types</span>
-                      <span class="badge b-haiku">haiku</span><span class="dur">2.1s</span>
-                    </div>
-                    <div class="row" style="--d: 2">
-                      <span class="g">◇</span><span class="lbl">Read</span>
-                      <span class="meta">types/auth.d.ts</span><span class="dur">0.3s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">⤷</span><span class="lbl">delegate › write-tests</span>
-                      <span class="badge b-sonnet">sonnet</span><span class="dur dur-live" data-tick>3.2s</span>
-                    </div>
-                    <div class="row is-live" style="--d: 2">
-                      <span class="g">◆</span><span class="lbl">Edit</span>
-                      <span class="meta">auth/session.test.ts</span><span class="dur dur-live" data-tick>3.2s</span>
-                    </div>
-                    <div class="row is-queued" style="--d: 2">
-                      <span class="g">◇</span><span class="lbl">Bash</span>
-                      <span class="meta">npm test</span><span class="dur">queued</span>
-                    </div>
-                  </div>
-
-                  <div class="panel-foot">
-                    <span><b>3</b> tools</span>
-                    <span><b>2</b> subagents</span>
-                    <span class="foot-right">worktree <em>auth-refactor</em></span>
-                  </div>
-                </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Nested tool calls, subagent delegations, durations ticking as they run, and what is
-                  queued behind them. Rebuilt from Claude Code's own transcript files, so there is
-                  nothing to instrument. The tailer polls once a second: you watch phases, not
-                  keystrokes.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        <!-- 04 · transcript + plan -->
-          <div class="opt c8 bleed-r" data-n="04">
-            <div class="opt-head">
-              <span class="tag">04</span>
-              <p class="opt-name">Read what the agent did, not just what it said</p>
-              <span class="verdict">transcript and plan</span>
-            </div>
-            <div class="opt-body wide">
-              <div class="stage">
-                <div class="stage-pair">
-                  <figure class="panel panel-convo">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">transcript · refactor auth</span>
-                      <span class="panel-flag">live</span>
-                    </figcaption>
-
-                    <div class="tx">
-                      <div class="tx-user">Refactor auth so the token is passed explicitly, then update the tests.</div>
-                      <div class="tx-prose">I'll thread the token through <code>refresh()</code>, then adjust the suite.</div>
-                      <div class="trun"><span class="tg">◇</span><span class="tname">Read 7 files</span></div>
-                      <div class="trun"><span class="tg">◇</span><span class="tname">Searched 3 times</span></div>
-                      <div class="trun"><span class="tg">◇</span><span class="tname">Delegated to a subagent</span><span class="tcaller">write-tests</span></div>
-                      <div class="tx-prose is-stream">Edited <code>auth/session.test.ts</code><span class="caret" aria-hidden="true"></span></div>
-                    </div>
-
-                    <div class="tx-sig">
-                      <span data-signal>Editing</span>
-                      <span class="tx-stop">Stop</span>
-                    </div>
-                  </figure>
-
-                  <figure class="panel panel-plan">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">plan mode</span>
-                      <span class="plan-prog"><b>3</b>/5 <span class="ppbar" aria-hidden="true"><i style="--w: 60%"></i></span></span>
-                    </figcaption>
-
-                    <div class="plan">
-                      <div class="todo done"><span class="tg">✓</span><span class="tt">Map the token flow through session.ts</span></div>
-                      <div class="todo done"><span class="tg">✓</span><span class="tt">Thread the token into refresh()</span></div>
-                      <div class="todo done"><span class="tg">✓</span><span class="tt">Extract the shared AuthError type</span></div>
-                      <div class="todo active"><span class="tg">▸</span><span class="tt">Update auth/session.test.ts</span></div>
-                      <div class="todo"><span class="tg">○</span><span class="tt">Run the suite and note coverage</span></div>
-                    </div>
-
-                    <div class="panel-foot">
-                      <span class="foot-note">The agent's own TodoWrite, rendered live.</span>
-                    </div>
-                  </figure>
-                </div>
-              </div>
-              <div class="notes">
-                <p>
-                  Tool runs are first-class blocks, and consecutive ones of a kind coalesce, so a
-                  two-hundred-turn session stays readable. The status line says what is happening
-                  rather than which tool is running, send becomes <strong>Stop</strong> while it
-                  works, and the agent's own plan ticks off beside it.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        <!-- 05 · terminal + sessions -->
-          <div class="opt c8 bleed-r" data-n="05">
-            <div class="opt-head">
-              <span class="tag">05</span>
-              <p class="opt-name">Take the keyboard back mid-task</p>
-              <span class="verdict">a real pty</span>
-            </div>
-            <div class="opt-body wide">
-              <div class="stage">
-                <div class="stage-pair">
-                  <figure class="panel panel-term">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">terminal · auth-refactor</span>
-                      <span class="panel-flag">zsh</span>
-                    </figcaption>
-
-                    <div class="term">
-                      <div class="term-line term-prompt">~/operator <b>❯</b> claude</div>
-                      <div class="term-line"><span class="term-accent">◆</span> Refactoring the auth module…</div>
-                      <div class="term-line term-dim">  Read src/auth/session.ts · Grep 'refreshToken'</div>
-                      <div class="term-line term-dim">  Dev server is running: http://localhost:5273/</div>
-                      <div class="term-line term-ok">  ✓ 24 passed</div>
-                      <div class="term-line term-prompt">~/operator <b>❯</b> <span class="caret" aria-hidden="true"></span></div>
-                    </div>
-
-                    <div class="panel-foot">
-                      <span>pid <b>48213</b></span>
-                      <span class="foot-right">OPERATOR_DEV_PORT <b>5273</b></span>
-                    </div>
-                  </figure>
-
-                  <figure class="panel panel-sessions">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">sessions</span>
-                      <span class="panel-flag">4 open</span>
-                    </figcaption>
-
-                    <div class="sessions">
-                      <div class="sess running">
-                        <span class="sess-name">refactor auth module</span>
-                        <span class="sess-sub">⤷ 2</span>
-                        <span class="sess-phase">running</span>
-                      </div>
-                      <div class="sess waiting">
-                        <span class="sess-name">port the theme system</span>
-                        <span class="sess-phase">your turn</span>
-                      </div>
-                      <div class="sess">
-                        <span class="sess-name">sweep flaky tests</span>
-                        <span class="sess-phase">idle</span>
-                      </div>
-                      <div class="sess">
-                        <span class="sess-name">compact session log</span>
-                        <span class="sess-phase">compacting…</span>
-                      </div>
-                    </div>
-
-                    <div class="panel-foot">
-                      <span class="foot-note">Each session tinted by what it is doing right now.</span>
-                    </div>
-                  </figure>
-                </div>
-              </div>
-              <div class="notes">
-                <p>
-                  Every session is a real pty you can type into, not a re-render of one. Run a
-                  command yourself, then hand it back. Sessions run concurrently, each with its own
-                  reserved dev port, and the preview tab probes that port and the usual defaults to
-                  render whichever server answers.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ DIRECTING ═════════════════════════════════════════════════ -->
-      <section id="directing">
-        <h2>Directing<i class="sec-n">06 – 08</i></h2>
-
-        <!-- 06 · team + board -->
-        <div class="cells">
-          <div class="opt c12 flush" data-n="06">
-            <div class="opt-head">
-              <span class="tag">06</span>
               <p class="opt-name">Staff the project once, then work the board</p>
               <span class="verdict">project home</span>
             </div>
@@ -596,21 +252,16 @@
               </div>
               <div class="notes">
                 <p>
-                  Each lane pins a model, an effort level, and permissions, so launching a correctly
-                  configured session is one click instead of a setup ritual. Work moves on the board:
-                  the card is the task, the agent is a chip on it, and <strong>Waiting</strong> is the
-                  column that needs you. Finishing runs the project's check command, so done can read
-                  done and green. A task whose lane vanished reads <strong>abandoned</strong>, because
-                  nobody saw the work finish.
+                  Each lane pins a model, an effort level, and permissions, so a correctly configured session is one click. The card is the task, the agent is a chip on it, and <strong>Waiting</strong> is the column that needs you. Finishing runs the project's check command, so done can read done and green. A task whose lane vanished reads <strong>abandoned</strong>: nobody saw the work finish.
                 </p>
               </div>
             </div>
           </div>
 
-        <!-- 07 · dispatch log -->
-          <div class="opt c5 bleed-l" data-n="07">
+          <!-- 02 · dispatch log -->
+          <div class="opt c7 bleed-l" data-n="02">
             <div class="opt-head">
-              <span class="tag">07</span>
+              <span class="tag">02</span>
               <p class="opt-name">Hand work between agents, on the record</p>
               <span class="verdict">the dispatch log</span>
             </div>
@@ -671,86 +322,83 @@
               </div>
               <div class="notes">
                 <p>
-                  One agent can route a task to another, and every hop lands here with its outcome on
-                  a chip. A dispatch from a lane that is not the coordinator is held until you approve
-                  it, chains brake themselves, and nothing retries. Results come back through
-                  <code>operator__report</code> and arrive on the board as a diff, not as chat.
+                  One agent routes a task to another and every hop lands here with its outcome on a chip. A dispatch from a lane that is not the coordinator is held until you approve it, chains brake themselves, and nothing retries. Results come back through <code>operator__report</code> as a diff on the board, not as chat.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- 08 · agent library -->
-          <div class="opt c4" data-n="08">
+          <!-- 03 · call tree -->
+          <div class="opt c5 flush bleed-r" data-n="03">
             <div class="opt-head">
-              <span class="tag">08</span>
-              <p class="opt-name">Pick the model where you define the agent</p>
-              <span class="verdict">your .claude/agents</span>
+              <span class="tag">03</span>
+              <p class="opt-name">Watch the call tree as it happens</p>
+              <span class="verdict">nothing to install</span>
             </div>
             <div class="opt-body">
               <div class="stage">
-                <figure class="panel panel-agents">
+                <figure class="panel panel-tree">
                   <figcaption class="panel-bar">
                     <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">agents</span>
-                    <span class="panel-flag">5 defined</span>
+                    <span class="panel-name">orchestration · session 7c1f</span>
+                    <span class="panel-flag">live</span>
                   </figcaption>
 
-                  <div class="agents">
-                    <div class="agt">
-                      <span class="agt-name">extract-types</span>
-                      <span class="badge b-haiku">haiku</span><span class="agt-scope">project</span>
+                  <div class="tree">
+                    <div class="row" style="--d: 0">
+                      <span class="g">▸</span><span class="lbl">refactor auth module</span>
+                      <span class="meta">orchestrator</span><span class="badge b-opus">opus</span>
+                      <span class="dur">running</span>
                     </div>
-                    <div class="agt">
-                      <span class="agt-name">write-tests</span>
-                      <span class="badge b-sonnet">sonnet</span><span class="agt-scope">project</span>
+                    <div class="row" style="--d: 1">
+                      <span class="g">◇</span><span class="lbl">Read</span>
+                      <span class="meta">src/auth/session.ts</span><span class="dur">0.4s</span>
                     </div>
-                    <div class="agt">
-                      <span class="agt-name">security-review</span>
-                      <span class="badge b-opus">opus</span><span class="agt-scope">user</span>
+                    <div class="row" style="--d: 1">
+                      <span class="g">◇</span><span class="lbl">Grep</span>
+                      <span class="meta">'refreshToken'</span><span class="dur">0.2s</span>
                     </div>
-                    <div class="agt">
-                      <span class="agt-name">plan-architect</span>
-                      <span class="badge b-plan">opusplan</span><span class="agt-scope">project</span>
+                    <div class="row" style="--d: 1">
+                      <span class="g">⤷</span><span class="lbl">delegate › extract-types</span>
+                      <span class="badge b-haiku">haiku</span><span class="dur">2.1s</span>
                     </div>
-                    <div class="agt">
-                      <span class="agt-name">docs-writer</span>
-                      <span class="badge b-haiku">haiku</span><span class="agt-scope">user</span>
+                    <div class="row" style="--d: 2">
+                      <span class="g">◇</span><span class="lbl">Read</span>
+                      <span class="meta">types/auth.d.ts</span><span class="dur">0.3s</span>
+                    </div>
+                    <div class="row" style="--d: 1">
+                      <span class="g">⤷</span><span class="lbl">delegate › write-tests</span>
+                      <span class="badge b-sonnet">sonnet</span><span class="dur dur-live" data-tick>3.2s</span>
+                    </div>
+                    <div class="row is-live" style="--d: 2">
+                      <span class="g">◆</span><span class="lbl">Edit</span>
+                      <span class="meta">auth/session.test.ts</span><span class="dur dur-live" data-tick>3.2s</span>
+                    </div>
+                    <div class="row is-queued" style="--d: 2">
+                      <span class="g">◇</span><span class="lbl">Bash</span>
+                      <span class="meta">npm test</span><span class="dur">queued</span>
                     </div>
                   </div>
 
                   <div class="panel-foot">
-                    <span class="foot-note">opusplan plans with Opus, then builds with Sonnet.</span>
+                    <span><b>3</b> tools</span>
+                    <span><b>2</b> subagents</span>
+                    <span class="foot-right">worktree <em>auth-refactor</em></span>
                   </div>
                 </figure>
               </div>
               <div class="notes">
                 <p>
-                  Haiku for extraction, Sonnet for the everyday, Opus where it earns its keep, chosen
-                  at the point where you say what the agent is for. It edits the
-                  <code>.claude/agents</code> files you already have and writes back to the same
-                  markdown, so your agents keep working in the terminal with Operator closed.
+                  Nested tool calls, delegations, durations ticking as they run, and what is queued behind them. Rebuilt from Claude Code's own transcript files, so there is nothing to instrument.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- a rest: the board is allowed to be empty somewhere -->
-          <div class="opt rest c3" aria-hidden="true">
-            <span class="rest-label">Directing</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ LANDING ═══════════════════════════════════════════════════ -->
-      <section id="landing">
-        <h2>Landing<i class="sec-n">09 – 10</i></h2>
-
-        <!-- 09 · worktrees + fan-out -->
-        <div class="cells">
-          <div class="opt c4 bleed-l" data-n="09">
+          <!-- 04 · worktrees + fan-out -->
+          <div class="opt c7 bleed-l" data-n="04">
             <div class="opt-head">
-              <span class="tag">09</span>
+              <span class="tag">04</span>
               <p class="opt-name">Run agents in parallel without collisions</p>
               <span class="verdict">one worktree per task</span>
             </div>
@@ -832,103 +480,289 @@
               </div>
               <div class="notes">
                 <p>
-                  One git worktree per task, so parallel agents never share a checkout and nothing
-                  touches your working tree until you say so. Fan-out sends the same prompt to N of
-                  them at once; you read the diffs side by side and keep one.
+                  One git worktree per task, so parallel agents never share a checkout and nothing touches your working tree until you say so. Fan-out sends the same prompt to N of them at once; you read the diffs side by side and keep one.
                 </p>
               </div>
             </div>
           </div>
 
-        <!-- 10 · review + usage -->
-          <div class="opt c8 bleed-r" data-n="10">
+          <!-- 05 · the left surface -->
+          <div class="opt c5 bleed-r" data-n="05">
             <div class="opt-head">
-              <span class="tag">10</span>
-              <p class="opt-name">Review the diff and land it in place</p>
-              <span class="verdict">local only</span>
+              <span class="tag">05</span>
+              <p class="opt-name">Keep every agent in peripheral view</p>
+              <span class="verdict">the left list</span>
             </div>
-            <div class="opt-body wide">
+            <div class="opt-body">
               <div class="stage">
-                <div class="stage-pair">
-                  <figure class="panel panel-diff">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">review · auth/session.ts</span>
-                      <span class="panel-stat"><span class="stat-add">+3</span> <span class="stat-del">−1</span></span>
-                    </figcaption>
+                <figure class="panel panel-nav">
+                  <figcaption class="panel-bar">
+                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel-name">scoped to operator</span>
+                    <span class="panel-flag">v0.17.2</span>
+                  </figcaption>
 
-                    <div class="diff">
-                      <div class="dhunk">@@ -18,7 +18,9 @@ export async function refresh(token)</div>
-                      <div class="dline"><span class="dsign"> </span><span class="dcode">  export async function refresh(token: string) {</span></div>
-                      <div class="dline del"><span class="dsign">-</span><span class="dcode">    const res = await fetch('/api/refresh')</span></div>
-                      <div class="dline add"><span class="dsign">+</span><span class="dcode">    const res = await fetch('/api/refresh', {</span></div>
-                      <div class="dline add"><span class="dsign">+</span><span class="dcode">      headers: { authorization: `Bearer ${token}` },</span></div>
-                      <div class="dline add"><span class="dsign">+</span><span class="dcode">    })</span></div>
-                      <div class="dline"><span class="dsign"> </span><span class="dcode">    if (!res.ok) throw new AuthError(res.status)</span></div>
-                      <div class="dline"><span class="dsign"> </span><span class="dcode">    return res.json()</span></div>
-                      <div class="dline"><span class="dsign"> </span><span class="dcode">  }</span></div>
+                  <div class="shell">
+                    <div class="sbar">
+                      <div class="sb-head"><span class="sb-logo"></span>Projects</div>
+                      <div class="sproj open cur laneink" style="--lane: var(--l-operator)"><span class="parrow">▾</span>operator<span class="pcount acc" data-pcount>2 running</span></div>
+                      <div class="slane"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
+                      <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
+                      <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
+                      <div class="sproj laneink" style="--lane: var(--l-design)"><span class="parrow">▸</span>el-encanto<span class="pcount">1 needs you</span></div>
+                      <div class="sproj laneink" style="--lane: var(--l-research)"><span class="parrow">▸</span>mantel<span class="pcount"></span></div>
+                      <div class="sb-foot"><span class="ring" aria-hidden="true"></span>Plan usage<span class="v">Agents</span></div>
                     </div>
 
-                    <div class="panel-foot">
-                      <span><b>2</b> of <b>5</b> files reviewed</span>
-                      <span class="foot-right">commit, merge, or discard</span>
-                    </div>
-                  </figure>
-
-                  <figure class="panel panel-cost">
-                    <figcaption class="panel-bar">
-                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="panel-name">usage · last 7 days</span>
-                      <span class="panel-total"><b>25.6M</b> tokens</span>
-                    </figcaption>
-
-                    <div class="cost-body">
-                      <div class="model">
-                        <div class="model-head">
-                          <span class="badge b-sonnet">sonnet</span><span class="model-cost">12.7M</span>
+                    <div class="canv">
+                      <div class="canv-head">home<span class="sub" data-bsub>Backlog 1 · Running 1 · Waiting 1 · Done 2</span></div>
+                      <div class="canv-feed">
+                        <div class="canv-msg">
+                          <span class="canv-who">Refactor the auth module</span><span class="canv-chip ok">running</span>
+                          <span class="canv-txt">code · in its own worktree</span>
                         </div>
-                        <div class="bar"><span class="bar-fill f-sonnet" style="--w: 92%"></span></div>
-                        <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
-                      </div>
-                      <div class="model">
-                        <div class="model-head">
-                          <span class="badge b-haiku">haiku</span><span class="model-cost">7.2M</span>
+                        <div class="canv-msg">
+                          <span class="canv-who">Implement the reply sentinel</span><span class="canv-chip wait">held · needs you</span>
+                          <span class="canv-txt">a dispatch from Research, waiting on approval</span>
                         </div>
-                        <div class="bar"><span class="bar-fill f-haiku" style="--w: 52%"></span></div>
-                        <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
-                      </div>
-                      <div class="model">
-                        <div class="model-head">
-                          <span class="badge b-opus">opus</span><span class="model-cost">5.6M</span>
-                        </div>
-                        <div class="bar"><span class="bar-fill f-opus" style="--w: 41%"></span></div>
-                        <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
-                      </div>
-
-                      <div class="time-grid">
-                        <div class="time-cell">
-                          <span class="time-label">API time</span><span class="time-val">14m 02s</span>
-                        </div>
-                        <div class="time-cell">
-                          <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
+                        <div class="canv-msg">
+                          <span class="canv-who">Fix the tray icon in dark mode</span><span class="canv-chip">done · green</span>
+                          <span class="canv-txt">design · +14 −3, check passed</span>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <div class="panel-foot">
-                      <span class="foot-note">Parsed from your own local transcripts. Nothing sent anywhere.</span>
-                    </div>
-                  </figure>
-                </div>
+                  <div class="panel-foot">
+                    <span class="foot-note">Collapsed and expanded are the same list. An agent never appears twice.</span>
+                  </div>
+                </figure>
               </div>
               <div class="notes">
                 <p>
-                  Work comes back as a diff you read in place, then commit, merge, or discard without
-                  leaving the window. Usage is tokens per model, split into input, output, and cache
-                  reads. No dollar figures anywhere: what a token costs depends on your plan.
+                  Every active project stays on screen, and the one you are in unfolds its agents beneath it. An agent appears exactly once. The foot carries the plan as a ring, never a number.
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ SPENDING TOKENS ═════════════════════════════════════════ -->
+      <section id="tokens">
+        <h2>Spending tokens<i class="sec-n">06 – 09</i></h2>
+        <div class="cells">
+          <!-- 06 · agent library, model + effort -->
+          <div class="opt c4 bleed-l" data-n="06">
+            <div class="opt-head">
+              <span class="tag">06</span>
+              <p class="opt-name">Pick the model and the effort where you define the agent</p>
+              <span class="verdict">your .claude/agents</span>
+            </div>
+            <div class="opt-body">
+              <div class="stage">
+                <figure class="panel panel-agents">
+                  <figcaption class="panel-bar">
+                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel-name">agents</span>
+                    <span class="panel-flag">5 defined</span>
+                  </figcaption>
+
+                  <div class="agents">
+                    <div class="agt">
+                      <span class="agt-name">extract-types</span>
+                      <span class="badge b-haiku">haiku</span><span class="agt-effort">low</span><span class="agt-scope">project</span>
+                    </div>
+                    <div class="agt">
+                      <span class="agt-name">write-tests</span>
+                      <span class="badge b-sonnet">sonnet</span><span class="agt-effort">medium</span><span class="agt-scope">project</span>
+                    </div>
+                    <div class="agt">
+                      <span class="agt-name">security-review</span>
+                      <span class="badge b-opus">opus</span><span class="agt-effort">xhigh</span><span class="agt-scope">user</span>
+                    </div>
+                    <div class="agt">
+                      <span class="agt-name">plan-architect</span>
+                      <span class="badge b-plan">opusplan</span><span class="agt-effort">high</span><span class="agt-scope">project</span>
+                    </div>
+                    <div class="agt">
+                      <span class="agt-name">docs-writer</span>
+                      <span class="badge b-haiku">haiku</span><span class="agt-effort">low</span><span class="agt-scope">user</span>
+                    </div>
+                  </div>
+
+                  <div class="panel-foot">
+                    <span class="foot-note">Effort travels as a flag at launch. settings.json never sees it.</span>
+                  </div>
+                </figure>
+              </div>
+              <div class="notes">
+                <p>
+                  Haiku for extraction, Sonnet for the everyday, Opus where it earns its keep, and the effort beside it: low to max, Claude Code's own five. It edits the <code>.claude/agents</code> files you already have, so your agents keep working in the terminal with Operator closed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 07 · usage -->
+          <div class="opt c5" data-n="07">
+            <div class="opt-head">
+              <span class="tag">07</span>
+              <p class="opt-name">Count tokens, not dollars</p>
+              <span class="verdict">your own transcripts</span>
+            </div>
+            <div class="opt-body">
+              <div class="stage">
+                <figure class="panel panel-cost">
+                                    <figcaption class="panel-bar">
+                                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                                      <span class="panel-name">usage · last 7 days</span>
+                                      <span class="panel-total"><b>25.6M</b> tokens</span>
+                                    </figcaption>
+
+                                    <div class="cost-body">
+                                      <div class="model">
+                                        <div class="model-head">
+                                          <span class="badge b-sonnet">sonnet</span><span class="model-cost">12.7M</span>
+                                        </div>
+                                        <div class="bar"><span class="bar-fill f-sonnet" style="--w: 92%"></span></div>
+                                        <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
+                                      </div>
+                                      <div class="model">
+                                        <div class="model-head">
+                                          <span class="badge b-haiku">haiku</span><span class="model-cost">7.2M</span>
+                                        </div>
+                                        <div class="bar"><span class="bar-fill f-haiku" style="--w: 52%"></span></div>
+                                        <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
+                                      </div>
+                                      <div class="model">
+                                        <div class="model-head">
+                                          <span class="badge b-opus">opus</span><span class="model-cost">5.6M</span>
+                                        </div>
+                                        <div class="bar"><span class="bar-fill f-opus" style="--w: 41%"></span></div>
+                                        <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
+                                      </div>
+
+                                      <div class="time-grid">
+                                        <div class="time-cell">
+                                          <span class="time-label">API time</span><span class="time-val">14m 02s</span>
+                                        </div>
+                                        <div class="time-cell">
+                                          <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="panel-foot">
+                                      <span class="foot-note">Parsed from your own transcripts on disk. Nothing sent anywhere.</span>
+                                    </div>
+                                  </figure>
+              </div>
+              <div class="notes">
+                <p>
+                  Input, output, and cache reads, per model, per project, per day, read from the transcripts Claude Code already writes. No dollar figure anywhere. A token is measurable; its price depends on your plan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 08 · the plan meter -->
+          <div class="opt c3 bleed-r" data-n="08">
+            <div class="opt-head">
+              <span class="tag">08</span>
+              <p class="opt-name">Know where the plan stands before you launch another lane</p>
+              <span class="verdict">the reading</span>
+            </div>
+            <div class="opt-body">
+              <div class="stage">
+                <figure class="panel panel-meter">
+                  <figcaption class="panel-bar">
+                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel-name">plan · max</span>
+                    <span class="panel-flag">read 2m ago</span>
+                  </figcaption>
+
+                  <div class="meter">
+                    <div class="mrow">
+                      <span class="mlab">Session</span><span class="mval" data-pct="62">62%</span>
+                      <span class="mbar"><i style="--w: 62%"></i></span>
+                      <span class="mreset">resets 4:40 pm</span>
+                    </div>
+                    <div class="mrow">
+                      <span class="mlab">Week</span><span class="mval">48%</span>
+                      <span class="mbar"><i style="--w: 48%"></i></span>
+                      <span class="mreset">resets Tue</span>
+                    </div>
+                    <div class="mrow warn">
+                      <span class="mlab">Opus · week</span><span class="mval">81%</span>
+                      <span class="mbar"><i style="--w: 81%"></i></span>
+                      <span class="mreset">resets Tue</span>
+                    </div>
+                    <div class="mrow none">
+                      <span class="mlab">API billing</span><span class="mval">no data</span>
+                      <span class="mbar"><i></i></span>
+                      <span class="mreset">absent is not zero</span>
+                    </div>
+                  </div>
+
+                  <div class="panel-foot">
+                    <span class="foot-note">Amber past 75, red past 90. The rail shows the ring; this is the reading.</span>
+                  </div>
+                </figure>
+              </div>
+              <div class="notes">
+                <p>
+                  Session, week, and the model with its own cap, each with when it resets. A timed-out read or API billing says <strong>no data</strong>, never 0%.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 09 · review -->
+          <div class="opt c8 bleed-l" data-n="09">
+            <div class="opt-head">
+              <span class="tag">09</span>
+              <p class="opt-name">Review the diff and land it in place</p>
+              <span class="verdict">local only</span>
+            </div>
+            <div class="opt-body">
+              <div class="stage">
+                <figure class="panel panel-diff">
+                                    <figcaption class="panel-bar">
+                                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                                      <span class="panel-name">review · auth/session.ts</span>
+                                      <span class="panel-stat"><span class="stat-add">+3</span> <span class="stat-del">−1</span></span>
+                                    </figcaption>
+
+                                    <div class="diff">
+                                      <div class="dhunk">@@ -18,7 +18,9 @@ export async function refresh(token)</div>
+                                      <div class="dline"><span class="dsign"> </span><span class="dcode">  export async function refresh(token: string) {</span></div>
+                                      <div class="dline del"><span class="dsign">-</span><span class="dcode">    const res = await fetch('/api/refresh')</span></div>
+                                      <div class="dline add"><span class="dsign">+</span><span class="dcode">    const res = await fetch('/api/refresh', {</span></div>
+                                      <div class="dline add"><span class="dsign">+</span><span class="dcode">      headers: { authorization: `Bearer ${token}` },</span></div>
+                                      <div class="dline add"><span class="dsign">+</span><span class="dcode">    })</span></div>
+                                      <div class="dline"><span class="dsign"> </span><span class="dcode">    if (!res.ok) throw new AuthError(res.status)</span></div>
+                                      <div class="dline"><span class="dsign"> </span><span class="dcode">    return res.json()</span></div>
+                                      <div class="dline"><span class="dsign"> </span><span class="dcode">  }</span></div>
+                                    </div>
+
+                                    <div class="panel-foot">
+                                      <span><b>2</b> of <b>5</b> files reviewed</span>
+                                      <span class="foot-right">commit, merge, or discard</span>
+                                    </div>
+                                  </figure>
+              </div>
+              <div class="notes">
+                <p>
+                  What the tokens bought comes back as a diff you read in place, then commit, merge, or discard without leaving the window.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- a rest: the board is allowed to be empty somewhere -->
+          <div class="opt rest c4" aria-hidden="true">
+            <span class="rest-label">Spending</span>
           </div>
         </div>
       </section>
@@ -949,6 +783,10 @@
             <tr>
               <td>Stop an agent mid-run</td><td><span class="can">does</span></td>
               <td>Send becomes Stop. That is Claude Code's own interrupt, not a kill: the session survives and hands the turn back.</td>
+            </tr>
+            <tr>
+              <td>Set a lane's effort</td><td><span class="can">does</span></td>
+              <td>Passed as <code>--effort</code> at launch, all five levels. settings.json keeps four and drops the fifth without a word, so Operator never writes it there.</td>
             </tr>
             <tr>
               <td>Quit out from under a working&nbsp;agent</td><td><span class="cant">leaves alone</span></td>
@@ -986,8 +824,8 @@
         <div class="prose">
           <p>
             I run several Claude Code sessions at once, across a few repos. I wanted one window
-            where I could see what each was doing, stop the one that had gone wrong, and read the
-            diff before it reached my working tree. Operator is that window. Every panel above
+            where I could see what each was doing, what it was spending, stop the one that had gone
+            wrong, and read the diff before it reached my working tree. Operator is that window. Every panel above
             exists because I needed it, in the order I needed it.
           </p>
           <p>
@@ -1004,7 +842,7 @@
         <span class="mark" data-cells="9" data-size="64" aria-hidden="true"></span>
         <h2 class="closing-title">Operator, standing&nbsp;by.</h2>
         <p class="closing-sub">
-          Free. It&nbsp;reads the Claude Code sessions you already run.
+          Free. It&nbsp;reads the Claude Code sessions you already run, and counts what they&nbsp;spend.
         </p>
         <div class="closing-cta">
           <a class="btn btn-primary" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
@@ -1026,11 +864,10 @@
             <span class="wordmark">Operator</span>
           </a>
           <nav class="foot-nav" aria-label="Footer">
-            <a href="#projects">Navigating</a>
-            <a href="#watching">Watching</a>
-            <a href="#directing">Directing</a>
-            <a href="#landing">Landing</a>
+            <a href="#orchestrating">Orchestrating</a>
+            <a href="#tokens">Tokens</a>
             <a href="#scope">Scope</a>
+            <a href="#why">Why</a>
             <a href="design-system.html">Design system</a>
             <a href="https://github.com/juanmnl/operator" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
             <a href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">Releases ↗</a>
@@ -1061,6 +898,11 @@
       </div>
     </div>
 
+    <!-- the wall: Juan's hand (verbatim from juanmnl.com) and Operator's own
+         sketches, drawn on canvases behind the sheet. Plain scripts, not modules:
+         they set window globals and the wall reads the hand. -->
+    <script src="hand.js"></script>
+    <script src="wall.js"></script>
     <script src="main.js" type="module"></script>
   </body>
 </html>

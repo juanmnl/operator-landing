@@ -31,6 +31,7 @@
   --page-accent-fg: #04130d;
   --warn: #ffb454;
   --stop: #ff5f56;
+  --wall-blue: #8fa8ff;
 
   /* the hero plate is graded into the ground rather than sitting on top of it */
   --grade: grayscale(0.5) brightness(0.78) contrast(1.05) saturate(0.7);
@@ -50,7 +51,7 @@
     --page-bg: #dbe0de; --page-panel: #fbfcfc; --page-fg: #1b2430;
     --page-muted: #535e6a; --page-border: #c4cac7;
     --page-accent: #0a6e53; --page-accent-fg: #ffffff;
-    --warn: #9a6700; --stop: #b42318;
+    --warn: #9a6700; --stop: #b42318; --wall-blue: #23386b;
     --grade: grayscale(0.18) contrast(1.03) brightness(1.06) saturate(0.95);
     --lift: 0 1px 2px rgba(20, 28, 26, 0.07), 0 16px 40px -12px rgba(20, 28, 26, 0.28);
   }
@@ -65,7 +66,7 @@
   --page-bg: #dbe0de; --page-panel: #fbfcfc; --page-fg: #1b2430;
   --page-muted: #535e6a; --page-border: #c4cac7;
   --page-accent: #0a6e53; --page-accent-fg: #ffffff;
-  --warn: #9a6700; --stop: #b42318;
+  --warn: #9a6700; --stop: #b42318; --wall-blue: #23386b;
   --grade: grayscale(0.18) contrast(1.03) brightness(1.06) saturate(0.95);
   --lift: 0 1px 2px rgba(20, 28, 26, 0.07), 0 16px 40px -12px rgba(20, 28, 26, 0.28);
 }
@@ -77,7 +78,7 @@
   --page-bg: #1f2329; --page-panel: #262b33; --page-fg: #dfe4e9;
   --page-muted: #8b95a2; --page-border: #333a44;
   --page-accent: #2fe39a; --page-accent-fg: #04130d;
-  --warn: #ffb454; --stop: #ff5f56;
+  --warn: #ffb454; --stop: #ff5f56; --wall-blue: #8fa8ff;
   --grade: grayscale(0.5) brightness(0.78) contrast(1.05) saturate(0.7);
   --lift: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 44px -10px rgba(0, 0, 0, 0.6);
 }
@@ -1033,3 +1034,40 @@ html.js .stage .panel.in { opacity: 1; transform: none; }
   .mark-glow { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ── the wall ───────────────────────────────────────────────────────────────
+   The visual signature shared with juanmnl.com and Mantel Red: Juan's hand and
+   quick sketches on canvases behind the page (wall.js). The canvases sit ABOVE
+   the sheet, not under it: every tile paints --page-bg to cover the grid lines,
+   so a layer beneath would never show inside the sheet. The wall never paints
+   on content (it gathers every panel, title and caption as figure and keeps
+   off them), which is what makes stacking it on top safe. Below the topbar
+   (50) and the palette (100). Inks are read from the tokens above, so a theme
+   flip redraws; --wall-blue is the fifth ink, the one the page has no use for. */
+.wall { position: absolute; top: 0; left: 0; width: 100%; z-index: 2; pointer-events: none; overflow: hidden; }
+.wall canvas { position: absolute; left: 0; display: block; }
+@media print { .wall { display: none; } }
+
+/* effort beside the model, in the agents specimen */
+.agt-effort {
+  font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.04em;
+  margin-left: 6px;
+}
+
+/* ── the plan meter ────────────────────────────────────────────────────────
+   The reading behind the ring: PlanMeter's popover. Three rows with a fill and
+   a reset, and a fourth that says no data, because absent is not zero. */
+.meter { padding: 12px 14px 8px; display: grid; gap: 12px; flex: 1; }
+.mrow {
+  display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto auto;
+  row-gap: 5px; column-gap: 10px; font-family: var(--mono); font-size: 11px;
+}
+.mlab { color: var(--fg); }
+.mval { color: var(--fg); font-weight: 600; text-align: right; }
+.mbar { grid-column: 1 / -1; height: 4px; background: color-mix(in srgb, var(--fg) 12%, transparent); border-radius: 2px; overflow: hidden; }
+.mbar i { display: block; height: 100%; width: var(--w, 0%); background: var(--accent); border-radius: 2px; transition: width 0.6s ease; }
+.mreset { grid-column: 1 / -1; color: var(--muted); font-size: 10px; }
+.mrow.warn .mbar i { background: var(--warn); }
+.mrow.warn .mval { color: var(--warn); }
+.mrow.none .mval { color: var(--muted); font-weight: 400; }
+.mrow.none .mbar { background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--fg) 14%, transparent) 0 4px, transparent 4px 8px); }

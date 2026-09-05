@@ -844,3 +844,20 @@ function onVisible(el, start, stop, threshold = 0.35) {
     }, 800)
   }, () => clearInterval(t))
 })()
+
+/* the plan meter — the session fill creeps, the way a reading does */
+;(() => {
+  const panel = $('.panel-meter')
+  if (!panel) return
+  const val = $('.mval[data-pct]', panel)
+  const fill = $('.mrow .mbar i', panel)
+  const base = +val.dataset.pct
+  let n = 0, t = null
+  onVisible(panel, () => {
+    t = setInterval(() => {
+      const pct = Math.min(74, base + (++n % 9))
+      val.textContent = pct + '%'
+      fill.style.setProperty('--w', pct + '%')
+    }, 1900)
+  }, () => { clearInterval(t); n = 0; val.textContent = base + '%'; fill.style.setProperty('--w', base + '%') })
+})()
