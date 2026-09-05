@@ -1,48 +1,68 @@
-# Operator — landing
+# Operator, the landing
 
-Marketing site for **Operator**, a macOS desktop app that observes and orchestrates
-[Claude Code](https://www.anthropic.com/claude-code): a live orchestration timeline, isolated
-git worktrees, in-app diff review, and usage/cost — all from one mission-control window.
+The site for **Operator**, a macOS app for [Claude Code](https://www.anthropic.com/claude-code):
+you work a project by deciding what its agents do, then tune each lane's model and effort so the
+plan runs close to its limit and never past it. Live at
+[juanmnl.com/operator-app](https://juanmnl.com/operator-app/). The app itself is
+[juanmnl/operator](https://github.com/juanmnl/operator), MIT.
 
-A single full-viewport **hero + footer** that wears the app's own themes, switched with a ⌘K
-command palette. Plain HTML/CSS/JS — **no framework, no build step, no dependencies.**
+Plain HTML, CSS and JS. No framework, no build step, no dependencies.
 
-## Highlights
+## What is on the page
 
-- **Operator's real themes.** Mission Control, 1984, Mr Pink, and Light — ported from the app
-  (`../operator/src/renderer/themes/`) as `data-theme` blocks of CSS custom properties.
-- **⌘K theme switcher.** Press <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd> (or click the chip in the
-  masthead) to open a command palette: type to filter, <kbd>↑</kbd>/<kbd>↓</kbd> to move,
-  <kbd>↵</kbd> to apply. The shortcut label adapts to the OS; the choice persists in
-  `localStorage`.
-- **Animated brand mark.** The Operator dot-disc twinkles in the active theme's accent — a true
-  7×7 grid at small sizes, a denser 11×11 lattice for the hero — generated in `main.js`.
-- **Full-viewport layout.** Hero and footer fill exactly one screen across every theme.
+One framed sheet of cells, with true-scale specimens of the app's own panels doing the arguing:
+
+- **Orchestrating (01 to 05).** The board and the team, the dispatch log, the call tree, one
+  worktree per task with fan-out, and the left list.
+- **Tuning (06 to 09).** Model and effort per agent, what each model actually spends, the plan
+  meter (session, week, model cap, and a row that reads "no data" because absent is not zero), and
+  the diff you review before it lands.
+- **Scope.** What Operator does and what it leaves alone.
+- **Why it exists.** A living tool, not a product.
+
+Each specimen mirrors a real component in the app, and each one runs its own small state machine
+while on screen (durations tick, the reply streams, the board's card counts). All of it is static
+under `prefers-reduced-motion`.
+
+## The wall
+
+Behind the sheet, on canvases, the page is written on: phrases in Juan's own handwriting and quick
+monoline sketches (the switchboard and its cords, a headset, a rotary dial, the board, a call
+tree, a worktree graph, the effort ladder, coins for tokens). It is the visual signature shared
+with [juanmnl.com](https://juanmnl.com) and Mantel Red.
+
+- `hand.js` is the hand, copied verbatim from juanmnl.com. Caps only.
+- `wall.js` is this site's phrases and sketches. Seeded per path, so a reload gives the same wall;
+  `?s=N` gives another. It never paints on content, draws itself in ahead of the reader, is
+  complete and still under reduced motion, and is off under 700px.
+
+## Appearance
+
+The page follows the system's light or dark scheme. <kbd>⌘K</kbd> (<kbd>Ctrl K</kbd> elsewhere)
+opens a palette that jumps to a section or pins a scheme.
 
 ## Run
 
-No build needed — it's static files. Serve the folder with anything, e.g.:
+Static files. Serve the folder with any static server and open it in a browser:
 
 ```bash
-python3 -m http.server 5173      # then open http://localhost:5173
-# or: npx serve .
+npx serve .
 ```
-
-(Opening `index.html` directly works too, though a server is recommended so the fonts and
-relative asset paths resolve cleanly.)
 
 ## Structure
 
 ```
-index.html     # markup: hero, footer, ⌘K palette
-styles.css     # themes (data-theme custom properties) + layout
-main.js        # theme switching, ⌘K palette, animated dot-disc, OS-aware shortcut
-public/        # static assets — hero image, logo marks, icons, favicon
+index.html          the document
+styles.css          two colour tiers (page ground, app chrome), the sheet, the specimen kit
+main.js             ⌘K palette, the animated dot-disc mark, the live-panel conductor
+hand.js             the handwriting, verbatim from juanmnl.com
+wall.js             the wall: Operator's phrases and sketches
+design-system.html  the styleguide: colour, type, spacing, the panel kit
+public/             hero image, marks, icons, favicon
 ```
 
 ## Notes
 
-- The hero switchboard-operator image (`public/hero.jpg`) is an **AI-generated illustration**
-  (flora.ai), not an archival photograph; it is not captioned as one.
-
-See [`CLAUDE.md`](./CLAUDE.md) for working conventions.
+- The hero image is AI-generated (flora.ai), not an archival photograph, and is captioned as
+  generated.
+- No dollar figures anywhere. Tokens are measurable; what they cost depends on the plan.
