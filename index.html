@@ -144,7 +144,7 @@
       <!-- ══ PROJECTS ══════════════════════════════════════════════════ -->
       <!-- ══ ORCHESTRATING ═══════════════════════════════════════════ -->
       <section id="orchestrating">
-        <h2>Orchestrating<i class="sec-n">01 – 05</i></h2>
+        <h2>Orchestrating<i class="sec-n">01 – 03</i></h2>
         <div class="cells">
           <!-- 01 · team + board -->
           <div class="opt c12 flush" data-n="01">
@@ -258,19 +258,19 @@
             </div>
           </div>
 
-          <!-- 02 · dispatch log -->
+          <!-- 02 · comms log -->
           <div class="opt c7 bleed-l" data-n="02">
             <div class="opt-head">
               <span class="tag">02</span>
               <p class="opt-name">Hand work between agents, on the record</p>
-              <span class="verdict">the dispatch log</span>
+              <span class="verdict">the comms log</span>
             </div>
             <div class="opt-body">
               <div class="stage">
                 <figure class="panel panel-dispatch">
                   <figcaption class="panel-bar">
                     <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">dispatches · operator</span>
+                    <span class="panel-name">comms · operator</span>
                     <span class="panel-flag" data-dflag>1 needs approval</span>
                   </figcaption>
 
@@ -322,83 +322,16 @@
               </div>
               <div class="notes">
                 <p>
-                  One agent routes a task to another and every hop lands here with its outcome on a chip. A dispatch from a lane that is not the coordinator is held until you approve it, chains brake themselves, and nothing retries. Results come back through <code>operator__report</code> as a diff on the board, not as chat.
+                  One agent routes a task to another and every hop lands here with its outcome on a chip. A dispatch from a lane that is not the coordinator is held until you approve it, chains brake themselves, and nothing retries. It is a record, not a mailbox: you open it when something looks wrong.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- 03 · call tree -->
-          <div class="opt c5 flush bleed-r" data-n="03">
+          <!-- 03 · worktrees + fan-out -->
+          <div class="opt c5 bleed-r" data-n="03">
             <div class="opt-head">
               <span class="tag">03</span>
-              <p class="opt-name">Watch the call tree as it happens</p>
-              <span class="verdict">nothing to install</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-tree">
-                  <figcaption class="panel-bar">
-                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">orchestration · session 7c1f</span>
-                    <span class="panel-flag">live</span>
-                  </figcaption>
-
-                  <div class="tree">
-                    <div class="row" style="--d: 0">
-                      <span class="g">▸</span><span class="lbl">refactor auth module</span>
-                      <span class="meta">orchestrator</span><span class="badge b-opus">opus</span>
-                      <span class="dur">running</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">◇</span><span class="lbl">Read</span>
-                      <span class="meta">src/auth/session.ts</span><span class="dur">0.4s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">◇</span><span class="lbl">Grep</span>
-                      <span class="meta">'refreshToken'</span><span class="dur">0.2s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">⤷</span><span class="lbl">delegate › extract-types</span>
-                      <span class="badge b-haiku">haiku</span><span class="dur">2.1s</span>
-                    </div>
-                    <div class="row" style="--d: 2">
-                      <span class="g">◇</span><span class="lbl">Read</span>
-                      <span class="meta">types/auth.d.ts</span><span class="dur">0.3s</span>
-                    </div>
-                    <div class="row" style="--d: 1">
-                      <span class="g">⤷</span><span class="lbl">delegate › write-tests</span>
-                      <span class="badge b-sonnet">sonnet</span><span class="dur dur-live" data-tick>3.2s</span>
-                    </div>
-                    <div class="row is-live" style="--d: 2">
-                      <span class="g">◆</span><span class="lbl">Edit</span>
-                      <span class="meta">auth/session.test.ts</span><span class="dur dur-live" data-tick>3.2s</span>
-                    </div>
-                    <div class="row is-queued" style="--d: 2">
-                      <span class="g">◇</span><span class="lbl">Bash</span>
-                      <span class="meta">npm test</span><span class="dur">queued</span>
-                    </div>
-                  </div>
-
-                  <div class="panel-foot">
-                    <span><b>3</b> tools</span>
-                    <span><b>2</b> subagents</span>
-                    <span class="foot-right">worktree <em>auth-refactor</em></span>
-                  </div>
-                </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Nested tool calls, delegations, durations ticking as they run, and what is queued behind them. Rebuilt from Claude Code's own transcript files, so there is nothing to instrument.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 04 · worktrees + fan-out -->
-          <div class="opt c7 bleed-l" data-n="04">
-            <div class="opt-head">
-              <span class="tag">04</span>
               <p class="opt-name">Run agents in parallel without collisions</p>
               <span class="verdict">one worktree per task</span>
             </div>
@@ -485,77 +418,17 @@
               </div>
             </div>
           </div>
-
-          <!-- 05 · the left surface -->
-          <div class="opt c5 bleed-r" data-n="05">
-            <div class="opt-head">
-              <span class="tag">05</span>
-              <p class="opt-name">Keep every agent in peripheral view</p>
-              <span class="verdict">the left list</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-nav">
-                  <figcaption class="panel-bar">
-                    <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel-name">scoped to operator</span>
-                    <span class="panel-flag">v0.17.2</span>
-                  </figcaption>
-
-                  <div class="shell">
-                    <div class="sbar">
-                      <div class="sb-head"><span class="sb-logo"></span>Projects</div>
-                      <div class="sproj open cur laneink" style="--lane: var(--l-operator)"><span class="parrow">▾</span>operator<span class="pcount acc" data-pcount>2 running</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-code)"></span>Code<span class="ph acc">running</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-design); opacity: .5"></span>Design<span class="ph">your turn</span></div>
-                      <div class="slane"><span class="sdot" style="background: var(--l-research); opacity: .35"></span>Research<span class="ph">idle</span></div>
-                      <div class="sproj laneink" style="--lane: var(--l-design)"><span class="parrow">▸</span>el-encanto<span class="pcount">1 needs you</span></div>
-                      <div class="sproj laneink" style="--lane: var(--l-research)"><span class="parrow">▸</span>mantel<span class="pcount"></span></div>
-                      <div class="sb-foot"><span class="ring" aria-hidden="true"></span>Plan usage<span class="v">Agents</span></div>
-                    </div>
-
-                    <div class="canv">
-                      <div class="canv-head">home<span class="sub" data-bsub>Backlog 1 · Running 1 · Waiting 1 · Done 2</span></div>
-                      <div class="canv-feed">
-                        <div class="canv-msg">
-                          <span class="canv-who">Refactor the auth module</span><span class="canv-chip ok">running</span>
-                          <span class="canv-txt">code · in its own worktree</span>
-                        </div>
-                        <div class="canv-msg">
-                          <span class="canv-who">Implement the reply sentinel</span><span class="canv-chip wait">held · needs you</span>
-                          <span class="canv-txt">a dispatch from Research, waiting on approval</span>
-                        </div>
-                        <div class="canv-msg">
-                          <span class="canv-who">Fix the tray icon in dark mode</span><span class="canv-chip">done · green</span>
-                          <span class="canv-txt">design · +14 −3, check passed</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="panel-foot">
-                    <span class="foot-note">Collapsed and expanded are the same list. An agent never appears twice.</span>
-                  </div>
-                </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Every active project stays on screen, and the one you are in unfolds its agents beneath it. An agent appears exactly once. The foot carries the plan as a ring, never a number.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       <!-- ══ SPENDING TOKENS ═════════════════════════════════════════ -->
       <section id="tokens">
-        <h2>Tuning<i class="sec-n">06 – 09</i></h2>
+        <h2>Tuning<i class="sec-n">04 – 06</i></h2>
         <div class="cells">
-          <!-- 06 · agent library, model + effort -->
-          <div class="opt c4 bleed-l" data-n="06">
+          <!-- 04 · agent library, model + effort -->
+          <div class="opt c4 bleed-l" data-n="04">
             <div class="opt-head">
-              <span class="tag">06</span>
+              <span class="tag">04</span>
               <p class="opt-name">Set the model and the effort per agent</p>
               <span class="verdict">your .claude/agents</span>
             </div>
@@ -600,81 +473,17 @@
                 <p>
                   Haiku for extraction, Sonnet for the everyday, Opus where it earns its keep, and
                   effort from low to max beside it. These two knobs decide what a lane spends, set
-                  where you say what the agent is for. It edits the <code>.claude/agents</code> files
-                  you already have.
+                  where you say what the agent is for. Hover a lane and the card shows the model and
+                  effort it is actually running beside the ones you asked for.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- 07 · usage -->
-          <div class="opt c5" data-n="07">
+          <!-- 05 · the plan meter -->
+          <div class="opt c3" data-n="05">
             <div class="opt-head">
-              <span class="tag">07</span>
-              <p class="opt-name">See what each model actually spends</p>
-              <span class="verdict">your own transcripts</span>
-            </div>
-            <div class="opt-body">
-              <div class="stage">
-                <figure class="panel panel-cost">
-                                    <figcaption class="panel-bar">
-                                      <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                                      <span class="panel-name">usage · last 7 days</span>
-                                      <span class="panel-total"><b>25.6M</b> tokens</span>
-                                    </figcaption>
-
-                                    <div class="cost-body">
-                                      <div class="model">
-                                        <div class="model-head">
-                                          <span class="badge b-sonnet">sonnet</span><span class="model-cost">12.7M</span>
-                                        </div>
-                                        <div class="bar"><span class="bar-fill f-sonnet" style="--w: 92%"></span></div>
-                                        <div class="model-toks"><span>in 2.8M</span><span>out 610K</span><span>cache 9.3M</span></div>
-                                      </div>
-                                      <div class="model">
-                                        <div class="model-head">
-                                          <span class="badge b-haiku">haiku</span><span class="model-cost">7.2M</span>
-                                        </div>
-                                        <div class="bar"><span class="bar-fill f-haiku" style="--w: 52%"></span></div>
-                                        <div class="model-toks"><span>in 5.1M</span><span>out 120K</span><span>cache 2.0M</span></div>
-                                      </div>
-                                      <div class="model">
-                                        <div class="model-head">
-                                          <span class="badge b-opus">opus</span><span class="model-cost">5.6M</span>
-                                        </div>
-                                        <div class="bar"><span class="bar-fill f-opus" style="--w: 41%"></span></div>
-                                        <div class="model-toks"><span>in 1.2M</span><span>out 340K</span><span>cache 4.1M</span></div>
-                                      </div>
-
-                                      <div class="time-grid">
-                                        <div class="time-cell">
-                                          <span class="time-label">API time</span><span class="time-val">14m 02s</span>
-                                        </div>
-                                        <div class="time-cell">
-                                          <span class="time-label">Wall time</span><span class="time-val">1h 38m</span>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div class="panel-foot">
-                                      <span class="foot-note">Parsed from your own transcripts on disk. Nothing sent anywhere.</span>
-                                    </div>
-                                  </figure>
-              </div>
-              <div class="notes">
-                <p>
-                  Input, output, and cache reads per model, per project, per day, read from the
-                  transcripts Claude Code already writes. This is where a tuning shows: a lane moved
-                  to Haiku, an effort dropped a step. Tokens, never dollars.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 08 · the plan meter -->
-          <div class="opt c3 bleed-r" data-n="08">
-            <div class="opt-head">
-              <span class="tag">08</span>
+              <span class="tag">05</span>
               <p class="opt-name">Run close to the limit, never past it</p>
               <span class="verdict">the reading</span>
             </div>
@@ -725,10 +534,10 @@
             </div>
           </div>
 
-          <!-- 09 · review -->
-          <div class="opt c8 bleed-l" data-n="09">
+          <!-- 06 · review -->
+          <div class="opt c5 bleed-r" data-n="06">
             <div class="opt-head">
-              <span class="tag">09</span>
+              <span class="tag">06</span>
               <p class="opt-name">Review the diff and land it in place</p>
               <span class="verdict">local only</span>
             </div>
@@ -766,11 +575,6 @@
               </div>
             </div>
           </div>
-
-          <!-- a rest: the board is allowed to be empty somewhere -->
-          <div class="opt rest c4" aria-hidden="true">
-            <span class="rest-label">Tuning</span>
-          </div>
         </div>
       </section>
 
@@ -796,10 +600,6 @@
               <td>Passed as <code>--effort</code> at launch, all five levels. settings.json keeps four and drops the fifth without a word, so Operator never writes it there.</td>
             </tr>
             <tr>
-              <td>Quit out from under a working&nbsp;agent</td><td><span class="cant">leaves alone</span></td>
-              <td>The quit dialog names every lane mid-turn and what dies with it. Worktrees and transcripts stay on disk.</td>
-            </tr>
-            <tr>
               <td>Push a message into a busy lane</td><td><span class="cant">leaves alone</span></td>
               <td>One submit queue per terminal. A mid-turn message rides the lane's own queue and is read at the turn boundary.</td>
             </tr>
@@ -808,12 +608,8 @@
               <td>A reply chain with no human in it hits a hop limit, and a pair sending too fast is suspended.</td>
             </tr>
             <tr>
-              <td>Host or proxy the model</td><td><span class="cant">leaves alone</span></td>
-              <td>It runs the CLI you already have. Your Claude Code auth, your account, your session.</td>
-            </tr>
-            <tr>
-              <td>Send anything to a server</td><td><span class="cant">leaves alone</span></td>
-              <td>Transcripts are read from disk and rendered locally. No upload, no telemetry, no account. The code is public, so this row is checkable.</td>
+              <td>Host the model, or send anything to a server</td><td><span class="cant">leaves alone</span></td>
+              <td>It runs the CLI you already have, on your auth, and reads the transcripts it writes. No upload, no telemetry, no account. The code is public, so this row is checkable.</td>
             </tr>
             <tr>
               <td>Estimate what a session cost</td><td><span class="cant">leaves alone</span></td>

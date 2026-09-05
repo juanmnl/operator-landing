@@ -12,11 +12,11 @@ Plain HTML, CSS and JS. No framework, no build step, no dependencies.
 
 One framed sheet of cells, with true-scale specimens of the app's own panels doing the arguing:
 
-- **Orchestrating (01 to 05).** The board and the team, the dispatch log, the call tree, one
-  worktree per task with fan-out, and the left list.
-- **Tuning (06 to 09).** Model and effort per agent, what each model actually spends, the plan
-  meter (session, week, model cap, and a row that reads "no data" because absent is not zero), and
-  the diff you review before it lands.
+- **Orchestrating (01 to 03).** The board and the team, the comms log, and one worktree per task
+  with fan-out.
+- **Tuning (04 to 06).** Model and effort per agent, the plan meter (session, week, model cap, and
+  a row that reads "no data" because absent is not zero), and the diff you review before it
+  lands.
 - **Scope.** What Operator does and what it leaves alone.
 - **Why it exists.** A living tool, not a product.
 
