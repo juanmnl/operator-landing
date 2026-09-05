@@ -19,7 +19,7 @@
     <title>Operator · You run the agents</title>
     <meta
       name="description"
-      content="A macOS app for Claude Code. Agent orchestration on one board, every task in its own git worktree, every token counted and none priced. Nothing leaves your machine. A personal project, MIT."
+      content="A macOS app for Claude Code. Decide what the agents do, then tune each lane's model and effort so the plan runs close to its limit and never past it. A living tool, MIT."
     />
     <meta name="author" content="juanmnl" />
     <link rel="canonical" href="https://juanmnl.com/operator-app/" />
@@ -30,14 +30,14 @@
     <meta property="og:title" content="Operator · You run the agents" />
     <meta
       property="og:description"
-      content="A macOS app for Claude Code. Orchestrate the agents, count the tokens. A personal project, MIT."
+      content="A macOS app for Claude Code. Decide what the agents do, tune model and effort per lane, stay under the limit. A living tool, MIT."
     />
     <meta property="og:image" content="https://juanmnl.com/operator-app/icon-source.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Operator · You run the agents" />
     <meta
       name="twitter:description"
-      content="A macOS app for Claude Code. Orchestrate the agents, count the tokens. A personal project, MIT."
+      content="A macOS app for Claude Code. Decide what the agents do, tune model and effort per lane, stay under the limit. A living tool, MIT."
     />
     <meta name="twitter:image" content="https://juanmnl.com/operator-app/icon-source.png" />
 
@@ -69,7 +69,7 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "A macOS app for Claude Code. Agent orchestration on one board, every task in its own git worktree, every token counted and none priced. Nothing leaves your machine. A personal project, MIT.",
+        "description": "A macOS app for Claude Code. Decide what the agents do, then tune each lane's model and effort so the plan runs close to its limit and never past it. A living tool, MIT.",
         "author": { "@type": "Person", "name": "juanmnl" }
       }
     </script>
@@ -85,7 +85,7 @@
         </a>
         <nav class="topnav" aria-label="Sections">
           <a href="#orchestrating"><i>01</i>Orchestrating</a>
-          <a href="#tokens"><i>02</i>Tokens</a>
+          <a href="#tokens"><i>02</i>Tuning</a>
           <a href="#scope"><i>03</i>Scope</a>
           <a href="#why"><i>04</i>Why</a>
         </nav>
@@ -114,8 +114,8 @@
           <p class="eyebrow">Operator · a macOS app for Claude Code</p>
           <h1>You run the&nbsp;agents.</h1>
           <p class="standfirst">
-            Every delegation, tool call, and diff on one board. Every task in its own git
-            worktree. Every token counted, none&nbsp;priced.
+            Work a project by deciding what its agents do. Tune each lane's model and effort so
+            the plan runs close to its limit and never&nbsp;past&nbsp;it.
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
@@ -135,8 +135,8 @@
         <div class="mast-strip">
           <span class="spec">Free · MIT · Apple Silicon</span>
           <p class="mast-note">
-            A personal project, built for the way I run Claude Code all day. Public in case that
-            resembles your setup.
+            A living tool: built for the way I run Claude Code all day, changed whenever that
+            changes. Public in case it resembles your&nbsp;setup.
           </p>
         </div>
       </div>
@@ -550,13 +550,13 @@
 
       <!-- ══ SPENDING TOKENS ═════════════════════════════════════════ -->
       <section id="tokens">
-        <h2>Spending tokens<i class="sec-n">06 – 09</i></h2>
+        <h2>Tuning<i class="sec-n">06 – 09</i></h2>
         <div class="cells">
           <!-- 06 · agent library, model + effort -->
           <div class="opt c4 bleed-l" data-n="06">
             <div class="opt-head">
               <span class="tag">06</span>
-              <p class="opt-name">Pick the model and the effort where you define the agent</p>
+              <p class="opt-name">Set the model and the effort per agent</p>
               <span class="verdict">your .claude/agents</span>
             </div>
             <div class="opt-body">
@@ -598,7 +598,10 @@
               </div>
               <div class="notes">
                 <p>
-                  Haiku for extraction, Sonnet for the everyday, Opus where it earns its keep, and the effort beside it: low to max, Claude Code's own five. It edits the <code>.claude/agents</code> files you already have, so your agents keep working in the terminal with Operator closed.
+                  Haiku for extraction, Sonnet for the everyday, Opus where it earns its keep, and
+                  effort from low to max beside it. These two knobs decide what a lane spends, set
+                  where you say what the agent is for. It edits the <code>.claude/agents</code> files
+                  you already have.
                 </p>
               </div>
             </div>
@@ -608,7 +611,7 @@
           <div class="opt c5" data-n="07">
             <div class="opt-head">
               <span class="tag">07</span>
-              <p class="opt-name">Count tokens, not dollars</p>
+              <p class="opt-name">See what each model actually spends</p>
               <span class="verdict">your own transcripts</span>
             </div>
             <div class="opt-body">
@@ -660,7 +663,9 @@
               </div>
               <div class="notes">
                 <p>
-                  Input, output, and cache reads, per model, per project, per day, read from the transcripts Claude Code already writes. No dollar figure anywhere. A token is measurable; its price depends on your plan.
+                  Input, output, and cache reads per model, per project, per day, read from the
+                  transcripts Claude Code already writes. This is where a tuning shows: a lane moved
+                  to Haiku, an effort dropped a step. Tokens, never dollars.
                 </p>
               </div>
             </div>
@@ -670,7 +675,7 @@
           <div class="opt c3 bleed-r" data-n="08">
             <div class="opt-head">
               <span class="tag">08</span>
-              <p class="opt-name">Know where the plan stands before you launch another lane</p>
+              <p class="opt-name">Run close to the limit, never past it</p>
               <span class="verdict">the reading</span>
             </div>
             <div class="opt-body">
@@ -712,7 +717,9 @@
               </div>
               <div class="notes">
                 <p>
-                  Session, week, and the model with its own cap, each with when it resets. A timed-out read or API billing says <strong>no data</strong>, never 0%.
+                  Session, week, and the model with its own cap, each with when it resets. Amber
+                  means tune the lanes down; headroom means turn one up. A timed-out read says
+                  <strong>no data</strong>, never 0%.
                 </p>
               </div>
             </div>
@@ -762,7 +769,7 @@
 
           <!-- a rest: the board is allowed to be empty somewhere -->
           <div class="opt rest c4" aria-hidden="true">
-            <span class="rest-label">Spending</span>
+            <span class="rest-label">Tuning</span>
           </div>
         </div>
       </section>
@@ -823,14 +830,14 @@
         <div class="sec-body">
         <div class="prose">
           <p>
-            I run several Claude Code sessions at once, across a few repos. I wanted one window
-            where I could see what each was doing, what it was spending, stop the one that had gone
-            wrong, and read the diff before it reached my working tree. Operator is that window. Every panel above
-            exists because I needed it, in the order I needed it.
+            I use Operator to work on projects. I decide what the agents do, hand work between
+            them, and read the diff before it lands. Most of all I tune the model and the effort
+            of every lane so the plan runs close to its limits without reaching them: cheap models
+            where the work is mechanical, high effort only where it pays.
           </p>
           <p>
-            It is not a product. No roadmap, no support queue, no telemetry, no account. I use it
-            every day, which is the only guarantee it comes with. The source is MIT, so if it is
+            It is a living tool, not a product. It changes whenever the way I work changes: no
+            roadmap, no support queue, no telemetry, no account. The source is MIT, so if it is
             close but not quite right for you, it is yours to change.
           </p>
         </div>
@@ -842,7 +849,7 @@
         <span class="mark" data-cells="9" data-size="64" aria-hidden="true"></span>
         <h2 class="closing-title">Operator, standing&nbsp;by.</h2>
         <p class="closing-sub">
-          Free. It&nbsp;reads the Claude Code sessions you already run, and counts what they&nbsp;spend.
+          Free. A&nbsp;living tool for the Claude Code sessions you already&nbsp;run.
         </p>
         <div class="closing-cta">
           <a class="btn btn-primary" href="https://github.com/juanmnl/operator/releases" target="_blank" rel="noreferrer noopener">
@@ -865,7 +872,7 @@
           </a>
           <nav class="foot-nav" aria-label="Footer">
             <a href="#orchestrating">Orchestrating</a>
-            <a href="#tokens">Tokens</a>
+            <a href="#tokens">Tuning</a>
             <a href="#scope">Scope</a>
             <a href="#why">Why</a>
             <a href="design-system.html">Design system</a>
